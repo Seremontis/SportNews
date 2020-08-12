@@ -1,0 +1,63 @@
+﻿{
+   "ContextClassName": "SportNewsContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Model",
+   "ProjectRootNamespace": "SportDatabase",
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Articles]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Categories]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Gallery]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[LogExceptions]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[LogOperation]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Permissions]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Roles]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Users]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[WFullArticle]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[WListArticles]"
+      }
+   ],
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseNodaTime": false,
+   "UseSpatial": false,
+   "UseStoredProcedures": true
+}

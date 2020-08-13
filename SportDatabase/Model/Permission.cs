@@ -15,5 +15,9 @@ namespace SportDatabase.Model
         public string Name { get; set; }
         [StringLength(255)]
         public string Description { get; set; }
+
+        [ForeignKey(nameof(RoleId))]
+        [InverseProperty("Permissions")]
+        public virtual Role Role { get; set; }
     }
 }

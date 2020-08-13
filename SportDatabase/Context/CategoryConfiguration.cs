@@ -2,15 +2,16 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore;
+using SportDatabase.Model;
 using System;
 
-namespace SportDatabase.Model
+namespace SportDatabase.Context
 {
-    public class RoleConfiguration : IEntityTypeConfiguration<Role>
+    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<Role> entity)
+        public void Configure(EntityTypeBuilder<Category> entity)
         {
-            entity.Property(e => e.NameRole).IsUnicode(false);
+            entity.Property(e => e.Name).IsUnicode(false);
         }
     }
 }

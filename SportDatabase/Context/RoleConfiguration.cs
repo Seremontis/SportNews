@@ -2,15 +2,16 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore;
+using SportDatabase.Model;
 using System;
 
-namespace SportDatabase.Model
+namespace SportDatabase.Context
 {
-    public class GalleryConfiguration : IEntityTypeConfiguration<Gallery>
+    public class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<Gallery> entity)
+        public void Configure(EntityTypeBuilder<Role> entity)
         {
-            entity.Property(e => e.Path).IsFixedLength();
+            entity.Property(e => e.NameRole).IsUnicode(false);
         }
     }
 }

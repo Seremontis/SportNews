@@ -4,7 +4,7 @@
    "DefaultDacpacSchema": null,
    "IncludeConnectionString": false,
    "ModelNamespace": null,
-   "OutputContextPath": null,
+   "OutputContextPath": "Context",
    "OutputPath": "Model",
    "ProjectRootNamespace": "SportDatabase",
    "SelectedHandlebarsLanguage": 0,
@@ -49,6 +49,10 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[WListArticles]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[WUser]"
       }
    ],
    "UseDatabaseNames": false,

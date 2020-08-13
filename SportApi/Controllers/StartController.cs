@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-//using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportDatabase;
+using SportDatabase.Context;
 using SportDatabase.Interface;
 using SportDatabase.Model;
 using SportDatabase.Repository;
 
 namespace SportApi.Controllers
 {
-    [Route("api")]
+    [Route("Api")]
     [ApiController]
     public class StartController : ErrorsController
     {
@@ -44,6 +44,7 @@ namespace SportApi.Controllers
                 throw;
             }
         }
+
         [HttpGet]
         [Route("GetAllArticles/{size}/{page}")]
         public IEnumerable<WListArticle> GetAllArticles(int page=1,int size=10)

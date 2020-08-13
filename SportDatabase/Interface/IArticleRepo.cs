@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SportDatabase.Interface
 {
-    public interface IArticleRepo<T> where T : Article
+    public interface IArticleRepo<T>: IRepository<T> where T:Article
     {
         WFullArticle GetFullArticle(int id);
         IEnumerable<WListArticle> GetListArticles(int page, int size);

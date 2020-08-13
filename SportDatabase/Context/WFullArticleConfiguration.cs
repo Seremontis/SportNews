@@ -2,23 +2,26 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore;
+using SportDatabase.Model;
 using System;
 
-namespace SportDatabase.Model
+namespace SportDatabase.Context
 {
-    public class WListArticleConfiguration : IEntityTypeConfiguration<WListArticle>
+    public class WFullArticleConfiguration : IEntityTypeConfiguration<WFullArticle>
     {
-        public void Configure(EntityTypeBuilder<WListArticle> entity)
+        public void Configure(EntityTypeBuilder<WFullArticle> entity)
         {
             entity.HasNoKey();
 
-            entity.ToView("WListArticles");
+            entity.ToView("WFullArticle");
+
+            entity.Property(e => e.FirstName).IsUnicode(false);
+
+            entity.Property(e => e.LastName).IsUnicode(false);
 
             entity.Property(e => e.Name).IsUnicode(false);
 
             entity.Property(e => e.SmallPicture).IsFixedLength();
-
-            entity.Property(e => e.Title).IsUnicode(false);
         }
     }
 }

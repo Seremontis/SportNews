@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SportDatabase.Context;
 using SportDatabase.Interface;
 using SportDatabase.Model;
 using System;
@@ -14,13 +15,13 @@ namespace SportDatabase.Repository
     {
         private SportNewsContext _Context { get; }
 
-        private ArticleRepo<Article> _IRepoArticle;
+        private IArticleRepo<Article> _IRepoArticle;
         private IRepository<Category> _IRepoCategory;
-        private IRepository<Gallery> _IRepoAGallery;
+        private IGalleryRepo<Gallery> _IRepoGallery;
         private IRepository<LogException> _IRepoLogException;
         private IRepository<Permission> _IRepoPermission;
         private IRepository<Role> _IRepoRole;
-        private IRepository<User> _IRepoUser;
+        private IUserRepo<User> _IRepoUser;
         private IRepository<LogOperation> _IRepoLogOperation;
 
         public UnitOfWork(SportNewsContext context)
@@ -43,11 +44,11 @@ namespace SportDatabase.Repository
         {
             _Context.Dispose();
         }
-        public IArticleRepo<Article> IRepoArticle => _IRepoArticle=_IRepoArticle??new ArticleRepo<Article>(_Context);
+        public IArticleRepo<Article> IRepoArticle => _IRepoArticle=_IRepoArticle??new ArticleRepo(_Context);
 
         public IRepository<Category> IRepoCategory => _IRepoCategory = _IRepoCategory ?? new Repository<Category>(_Context);
 
-        public IRepository<Gallery> IRepoAGallery => _IRepoAGallery = _IRepoAGallery ?? new Repository<Gallery>(_Context);
+        public IGalleryRepo<Gallery> IRepoGallery => _IRepoGallery = _IRepoGallery ?? new GalleryRepo(_Context);
 
         public IRepository<LogException> IRepoLogException => _IRepoLogException = _IRepoLogException ?? new Repository<LogException>(_Context);
 
@@ -55,7 +56,7 @@ namespace SportDatabase.Repository
 
         public IRepository<Role> IRepoRole => _IRepoRole = _IRepoRole ?? new Repository<Role>(_Context);
        
-        public IRepository<User> IRepoUser => _IRepoUser = _IRepoUser ?? new Repository<User>(_Context);
+        public IUserRepo<User> IRepoUser => _IRepoUser = _IRepoUser ?? new UserRepo(_Context);
 
         public IRepository<LogOperation> IRepoLogOperation => _IRepoLogOperation = _IRepoLogOperation ?? new Repository<LogOperation>(_Context);
     }

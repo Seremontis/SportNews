@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using SportDatabase.Model;
 
-namespace SportDatabase.Model
+namespace SportDatabase.Context
 {
     public partial class SportNewsContextProcedures
     {
@@ -13,6 +13,22 @@ namespace SportDatabase.Model
         public SportNewsContextProcedures(SportNewsContext context)
         {
             _context = context;
+        }
+
+        public async Task<GetWUserResult[]> GetWUser(int? userid)
+        {
+            var parameteruserid = new SqlParameter
+            {
+                ParameterName = "userid",
+                Precision = 10,
+                Size = 4,
+                SqlDbType = System.Data.SqlDbType.Int,
+                Value = userid,
+            };
+
+            var result = await _context.SqlQuery<GetWUserResult>("EXEC [dbo].[GetWUser] @userid  ",parameteruserid);
+
+            return result;
         }
 
         public async Task<ListShortArticlesResult[]> ListShortArticles(int? PageNumber,int? PageSize)

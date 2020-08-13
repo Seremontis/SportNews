@@ -10,6 +10,7 @@ namespace SportDatabase.Model
         public string Title { get; set; }
         public byte[] SmallPicture { get; set; }
         public string ShortArticle { get; set; }
+        public string Article { get; set; }
         public DateTime? PublicationTime { get; set; }
         public DateTime? LastUpdate { get; set; }
         public bool? IsGallery { get; set; }

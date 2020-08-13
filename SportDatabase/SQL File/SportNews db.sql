@@ -1,7 +1,7 @@
 --dodaæ podzia³ dziennikarzy
--- odseparowaæ do osobnych plików SQL
 use master
 go
+
 DROP DATABASE IF EXISTS SportNews
 go
 
@@ -11,6 +11,12 @@ go
 use SportNews
 go
 
+Create table Roles(
+[RoleId] int identity(1,1) primary key,
+[NameRole] varchar(100)
+)
+go
+
 Create table Users(
 [UserId] int identity(1,1) primary key,
 [FirstName] varchar(50),
@@ -18,19 +24,14 @@ Create table Users(
 [Login] varchar(50),
 [Password] binary(64),
 [PasswordExpired] datetime,
-[RoleId] int,
-)
-go
-Create table Roles(
-[RoleId] int identity(1,1) primary key,
-[NameRole] varchar(100)
+[RoleId] int foreign key references Roles(RoleId)
 )
 go
 
 --dokoñczyæ w trakcie budowy apki
 Create table [Permissions](
 [PermissionId] int identity(1,1) primary key,
-[RoleId] int not null,
+[RoleId] int foreign key (RoleId) references Roles(RoleId) not null,
 [Name] varchar(100),
 [Description] varchar(255)
 )
@@ -44,11 +45,11 @@ go
 
 Create table Articles(
 [ArticleId] int identity(1,1) primary key,
-[AuthorId] int not null,
-[Title] varchar(100) not null,
+[AuthorId] int foreign key references Users(UserId),
+[Title] text not null,
 [SmallPicture] binary,
 [MainPicture] nchar(300), 
-[ShortArticle] nvarchar(150),
+[ShortArticle] text,
 [Article] text,
 [Keywords] nchar(100),
 [PublicationTime] date,
@@ -58,9 +59,10 @@ Create table Articles(
 )
 go
 
+
 Create table Gallery(
 [GalleryId] int identity(1,1) primary key,
-[ArticleId] int not null,
+[ArticleId] int foreign key references Articles([ArticleId]) not null,
 [Path] nchar(150)
 )
 go
@@ -70,7 +72,7 @@ Create table LogExceptions(
 [Date] datetime,
 [Path] nvarchar(150) not null,
 [Message] nvarchar(max) not null,
-[UserId] int,
+[UserId] int foreign key (UserId) references Users(UserId)
 )
 go
 
@@ -81,6 +83,6 @@ Create table LogOperation(
 [Controller] nvarchar(25),
 [Operation] nvarchar(25),
 [Description] nvarchar(50),
-[UserId] int
+[UserId] int foreign key (UserId) references Users(UserId)
 )
 go

@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SportDatabase.Context;
 using SportDatabase.Interface;
 using SportDatabase.Model;
 using System;
 using System.Collections.Generic;
+using System.Deployment.Internal;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,15 +46,12 @@ namespace SportDatabase.Repository
             return _SportNewsContext.Set<T>();
         }
 
-        public IEnumerable<T> Get(int page)
+
+        public T Get(int id)
         {
-            throw new NotImplementedException();
+            return _SportNewsContext.Set<T>().Find((object)id);
         }
 
-        /*public T GetOne(int id)
-        {
-            return _SportNewsContext.Set<T>().Find(id);
-        }*/
         public void Update(T model)
         {
             _SportNewsContext.Entry(model).State = EntityState.Modified;

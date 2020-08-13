@@ -2,21 +2,26 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore;
+using SportDatabase.Model;
 using System;
 
-namespace SportDatabase.Model
+namespace SportDatabase.Context
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class WUserConfiguration : IEntityTypeConfiguration<WUser>
     {
-        public void Configure(EntityTypeBuilder<User> entity)
+        public void Configure(EntityTypeBuilder<WUser> entity)
         {
+            entity.HasNoKey();
+
+            entity.ToView("WUser");
+
             entity.Property(e => e.FirstName).IsUnicode(false);
 
             entity.Property(e => e.LastName).IsUnicode(false);
 
             entity.Property(e => e.Login).IsUnicode(false);
 
-            entity.Property(e => e.Password).IsFixedLength();
+            entity.Property(e => e.NameRole).IsUnicode(false);
         }
     }
 }

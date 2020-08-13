@@ -14,13 +14,12 @@ namespace SportDatabase.Interface
     {
         IArticleRepo<Article> IRepoArticle {get;}
         IRepository<Category> IRepoCategory{get;}
-        IRepository<Gallery> IRepoAGallery{get;}
-        IRepository<LogException> IRepoLogException{get;}
+        IGalleryRepo<Gallery> IRepoGallery{get;}
         IRepository<Permission> IRepoPermission{get;}
         IRepository<Role> IRepoRole{ get; }
-        IRepository<User> IRepoUser{ get; }
+        IUserRepo<User> IRepoUser{ get; }
+        IRepository<LogException> IRepoLogException { get; }
         IRepository<LogOperation> IRepoLogOperation { get; }
-
 
         void Commit();
         void Rollback();

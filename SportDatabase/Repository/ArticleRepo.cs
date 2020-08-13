@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using SportDatabase.Context;
 using SportDatabase.Interface;
 using SportDatabase.Model;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SportDatabase.Repository
 {
-    public class ArticleRepo<T> : Repository<T> ,IArticleRepo<T> where T : Article
+    public class ArticleRepo : Repository<Article> ,IArticleRepo<Article>
     {
         public ArticleRepo(SportNewsContext newsContext):base(newsContext)
         {
@@ -29,7 +30,7 @@ namespace SportDatabase.Repository
         {
             SqlParameter paramArticle = new SqlParameter("@ArticleId", id);
             var result = _SportNewsContext.Set<WFullArticle>()
-                .FromSqlRaw("SingleFullArticle @ArticleId", paramArticle).ToList();
+                .FromSqlRaw("SingleFullArticle @ArticleId", paramArticle).AsNoTracking().ToList();
             return result.SingleOrDefault();
         }
 
@@ -38,7 +39,7 @@ namespace SportDatabase.Repository
             SqlParameter paramPage = new SqlParameter("@PageNumber", page);
             SqlParameter paramSize = new SqlParameter("@PageSize", size);
             var result = _SportNewsContext.Set<WListArticle>()
-                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize", paramPage,paramSize).ToList();
+                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize", paramPage,paramSize).AsNoTracking().ToList();
             return result;
         }
 
@@ -48,7 +49,7 @@ namespace SportDatabase.Repository
             SqlParameter paramSize = new SqlParameter("@PageSize", size);
             SqlParameter paramCategory = new SqlParameter("@CategoryId", categoryId);
             var result = _SportNewsContext.Set<WListArticle>()
-                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize,@CategoryId", paramPage, paramSize,paramCategory).ToList();
+                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize,@CategoryId", paramPage, paramSize,paramCategory).AsNoTracking().ToList();
             return result;
         }
 

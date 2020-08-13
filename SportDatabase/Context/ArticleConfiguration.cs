@@ -2,9 +2,10 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore;
+using SportDatabase.Model;
 using System;
 
-namespace SportDatabase.Model
+namespace SportDatabase.Context
 {
     public class ArticleConfiguration : IEntityTypeConfiguration<Article>
     {
@@ -18,7 +19,10 @@ namespace SportDatabase.Model
 
             entity.Property(e => e.SmallPicture).IsFixedLength();
 
-            entity.Property(e => e.Title).IsUnicode(false);
+            entity.HasOne(d => d.Author)
+                .WithMany(p => p.Articles)
+                .HasForeignKey(d => d.AuthorId)
+                .HasConstraintName("FK__Articles__Author__412EB0B6");
         }
     }
 }

@@ -2,9 +2,10 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore;
+using SportDatabase.Model;
 using System;
 
-namespace SportDatabase.Model
+namespace SportDatabase.Context
 {
     public class PermissionConfiguration : IEntityTypeConfiguration<Permission>
     {
@@ -13,6 +14,12 @@ namespace SportDatabase.Model
             entity.Property(e => e.Description).IsUnicode(false);
 
             entity.Property(e => e.Name).IsUnicode(false);
+
+            entity.HasOne(d => d.Role)
+                .WithMany(p => p.Permissions)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Permissio__RoleI__3C69FB99");
         }
     }
 }

@@ -8,6 +8,13 @@ namespace SportDatabase.Model
 {
     public partial class User
     {
+        public User()
+        {
+            Articles = new HashSet<Article>();
+            LogExceptions = new HashSet<LogException>();
+            LogOperations = new HashSet<LogOperation>();
+        }
+
         [Key]
         public int UserId { get; set; }
         [StringLength(50)]
@@ -21,5 +28,15 @@ namespace SportDatabase.Model
         [Column(TypeName = "datetime")]
         public DateTime? PasswordExpired { get; set; }
         public int? RoleId { get; set; }
+
+        [ForeignKey(nameof(RoleId))]
+        [InverseProperty("Users")]
+        public virtual Role Role { get; set; }
+        [InverseProperty(nameof(Article.Author))]
+        public virtual ICollection<Article> Articles { get; set; }
+        [InverseProperty(nameof(LogException.User))]
+        public virtual ICollection<LogException> LogExceptions { get; set; }
+        [InverseProperty(nameof(LogOperation.User))]
+        public virtual ICollection<LogOperation> LogOperations { get; set; }
     }
 }

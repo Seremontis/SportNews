@@ -8,17 +8,23 @@ namespace SportDatabase.Model
 {
     public partial class Article
     {
+        public Article()
+        {
+            Galleries = new HashSet<Gallery>();
+        }
+
         [Key]
         public int ArticleId { get; set; }
-        public int AuthorId { get; set; }
+        public int? AuthorId { get; set; }
         [Required]
-        [StringLength(100)]
+        [Column(TypeName = "text")]
         public string Title { get; set; }
         [MaxLength(1)]
         public byte[] SmallPicture { get; set; }
         [StringLength(300)]
         public string MainPicture { get; set; }
-        [StringLength(150)]
+        [Required]
+        [Column(TypeName = "text")]
         public string ShortArticle { get; set; }
         [Column("Article", TypeName = "text")]
         public string Article1 { get; set; }
@@ -30,5 +36,11 @@ namespace SportDatabase.Model
         public DateTime? LastUpdate { get; set; }
         public int? CategoryId { get; set; }
         public bool? IsGallery { get; set; }
+
+        [ForeignKey(nameof(AuthorId))]
+        [InverseProperty(nameof(User.Articles))]
+        public virtual User Author { get; set; }
+        [InverseProperty(nameof(Gallery.Article))]
+        public virtual ICollection<Gallery> Galleries { get; set; }
     }
 }

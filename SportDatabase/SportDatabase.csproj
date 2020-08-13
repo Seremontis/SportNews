@@ -329,33 +329,41 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseContext.cs" />
+    <Compile Include="Context\ArticleConfiguration.cs" />
+    <Compile Include="Context\CategoryConfiguration.cs" />
+    <Compile Include="Context\GalleryConfiguration.cs" />
+    <Compile Include="Context\LogExceptionConfiguration.cs" />
+    <Compile Include="Context\LogOperationConfiguration.cs" />
+    <Compile Include="Context\PermissionConfiguration.cs" />
+    <Compile Include="Context\RoleConfiguration.cs" />
+    <Compile Include="Context\SportNewsContext.cs" />
+    <Compile Include="Context\UserConfiguration.cs" />
+    <Compile Include="Context\WFullArticleConfiguration.cs" />
+    <Compile Include="Context\WListArticleConfiguration.cs" />
+    <Compile Include="Context\WUserConfiguration.cs" />
     <Compile Include="EnumOperation.cs" />
     <Compile Include="Interface\IArticleRepo.cs" />
     <Compile Include="Interface\IBaseContext.cs" />
     <Compile Include="Interface\ISportNewsContext.cs" />
     <Compile Include="Model\Article.cs" />
-    <Compile Include="Model\ArticleConfiguration.cs" />
     <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\CategoryConfiguration.cs" />
     <Compile Include="Model\Gallery.cs" />
     <Compile Include="Interface\IRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
-    <Compile Include="Model\GalleryConfiguration.cs" />
     <Compile Include="Model\LogException.cs" />
     <Compile Include="Model\LogOperation.cs" />
     <Compile Include="Model\Permission.cs" />
-    <Compile Include="Model\PermissionConfiguration.cs" />
     <Compile Include="Model\Role.cs" />
-    <Compile Include="Model\RoleConfiguration.cs" />
-    <Compile Include="Model\SportNewsContext.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\UserConfiguration.cs" />
     <Compile Include="Model\WFullArticle.cs" />
-    <Compile Include="Model\WFullArticleConfiguration.cs" />
     <Compile Include="Model\WListArticle.cs" />
-    <Compile Include="Model\WListArticleConfiguration.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="Model\WUser.cs" />
+    <Compile Include="Repository\GalleryRepo.cs" />
+    <Compile Include="Repository\IGalleryRepo.cs" />
+    <Compile Include="Repository\IUserRepo.cs" />
+    <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\ArticleRepo.cs" />
+    <Compile Include="Repository\UserRepo.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup />

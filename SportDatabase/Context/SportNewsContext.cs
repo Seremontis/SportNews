@@ -2,8 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using SportDatabase.Model;
 
-namespace SportDatabase.Model
+namespace SportDatabase.Context
 {
     public partial class SportNewsContext : DbContext
     {
@@ -26,17 +27,21 @@ namespace SportDatabase.Model
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WFullArticle> WfullArticles { get; set; }
         public virtual DbSet<WListArticle> WlistArticles { get; set; }
+        public virtual DbSet<WUser> Wusers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ArticleConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new GalleryConfiguration());
+            modelBuilder.ApplyConfiguration(new LogExceptionConfiguration());
+            modelBuilder.ApplyConfiguration(new LogOperationConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new WFullArticleConfiguration());
             modelBuilder.ApplyConfiguration(new WListArticleConfiguration());
+            modelBuilder.ApplyConfiguration(new WUserConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
         }

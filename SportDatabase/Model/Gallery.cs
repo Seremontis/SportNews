@@ -14,5 +14,9 @@ namespace SportDatabase.Model
         public int ArticleId { get; set; }
         [StringLength(150)]
         public string Path { get; set; }
+
+        [ForeignKey(nameof(ArticleId))]
+        [InverseProperty("Galleries")]
+        public virtual Article Article { get; set; }
     }
 }

@@ -21,6 +21,7 @@ using SportDatabase.Interface;
 using SportDatabase.Repository;
 using Microsoft.EntityFrameworkCore;
 using SportDatabase.Model;
+using SportDatabase.Context;
 
 namespace SportApi
 {

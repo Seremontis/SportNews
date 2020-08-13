@@ -36,7 +36,22 @@ go
 CREATE OR ALTER PROCEDURE SingleFullArticle
 @ArticleId int
 AS
-SELECT ArticleId,Title,SmallPicture,ShortArticle,PublicationTime,LastUpdate,IsGallery,Name,CategoryId,FirstName,LastName
+SELECT ArticleId,Title,SmallPicture,ShortArticle,Article,PublicationTime,LastUpdate,IsGallery,Name,CategoryId,FirstName,LastName
 FROM WFullArticle
 where ArticleId=@ArticleId
 go
+
+CREATE OR ALTER PROCEDURE GetWUser
+@userid int
+AS
+SELECT UserId,FirstName,LastName,Login,PasswordExpired,RoleId,NameRole
+FROM WUser
+where UserId=@userid
+GO
+
+CREATE OR ALTER PROCEDURE GetGallery
+@articleId int
+AS
+SELECT ArticleId,GalleryId,Path
+FROM Gallery
+GO

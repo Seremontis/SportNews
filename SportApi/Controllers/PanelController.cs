@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
+using SportApi.Attribute;
 using SportDatabase;
 using SportDatabase.Context;
 using SportDatabase.Interface;
@@ -17,11 +18,11 @@ namespace SportApi.Controllers
 {
     [Route("Panel")]
     [ApiController]
-    public class PanelController : ErrorsController
+    public class PanelController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
         private Action sendOperation;
-        GenericOperation genericOperation;
+        private GenericOperation genericOperation;
 
         public PanelController(SportNewsContext sportNewsContext)
         {
@@ -42,33 +43,34 @@ namespace SportApi.Controllers
         {
             try
             {
-                var result=unitOfWork.IRepoUser.Get(id);
-                return result;
+                return unitOfWork.IRepoUser.Get(id);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
         [Route("AddUser")]
+        [ValidateModel]
         [HttpPost]
         public HttpResponseMessage AddUser([FromBody]User user)
         {
+
             sendOperation = delegate { unitOfWork.IRepoUser.Add(user); };
             return genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
         }
 
-        [Route("DeleteUser/{userid}")]
+        [Route("DeleteUser/{id}")]
         [HttpDelete]
-        public HttpResponseMessage DeleteUser(int userid)
+        public HttpResponseMessage DeleteUser(int id)
         {            
-            sendOperation = delegate { unitOfWork.IRepoUser.Delete(userid); };
+            sendOperation = delegate { unitOfWork.IRepoUser.Delete(id); };
             return genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
         }
 
         [Route("UpdateUser")]
+        [ValidateModel]
         [HttpPut]
         public HttpResponseMessage UpdateUser([FromBody]User user)
         {
@@ -77,6 +79,7 @@ namespace SportApi.Controllers
         }
 
         [Route("AddCategory")]
+        [ValidateModel]
         [HttpPost]
         public HttpResponseMessage AddCategory([FromBody] Category[] categories)
         {               
@@ -88,6 +91,7 @@ namespace SportApi.Controllers
             }
 
         [Route("UpdateCategory")]
+        [ValidateModel]
         [HttpPut]
         public HttpResponseMessage UpdateCategory([FromBody] Category[] categories)
         {
@@ -99,23 +103,44 @@ namespace SportApi.Controllers
             return genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
         }
 
-        [Route("GetGallery/{id}")]
+        [Route("DeleteCategory/{id}")]
+        [HttpDelete]
+        public HttpResponseMessage DeleteCategory(int id)
+        {
+            sendOperation = delegate { unitOfWork.IRepoCategory.Delete(id); };
+            return genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
+        }
+
+        [Route("GetCategory")]
         [HttpGet]
-        public IEnumerable<Gallery> GetGallery(int idArticle)
+        public IEnumerable<Category> GetCategory()
         {
             try
             {
-                var result = unitOfWork.IRepoGallery.GetList(idArticle);
-                return result;
+                return unitOfWork.IRepoCategory.Get();
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
 
+        [Route("GetGallery/{id}")]
+        [HttpGet]
+        public IEnumerable<Gallery> GetGallery(int id)
+        {
+            try
+            {
+                return unitOfWork.IRepoGallery.GetList(id);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
 
         [Route("AddGallery")]
+        [ValidateModel]
         [HttpPost]
         public HttpResponseMessage AddGallery([FromBody] Gallery[] galleries)
         {
@@ -136,9 +161,10 @@ namespace SportApi.Controllers
                 foreach (var item in galleries)
                     unitOfWork.IRepoGallery.Delete(item);
             };
-            return genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+            return genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
 
         }
+
 
     }
 }

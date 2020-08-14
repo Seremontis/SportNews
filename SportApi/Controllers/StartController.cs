@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportDatabase;
 using SportDatabase.Context;
@@ -15,14 +13,14 @@ namespace SportApi.Controllers
 {
     [Route("Api")]
     [ApiController]
-    public class StartController : ErrorsController
+    public class StartController : ControllerBase
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         //change on DI
         public StartController(SportNewsContext sportNewsContext)
         {
-            this.unitOfWork = new UnitOfWork(sportNewsContext);
+            this._unitOfWork = new UnitOfWork(sportNewsContext);
         }
         [HttpGet]
         [Route("")]
@@ -36,8 +34,7 @@ namespace SportApi.Controllers
         {
             try
             {
-                var result= unitOfWork.IRepoArticle.GetFullArticle(id);
-                return result;
+                return _unitOfWork.IRepoArticle.GetFullArticle(id);
             }
             catch (Exception)
             {
@@ -51,8 +48,7 @@ namespace SportApi.Controllers
         {
             try
             {
-                var result = unitOfWork.IRepoArticle.GetListArticles(page,size);
-                return result;
+                return _unitOfWork.IRepoArticle.GetListArticles(page,size);
             }
             catch (Exception)
             {
@@ -65,8 +61,7 @@ namespace SportApi.Controllers
         {
             try
             {
-                var result = unitOfWork.IRepoArticle.GetListArticlesByCategory(categoryId,page, size);
-                return result;
+                return _unitOfWork.IRepoArticle.GetListArticlesByCategory(categoryId,page, size);
             }
             catch (Exception)
             {
@@ -79,13 +74,13 @@ namespace SportApi.Controllers
         {
             try
             {
-                var result = unitOfWork.IRepoCategory.Get();
-                return result;
+                return _unitOfWork.IRepoCategory.Get();
             }
             catch (Exception)
             {
                 throw;
             }
+
         }
     }
 }

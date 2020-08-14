@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Deployment.Internal;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,16 +37,18 @@ namespace SportDatabase.Repository
                 _SportNewsContext.Set<T>().Remove(checkModel);
             else
             {
-                //dodać rejestrowanie błędów
+                //throw new HttpResponseMessage(System.Net.HttpStatusCode.NotFound)
+                //{
+                //    Content = new StringContent(string.Format("Brak wyników dla id= {0}", id)),
+                //    ReasonPhrase = "Brak elementu do usunięcia"
+                //};
             }
         }
 
-        //konflikt z niektórymi operacjami repo
         public IEnumerable<T> Get()
         {
             return _SportNewsContext.Set<T>();
         }
-
 
         public T Get(int id)
         {

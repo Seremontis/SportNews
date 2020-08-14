@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Http.Features;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace SportApi.Errors
 {
@@ -19,19 +22,16 @@ namespace SportApi.Errors
         public async Task Invoke(HttpContext context)
         {
             await _next(context);
-            HandlePageNotFound(context);
+            HandleException(context);
         }
-        public static void HandlePageNotFound(HttpContext context)
+        public static void HandleException(HttpContext context)
         {
-            CookieOptions cookieOptions = new CookieOptions();
-            cookieOptions.Expires = DateTime.Now.AddMilliseconds(10000);
-            cookieOptions.IsEssential = true;
-            context.Response.Cookies.Append("Source", "./" + context.Request.Path, cookieOptions);
-            context.Response.Cookies.Append("Status", context.Response.StatusCode.ToString(), cookieOptions);
-            context.Response.Redirect("/Error");
-            var result = string.Empty;
+            context.Response.StatusCode = context.Response.StatusCode;
+            context.Response.ContentType = "application/json";
 
+            //context.Response.Redirect("/Error");
             var test=context.Connection.RemoteIpAddress.ToString();
+            
         }
 
 

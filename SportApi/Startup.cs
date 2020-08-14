@@ -45,36 +45,21 @@ namespace SportApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Use(next => context =>
-            {
-                context.Response.OnStarting(() =>
-                {
-                    if (context.Response.StatusCode == 405)
-                    {
-                        ErrorHandler.HandlePageNotFound(context);
-                    }
-
-                    return Task.CompletedTask;
-                });
-
-                return next(context);
-            });
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseExceptionHandler("/Error");
             app.UseHttpsRedirection();
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-            app.UseMiddleware<ErrorHandler>();
+            //app.UseMiddleware<ErrorHandler>();
+            app.UseStatusCodePages();
 
             //depency injection
             /*var container = new Container();

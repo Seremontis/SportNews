@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
 using SportDatabase;
+using SportDatabase.Context;
 using SportDatabase.Interface;
 using SportDatabase.Model;
 using SportDatabase.Repository;

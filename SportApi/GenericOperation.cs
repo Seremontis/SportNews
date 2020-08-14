@@ -26,8 +26,7 @@ namespace SportApi
                 action();
                 unitOfWork.IRepoLogOperation.Add(GetLogException(enumOperation,routeData));
                 unitOfWork.Commit();
-                HttpResponseMessage message = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
-                return message;
+                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
             catch (Exception)
             {

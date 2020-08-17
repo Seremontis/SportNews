@@ -328,7 +328,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseContext.cs" />
     <Compile Include="Context\ArticleConfiguration.cs" />
     <Compile Include="Context\CategoryConfiguration.cs" />
     <Compile Include="Context\GalleryConfiguration.cs" />

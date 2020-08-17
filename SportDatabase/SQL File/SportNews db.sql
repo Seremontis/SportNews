@@ -13,7 +13,8 @@ go
 
 Create table Roles(
 [RoleId] int identity(1,1) primary key,
-[NameRole] varchar(100)
+[NameRole] varchar(100),
+[CanModify] bit default 1,
 )
 go
 

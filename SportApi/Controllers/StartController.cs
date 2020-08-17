@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportDatabase;
 using SportDatabase.Context;
 using SportDatabase.Interface;
 using SportDatabase.Model;
 using SportDatabase.Repository;
+using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace SportApi.Controllers
 {
@@ -22,14 +25,17 @@ namespace SportApi.Controllers
         {
             this._unitOfWork = new UnitOfWork(sportNewsContext);
         }
-        [HttpGet]
+
+        [HttpGet]  
         [Route("")]
+        [AllowAnonymous]
         public string TextLauncher()
         {
             return "Witaj w Api serwisu sportowego";
         }
         [HttpGet]
         [Route("GetArticle/{id}")]
+        [AllowAnonymous]
         public WFullArticle GetArticle(int id)
         {
             try
@@ -43,6 +49,7 @@ namespace SportApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [Route("GetAllArticles/{size}/{page}")]
         public IEnumerable<WListArticle> GetAllArticles(int page=1,int size=10)
         {
@@ -57,6 +64,7 @@ namespace SportApi.Controllers
         }
         [HttpGet]
         [Route("GetAllArticlesSport/{categoryId}/{size}/{page}")]
+        [AllowAnonymous]
         public IEnumerable<WListArticle> GetAllArticlesSport(int categoryId,int page = 1, int size = 10)
         {
             try
@@ -70,6 +78,7 @@ namespace SportApi.Controllers
         }      
         [HttpGet]
         [Route("GetCategories")]
+        [AllowAnonymous]
         public IEnumerable<Category> GetCategories()
         {
             try

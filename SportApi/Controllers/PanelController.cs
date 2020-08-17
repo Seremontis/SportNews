@@ -4,10 +4,12 @@ using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using SportApi.Attribute;
+using SportApi.Model;
 using SportDatabase;
 using SportDatabase.Context;
 using SportDatabase.Interface;
@@ -32,6 +34,7 @@ namespace SportApi.Controllers
 
         [Route("")]
         [HttpGet]
+        [Authorize(Roles = Policies.All)] 
         public string Start()
         {
             return "Witaj w panelu użytkownika";
@@ -39,6 +42,7 @@ namespace SportApi.Controllers
 
         [Route("GetUser/{id}")]
         [HttpGet]
+        [Authorize(Roles=Policies.AllAdmin)]
         public WUser GetUser(int id)
         {
             try
@@ -54,7 +58,8 @@ namespace SportApi.Controllers
         [Route("AddUser")]
         [ValidateModel]
         [HttpPost]
-        public HttpResponseMessage AddUser([FromBody]User user)
+        [Authorize(Roles =Policies.AllAdmin)]
+        public HttpResponseMessage AddUser([FromBody] SportDatabase.Model.User user)
         {
 
             sendOperation = delegate { unitOfWork.IRepoUser.Add(user); };
@@ -63,6 +68,7 @@ namespace SportApi.Controllers
 
         [Route("DeleteUser/{id}")]
         [HttpDelete]
+        [Authorize(Roles =Policies.AllAdmin)]
         public HttpResponseMessage DeleteUser(int id)
         {            
             sendOperation = delegate { unitOfWork.IRepoUser.Delete(id); };
@@ -72,7 +78,8 @@ namespace SportApi.Controllers
         [Route("UpdateUser")]
         [ValidateModel]
         [HttpPut]
-        public HttpResponseMessage UpdateUser([FromBody]User user)
+        [Authorize(Roles =Policies.AllAdmin)]
+        public HttpResponseMessage UpdateUser([FromBody] SportDatabase.Model.User user)
         {
             sendOperation = delegate { unitOfWork.IRepoUser.Add(user); };
             return genericOperation.Execute(sendOperation, EnumOperation.Update,this.ControllerContext.RouteData);
@@ -81,6 +88,7 @@ namespace SportApi.Controllers
         [Route("AddCategory")]
         [ValidateModel]
         [HttpPost]
+        [Authorize(Roles =Policies.AllAdmin)]
         public HttpResponseMessage AddCategory([FromBody] Category[] categories)
         {               
                 sendOperation = delegate {
@@ -93,6 +101,7 @@ namespace SportApi.Controllers
         [Route("UpdateCategory")]
         [ValidateModel]
         [HttpPut]
+        [Authorize(Roles =Policies.AllAdmin)]
         public HttpResponseMessage UpdateCategory([FromBody] Category[] categories)
         {
             sendOperation = delegate
@@ -105,6 +114,7 @@ namespace SportApi.Controllers
 
         [Route("DeleteCategory/{id}")]
         [HttpDelete]
+        [Authorize(Roles =Policies.AllAdmin)]
         public HttpResponseMessage DeleteCategory(int id)
         {
             sendOperation = delegate { unitOfWork.IRepoCategory.Delete(id); };
@@ -113,6 +123,7 @@ namespace SportApi.Controllers
 
         [Route("GetCategory")]
         [HttpGet]
+        [Authorize(Roles =Policies.All)]
         public IEnumerable<Category> GetCategory()
         {
             try
@@ -127,6 +138,7 @@ namespace SportApi.Controllers
 
         [Route("GetGallery/{id}")]
         [HttpGet]
+        [Authorize(Roles =Policies.All)]
         public IEnumerable<Gallery> GetGallery(int id)
         {
             try
@@ -142,6 +154,7 @@ namespace SportApi.Controllers
         [Route("AddGallery")]
         [ValidateModel]
         [HttpPost]
+        [Authorize(Roles =Policies.AllWithoutAdmin)]
         public HttpResponseMessage AddGallery([FromBody] Gallery[] galleries)
         {
             sendOperation = delegate
@@ -154,6 +167,7 @@ namespace SportApi.Controllers
 
         [Route("DeleteGallery")]
         [HttpDelete]
+        [Authorize(Roles =Policies.AllWithoutAdmin)]
         public HttpResponseMessage DeleteGallery(int[] galleries)
         {
             sendOperation = delegate

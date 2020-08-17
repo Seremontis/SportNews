@@ -99,3 +99,8 @@ INSERT INTO Articles VALUES (2,'Lorem Ipsum Small',NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"',
 '"Tristique nulla vel molestie. Donec purus ex, hendrerit id dui vitae, consectetur accumsan sapien.',
 'lorem ipsum test 5',GETDATE(),null,1,0)
+
+
+Insert into Roles values ('FullAdmin',0)
+Insert into Roles values ('Admin',0)
+Insert into Roles values ('FullJournalist',0)

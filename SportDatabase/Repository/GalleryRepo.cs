@@ -17,10 +17,10 @@ namespace SportDatabase.Repository
 
         }
 
-        public IEnumerable<Gallery> GetList(int id)
+        public async Task<List<Gallery>> GetList(int id)
         {
             SqlParameter sqlParameter = new SqlParameter("@articleid", id);
-            return _SportNewsContext.Galleries.FromSqlRaw("GetGallery @articleid", sqlParameter).ToList();
+            return await _SportNewsContext.Galleries.FromSqlRaw("GetGallery @articleid", sqlParameter).ToListAsync();
         }
     }
 }

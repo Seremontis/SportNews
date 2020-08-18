@@ -9,8 +9,9 @@ namespace SportDatabase.Interface
 {
     public interface IArticleRepo<T>: IRepository<T> where T:Article
     {
-        WFullArticle GetFullArticle(int id);
-        IEnumerable<WListArticle> GetListArticles(int page, int size);
-        IEnumerable<WListArticle> GetListArticlesByCategory(int categoryId, int page, int size);
+        Task<WListArticle> GetOne(int id);
+        Task<WFullArticle> GetFullArticle(int id);
+        Task<IEnumerable<WListArticle>> GetListArticles(int page, int size);
+        Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId, int page, int size);
     }
 }

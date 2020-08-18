@@ -36,11 +36,11 @@ namespace SportApi.Controllers
         [HttpGet]
         [Route("GetArticle/{id}")]
         [AllowAnonymous]
-        public WFullArticle GetArticle(int id)
+        public async Task<WFullArticle> GetArticle(int id)
         {
             try
             {
-                return _unitOfWork.IRepoArticle.GetFullArticle(id);
+                return await _unitOfWork.IRepoArticle.GetFullArticle(id);
             }
             catch (Exception)
             {
@@ -51,11 +51,11 @@ namespace SportApi.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("GetAllArticles/{size}/{page}")]
-        public IEnumerable<WListArticle> GetAllArticles(int page=1,int size=10)
+        public async Task<IEnumerable<WListArticle>> GetAllArticles(int page=1,int size=10)
         {
             try
             {
-                return _unitOfWork.IRepoArticle.GetListArticles(page,size);
+                return await _unitOfWork.IRepoArticle.GetListArticles(page,size);
             }
             catch (Exception)
             {
@@ -65,11 +65,11 @@ namespace SportApi.Controllers
         [HttpGet]
         [Route("GetAllArticlesSport/{categoryId}/{size}/{page}")]
         [AllowAnonymous]
-        public IEnumerable<WListArticle> GetAllArticlesSport(int categoryId,int page = 1, int size = 10)
+        public async Task<IEnumerable<WListArticle>> GetAllArticlesSport(int categoryId,int page = 1, int size = 10)
         {
             try
             {
-                return _unitOfWork.IRepoArticle.GetListArticlesByCategory(categoryId,page, size);
+                return await _unitOfWork.IRepoArticle.GetListArticlesByCategory(categoryId,page, size);
             }
             catch (Exception)
             {
@@ -79,11 +79,11 @@ namespace SportApi.Controllers
         [HttpGet]
         [Route("GetCategories")]
         [AllowAnonymous]
-        public IEnumerable<Category> GetCategories()
+        public async Task<List<Category>> GetCategories()
         {
             try
             {
-                return _unitOfWork.IRepoCategory.Get();
+                return await _unitOfWork.IRepoCategory.Get();
             }
             catch (Exception)
             {

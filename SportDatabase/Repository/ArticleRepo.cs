@@ -18,39 +18,41 @@ namespace SportDatabase.Repository
             
         }
 
-        public WListArticle GetOne(int id)
+        public async Task<WListArticle> GetOne(int id)
         {
             SqlParameter param= new SqlParameter("@SportId",id);
-            var result= _SportNewsContext.Set<WListArticle>()
-                .FromSqlRaw("SingleShortArticle @SportId", param).ToList();
-            return result.SingleOrDefault();
+            return (await _SportNewsContext.Set<WListArticle>()
+                .FromSqlRaw("SingleShortArticle @SportId", param)
+                .ToListAsync()).FirstOrDefault();
         }
 
-        public WFullArticle GetFullArticle(int id)
+        public async Task<WFullArticle> GetFullArticle(int id)
         {
             SqlParameter paramArticle = new SqlParameter("@ArticleId", id);
-            var result = _SportNewsContext.Set<WFullArticle>()
-                .FromSqlRaw("SingleFullArticle @ArticleId", paramArticle).AsNoTracking().ToList();
-            return result.SingleOrDefault();
+            return (await _SportNewsContext.Set<WFullArticle>()
+                .FromSqlRaw("SingleFullArticle @ArticleId", paramArticle)
+                .ToListAsync()).FirstOrDefault();
         }
 
-        public IEnumerable<WListArticle> GetListArticles(int page,int size)
+        public async Task<IEnumerable<WListArticle>> GetListArticles(int page,int size)
         {
             SqlParameter paramPage = new SqlParameter("@PageNumber", page);
             SqlParameter paramSize = new SqlParameter("@PageSize", size);
-            var result = _SportNewsContext.Set<WListArticle>()
-                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize", paramPage,paramSize).AsNoTracking().ToList();
-            return result;
+            return await  _SportNewsContext.Set<WListArticle>()
+                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize", paramPage, paramSize)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
-        public IEnumerable<WListArticle> GetListArticlesByCategory(int categoryId,int page, int size)
+        public async Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId,int page, int size)
         {
             SqlParameter paramPage = new SqlParameter("@PageNumber", page);
             SqlParameter paramSize = new SqlParameter("@PageSize", size);
             SqlParameter paramCategory = new SqlParameter("@CategoryId", categoryId);
-            var result = _SportNewsContext.Set<WListArticle>()
-                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize,@CategoryId", paramPage, paramSize,paramCategory).AsNoTracking().ToList();
-            return result;
+            return await _SportNewsContext.Set<WListArticle>()
+                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize,@CategoryId", paramPage, paramSize, paramCategory)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
     }

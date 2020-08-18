@@ -26,6 +26,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using SportApi.Model;
+using Microsoft.IdentityModel.Logging;
 
 namespace SportApi
 {
@@ -42,7 +43,8 @@ namespace SportApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SportNewsContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Database")));
+                options.UseSqlServer(Configuration.GetConnectionString("Database")),
+                ServiceLifetime.Transient);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(option =>
                 {
@@ -60,6 +62,7 @@ namespace SportApi
                         ClockSkew = TimeSpan.Zero
                     };
                     services.AddCors();
+                    IdentityModelEventSource.ShowPII = true;// potem delete
                 });
             services.AddAuthorization(configure =>
             {

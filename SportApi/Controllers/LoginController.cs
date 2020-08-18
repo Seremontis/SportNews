@@ -26,7 +26,7 @@ namespace SportApi.Controllers
             UserName = "test",
             //Password = Encoding.UTF8.GetBytes("test"),
             Password="test",
-            Role = "FullAdmin",
+            Role = "SuperAdmin",
             UserType = string.Empty
         },
         new User()
@@ -54,12 +54,20 @@ namespace SportApi.Controllers
             User user = users.Where(x=>x.UserName==login.UserName && x.Password==login.Password).FirstOrDefault();//tutaj sporawdzanie z bazy
             if (user!=null){
 
-                var token = GenerateJWT(user);
-                response = Ok(new
+                try
                 {
-                    token = token,
-                    userDetail = user
-                });
+                    var token = GenerateJWT(user);
+                    response = Ok(new
+                    {
+                        token = token,
+                        userDetail = user
+                    });
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                
             }
             return response;
         }

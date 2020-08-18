@@ -362,6 +362,7 @@
     <Compile Include="Repository\IUserRepo.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\ArticleRepo.cs" />
+    <Compile Include="Repository\Task.cs" />
     <Compile Include="Repository\UserRepo.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>

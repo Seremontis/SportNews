@@ -25,14 +25,14 @@ namespace SportDatabase.Repository
             _SportNewsContext = sportNews;
         }
 
-        public void Add(T model)
+        public async Task Add(T model)
         {
-            _SportNewsContext.Set<T>().Add(model);
+            await _SportNewsContext.Set<T>().AddAsync(model);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            T checkModel = _SportNewsContext.Set<T>().Find((object)id);
+            T checkModel = await _SportNewsContext.Set<T>().FindAsync((object)id);
             if (checkModel != null)
                 _SportNewsContext.Set<T>().Remove(checkModel);
             else
@@ -45,14 +45,14 @@ namespace SportDatabase.Repository
             }
         }
 
-        public IEnumerable<T> Get()
+        public async Task<List<T>> Get()
         {
-            return _SportNewsContext.Set<T>();
+            return await _SportNewsContext.Set<T>().ToListAsync();
         }
 
-        public T Get(int id)
+        public async Task<T> Get(int id)
         {
-            return _SportNewsContext.Set<T>().Find((object)id);
+            return await _SportNewsContext.Set<T>().FindAsync((object)id);
         }
 
         public void Update(T model)

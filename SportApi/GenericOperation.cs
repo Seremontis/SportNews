@@ -19,13 +19,13 @@ namespace SportApi
         {
             this.unitOfWork = unitOfWork;
         }
-        public HttpResponseMessage Execute(Action action, EnumOperation enumOperation, RouteData routeData)
+        public async Task<HttpResponseMessage> Execute(Func<Task> action, EnumOperation enumOperation, RouteData routeData)
         {
             try
             {
-                action();
-                unitOfWork.IRepoLogOperation.Add(GetLogException(enumOperation,routeData));
-                unitOfWork.Commit();
+                await action();
+                await unitOfWork.IRepoLogOperation.Add(GetLogException(enumOperation,routeData));
+                await unitOfWork.Commit();
                 return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
             catch (Exception)

@@ -21,7 +21,7 @@ namespace SportDatabase.Interface
         IRepository<LogException> IRepoLogException { get; }
         IRepository<LogOperation> IRepoLogOperation { get; }
 
-        void Commit();
-        void Rollback();
+        Task Commit();
+        Task Rollback();
     }
 }

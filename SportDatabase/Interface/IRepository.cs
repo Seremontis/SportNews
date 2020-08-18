@@ -9,10 +9,10 @@ namespace SportDatabase.Interface
 {
     public interface IRepository<T> where T: class
     {
-        IEnumerable<T> Get();
-        T Get(int id);
-        void Add(T model);
-        void Delete(int id);
+        Task<List<T>> Get();
+        Task<T> Get(int id);
+        Task Add(T model);
+        Task Delete(int id);
         void Update(T model);
     }
 }

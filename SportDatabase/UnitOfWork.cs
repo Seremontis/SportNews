@@ -30,14 +30,14 @@ namespace SportDatabase.Repository
         }
 
         //add async task
-        public void Commit()
+        public async Task Commit()
         {
-            _Context.SaveChanges();
+            await _Context.SaveChangesAsync();
         }
 
-        public void Rollback()
+        public async Task Rollback()
         {
-            _Context.Dispose();
+            await _Context.DisposeAsync();
         }
 
         public void Dispose()

@@ -20,10 +20,11 @@ namespace SportApi.Controllers
 {
     [Route("Panel")]
     [ApiController]
+    /// TODO :co zrobić z użytkownika których nie można usunąć oraz obiektami
     public class PanelController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
-        private Action sendOperation;
+        private Func<Task> sendOperation;
         private GenericOperation genericOperation;
 
         public PanelController(SportNewsContext sportNewsContext)
@@ -43,11 +44,11 @@ namespace SportApi.Controllers
         [Route("GetUser/{id}")]
         [HttpGet]
         [Authorize(Roles=Policies.AllAdmin)]
-        public WUser GetUser(int id)
+        public async Task<WUser> GetUser(int id)
         {
             try
             {
-                return unitOfWork.IRepoUser.Get(id);
+                return await unitOfWork.IRepoUser.Get(id);
             }
             catch (Exception)
             {
@@ -58,77 +59,78 @@ namespace SportApi.Controllers
         [Route("AddUser")]
         [ValidateModel]
         [HttpPost]
-        [Authorize(Roles =Policies.AllAdmin)]
-        public HttpResponseMessage AddUser([FromBody] SportDatabase.Model.User user)
+        [Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> AddUser([FromBody] SportDatabase.Model.User user)
         {
 
-            sendOperation = delegate { unitOfWork.IRepoUser.Add(user); };
-            return genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+            sendOperation = async()=> { await unitOfWork.IRepoUser.Add(user); };
+            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
         }
 
         [Route("DeleteUser/{id}")]
         [HttpDelete]
         [Authorize(Roles =Policies.AllAdmin)]
-        public HttpResponseMessage DeleteUser(int id)
+        public async Task<HttpResponseMessage> DeleteUser(int id)
         {            
-            sendOperation = delegate { unitOfWork.IRepoUser.Delete(id); };
-            return genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
+            sendOperation = async() => {await unitOfWork.IRepoUser.Delete(id); };
+            return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
         }
 
         [Route("UpdateUser")]
         [ValidateModel]
         [HttpPut]
-        [Authorize(Roles =Policies.AllAdmin)]
-        public HttpResponseMessage UpdateUser([FromBody] SportDatabase.Model.User user)
+        [Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> UpdateUser([FromBody] SportDatabase.Model.User user)
         {
-            sendOperation = delegate { unitOfWork.IRepoUser.Add(user); };
-            return genericOperation.Execute(sendOperation, EnumOperation.Update,this.ControllerContext.RouteData);
+            sendOperation = async() => { unitOfWork.IRepoUser.Update(user); };
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
         }
 
         [Route("AddCategory")]
         [ValidateModel]
         [HttpPost]
-        [Authorize(Roles =Policies.AllAdmin)]
-        public HttpResponseMessage AddCategory([FromBody] Category[] categories)
-        {               
-                sendOperation = delegate {
-                    foreach (var item in categories)
-                        unitOfWork.IRepoCategory.Add(item);
-                };
-                return genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
-            }
+        [Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> AddCategory([FromBody] Category[] categories)
+        {
+            sendOperation = async()=>
+            {
+                foreach (var item in categories)
+                   await unitOfWork.IRepoCategory.Add(item);
+            };
+            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+        }
 
         [Route("UpdateCategory")]
         [ValidateModel]
         [HttpPut]
-        [Authorize(Roles =Policies.AllAdmin)]
-        public HttpResponseMessage UpdateCategory([FromBody] Category[] categories)
+        [Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> UpdateCategory([FromBody] Category[] categories)
         {
-            sendOperation = delegate
+            sendOperation = async() =>
             {
                 foreach (var item in categories)
                     unitOfWork.IRepoCategory.Update(item);
             };
-            return genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
         }
 
         [Route("DeleteCategory/{id}")]
         [HttpDelete]
-        [Authorize(Roles =Policies.AllAdmin)]
-        public HttpResponseMessage DeleteCategory(int id)
+        [Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> DeleteCategory(int id)
         {
-            sendOperation = delegate { unitOfWork.IRepoCategory.Delete(id); };
-            return genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
+            sendOperation = async () => { await unitOfWork.IRepoCategory.Delete(id); };
+            return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
         }
 
         [Route("GetCategory")]
         [HttpGet]
-        [Authorize(Roles =Policies.All)]
-        public IEnumerable<Category> GetCategory()
+        [Authorize(Roles = Policies.All)]
+        public async Task<IEnumerable<Category>> GetCategory()
         {
             try
             {
-                return unitOfWork.IRepoCategory.Get();
+                return await unitOfWork.IRepoCategory.Get();
             }
             catch (Exception)
             {
@@ -138,12 +140,12 @@ namespace SportApi.Controllers
 
         [Route("GetGallery/{id}")]
         [HttpGet]
-        [Authorize(Roles =Policies.All)]
+        [Authorize(Roles = Policies.All)]
         public IEnumerable<Gallery> GetGallery(int id)
         {
             try
             {
-                return unitOfWork.IRepoGallery.GetList(id);
+                return await unitOfWork.IRepoGallery.GetList(id);
             }
             catch (Exception)
             {
@@ -154,28 +156,28 @@ namespace SportApi.Controllers
         [Route("AddGallery")]
         [ValidateModel]
         [HttpPost]
-        [Authorize(Roles =Policies.AllWithoutAdmin)]
-        public HttpResponseMessage AddGallery([FromBody] Gallery[] galleries)
+        [Authorize(Roles = Policies.AllWithoutAdmin)]
+        public async Task<HttpResponseMessage> AddGallery([FromBody] Gallery[] galleries)
         {
-            sendOperation = delegate
+            sendOperation = async()=>
             {
                 foreach (var item in galleries)
-                    unitOfWork.IRepoGallery.Add(item);
+                    await unitOfWork.IRepoGallery.Add(item);
             };
-            return genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
         }
 
         [Route("DeleteGallery")]
         [HttpDelete]
-        [Authorize(Roles =Policies.AllWithoutAdmin)]
-        public HttpResponseMessage DeleteGallery(int[] galleries)
+        [Authorize(Roles = Policies.AllWithoutAdmin)]
+        public async Task<HttpResponseMessage> DeleteGallery(int[] galleries)
         {
-            sendOperation = delegate
+            sendOperation = async() =>
             {
                 foreach (var item in galleries)
-                    unitOfWork.IRepoGallery.Delete(item);
+                    await unitOfWork.IRepoGallery.Delete(item);
             };
-            return genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
 
         }
 

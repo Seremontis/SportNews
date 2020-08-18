@@ -19,12 +19,13 @@ namespace SportDatabase.Repository
         {
 
         }
-        public WUser Get(int id)
+        public async Task<WUser> Get(int id)
         {
             SqlParameter idparam = new SqlParameter("@userId", id);
-            var result = _SportNewsContext.Set<WUser>()
-                .FromSqlRaw("GetWUser @userId", idparam).AsNoTracking().ToList();
-            return result.SingleOrDefault();
+            return (await _SportNewsContext.Set<WUser>()
+                .FromSqlRaw("GetWUser @userId", idparam)
+                .AsNoTracking()
+                .ToListAsync()).SingleOrDefault();
         }
     }
 }

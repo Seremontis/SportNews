@@ -1,4 +1,5 @@
-INSERT INTO Roles VALUES ('Administrator')
+INSERT INTO Roles VALUES ('SuperAdmin')
+INSERT INTO Roles VALUES ('Admin')
 INSERT INTO Roles VALUES ('Dziennikarz')
 INSERT INTO Roles VALUES ('Specjalne uprawnienia')
 

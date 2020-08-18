@@ -29,7 +29,7 @@ namespace SportApi.Controllers
 
         [Microsoft.AspNetCore.Mvc.Route("Error")]
         [AllowAnonymous]
-        public object Error()
+        public async Task<IActionResult> Error()
         {
             var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
             LogException logException = new LogException()
@@ -41,14 +41,14 @@ namespace SportApi.Controllers
             };          
             try
             {
-                _unitOfWork.IRepoLogException.Add(logException);
-                _unitOfWork.Commit();
+                await _unitOfWork.IRepoLogException.Add(logException);
+                await _unitOfWork.Commit();
             }
             catch (Exception)
             {
                 throw;
             }
-            return new { Content = "Error\n" + exceptionDetails.Error.Message.ToString() };
+            return StatusCode(StatusCodes.Status500InternalServerError,"Error\n" + exceptionDetails.Error.Message.ToString());
 
         }
         protected LogOperation GetLogException(EnumOperation operation)

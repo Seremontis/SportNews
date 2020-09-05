@@ -49,7 +49,9 @@ Create table Articles(
 [AuthorId] int foreign key references Users(UserId),
 [Title] text not null,
 [SmallPicture] binary,
+[DescritpionSmallPicture] nvarchar(300),
 [MainPicture] nchar(300), 
+[DescritpionMainPicture] nvarchar(300),
 [ShortArticle] text,
 [Article] text,
 [Keywords] nchar(100),
@@ -64,6 +66,7 @@ go
 Create table Gallery(
 [GalleryId] int identity(1,1) primary key,
 [ArticleId] int foreign key references Articles([ArticleId]) not null,
+[Description] nvarchar(300),
 [Path] nchar(150)
 )
 go

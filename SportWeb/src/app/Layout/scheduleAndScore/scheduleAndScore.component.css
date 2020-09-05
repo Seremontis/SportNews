@@ -1,0 +1,25 @@
+.content{
+    display: block;
+    background: yellowgreen;
+    height: 100%;
+    width: 100%;
+}
+.menuSchedule{
+    padding-left: 15px;
+}
+.menuSchedule>*{
+    margin-right: 5px;
+}
+
+.menuSchedule>button{
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(196,196,196,1) 12%);
+    border-radius: 0px 0px 15px 15px;
+    padding:5px;
+    min-width: 80px;
+}
+
+.menuSchedule>button:hover{
+    background:rgb(59, 48, 48);
+    color: white;
+}

@@ -12,7 +12,7 @@ INSERT INTO Categories VALUES ('Pi³ka')
 INSERT INTO Categories VALUES ('Hokej')
 INSERT INTO Categories VALUES ('Formu³a 1')
 
-INSERT INTO Articles VALUES (2,'Lorem Ipsum',NULL,NULL,
+INSERT INTO Articles VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
 "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
 
@@ -24,7 +24,7 @@ Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tri
 
 'lorem ipsum test 5',GETDATE(),null,1,0)
 
-INSERT INTO Articles VALUES (2,'Lorem Ipsum',NULL,NULL,
+INSERT INTO Articles VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
 "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
 
@@ -36,7 +36,7 @@ Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tri
 
 'lorem ipsum test 5',GETDATE(),null,1,0)
 
-INSERT INTO Articles VALUES (3,'Lorem Ipsum2',NULL,NULL,
+INSERT INTO Articles VALUES (3,'Lorem Ipsum2',NULL,NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
 "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
 
@@ -48,7 +48,7 @@ Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tri
 
 'lorem ipsum test 5',GETDATE(),null,1,0)
 
-INSERT INTO Articles VALUES (3,'Jak to siê zaczê³o? – historia pierwszego wyœcigu F1',NULL,NULL,
+INSERT INTO Articles VALUES (3,'Jak to siê zaczê³o? – historia pierwszego wyœcigu F1',NULL,NULL,NULL,NULL,
 '70 lat minê³o, jak jeden dzieñ – parafrazuj¹c tytu³owy utwór serialu „Czterdziestolatek”. Minê³o dok³adnie 13 maja, bo w³aœnie tego dnia 1950 roku, kierowcy po raz pierwszy œcigali siê w ramach Mistrzostw Œwiata Formu³y 1. W ubieg³¹ niedzielê odby³o siê inauguracyjne Grand Prix 70-lecia, a jak w³aœciwie dosz³o do tego pierwszego GP w dziejach F1?',
 
 'Historia wyœcigów Grand Prix siêga roku 1906, kiedy to Automobilklub Francuski zorganizowa³ wyœcig w pobli¿u Le Mans i okolicznych miejscowoœci. Warunki rozgrywania tych zawodów odbiega³y jednak znacznie od obecnych. Jedno okr¹¿enie toru, który wykorzystywa³ g³ównie pobliskie drogi, liczy³o ponad 103 kilometry! Mierz¹c dzisiejsz¹ miar¹, przypomina³o to bardziej rajd terenowy, ni¿ rywalizacjê wyœcigow¹.
@@ -96,7 +96,7 @@ Niedzielne Grand Prix 70-lecia by³o 1023. wyœcigiem w historii Formu³y 1 oraz 55
 
 'lorem ipsum test 5',GETDATE(),null,1,4)
 
-INSERT INTO Articles VALUES (2,'Lorem Ipsum Small',NULL,NULL,
+INSERT INTO Articles VALUES (2,'Lorem Ipsum Small',NULL,NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"',
 '"Tristique nulla vel molestie. Donec purus ex, hendrerit id dui vitae, consectetur accumsan sapien.',
 'lorem ipsum test 5',GETDATE(),null,1,0)

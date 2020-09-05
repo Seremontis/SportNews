@@ -1,0 +1,54 @@
+.navOption {
+  color: white;
+}
+.imgLogo {
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.19),
+      rgba(255, 255, 255, 0.19)
+    );
+  border: 2px solid #000000;
+  border-radius: 50px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+ul>li{
+    border-bottom: 1px solid white;
+    text-align: center;
+    background: rgba(196, 196, 196, 0.09);
+    padding: 5px;
+}
+
+ul>li:hover{
+  background: rgba(46, 44, 44, 0.09);
+}
+
+ul>li>a{
+    color: white;
+}
+
+.searcherAndSocialMedia{
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  width: 95%;
+}
+
+.socialMedia{
+  margin-top:10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.media{
+  border: 1px solid gray;
+  min-width: 44px;
+  display: block;
+  margin: auto;
+  padding: 5px;
+  border-radius: 50%;
+  color:gray;
+}

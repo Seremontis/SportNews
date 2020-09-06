@@ -1,11 +1,12 @@
 .content{
     display: block;
-    background: yellowgreen;
+    background: #CDEB77;
     height: 100%;
     width: 100%;
 }
 .menuSchedule{
     padding-left: 15px;
+    height: 40px;
 }
 .menuSchedule>*{
     margin-right: 5px;
@@ -23,3 +24,104 @@
     background:rgb(59, 48, 48);
     color: white;
 }
+
+.scheduleAndResult{
+    display: inline-flex;
+    height: calc( 100% - 40px);
+    width: 100%;
+    overflow-y: auto;
+}
+.schedule, .result{
+    border: 2px solid #C8C5C5;
+    box-sizing: border-box;
+    margin-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background: rgba(251, 246, 246, 0.53);
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.result{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    font-weight: bold;
+}
+.result>.line{
+    display: grid;
+    grid-template-columns: 4fr 20px;
+}
+
+.result>.line>span:first-child{
+    padding-right: 10px;
+}
+
+.result>.line:first-child,.schedule>span{
+    border-bottom: 1px solid black;
+}
+
+.breakLine{
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 3px;
+    width: 0;
+    border: 2px solid black;
+}
+
+.schedule{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    width: 100%;
+    text-align: center;
+}
+.schedule>*{
+  width: 100%;
+}
+
+.schedule>.date{
+    font-weight: normal;
+    font-size: 0.7em;
+    white-space: nowrap;
+    margin: auto;
+}
+
+.schedule>span:last-child{
+    border-bottom: none;
+}
+
+/*scrollbar*/
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #383333;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #90ada9;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #171616;
+}
+::-webkit-scrollbar-track {
+  background: #262650;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #000000;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+/*end scrollbar*/

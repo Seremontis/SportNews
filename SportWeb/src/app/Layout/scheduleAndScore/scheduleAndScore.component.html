@@ -1,12 +1,25 @@
 <div class="content">
-<div class="menuSchedule">
-<button>Piłka nożna</button>
-<button>Koszykówka</button>
-<button>Tenis</button>
-<button>Siatkówka</button>
-<button>Motorsport</button>
+  <div class="menuSchedule">
+    <button>Piłka nożna</button>
+    <button>Koszykówka</button>
+    <button>Tenis</button>
+    <button>Siatkówka</button>
+    <button>Motorsport</button>
+  </div>
+  <div class="scheduleAndResult">
+    <div class="result" *ngFor="let item of createRange(5)">
+      <div class="line">
+        <span>Barcelona</span><span>5</span>
+      </div>
+      <div class="line">
+        <span>Bayern</span><span>1</span>
+      </div>
+    </div>
+    <span class="breakLine"></span>
+    <div class="schedule" *ngFor="let item of createRange(5)">
+        <span class="date">29.01.2020 20:00</span>
+        <span>Piast</span>
+        <span>Legia</span>
+    </div>
+  </div>
 </div>
-<div>
-  test test
-</div>
-</div> 

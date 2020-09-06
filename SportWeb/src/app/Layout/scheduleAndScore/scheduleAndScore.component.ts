@@ -12,4 +12,11 @@ export class ScheduleAndScoreComponent implements OnInit {
   ngOnInit() {
   }
 
+  createRange(number){
+    var items: number[] = [];
+    for(var i = 1; i <= number; i++){
+       items.push(i);
+    }
+    return items;
+  }
 }

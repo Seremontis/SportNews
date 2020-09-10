@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VisitorLayoutComponent} from './Layout/visitor-layout/visitor-layout.component';
 import { UserLayoutComponent} from './Layout/user-layout/user-layout.component';
-import { VisitorHomeComponent } from './Home/visitor-home/visitor-home.component';
-import { UserHomeComponent } from './Home/user-home/user-home.component';
+import { VisitorHomeComponent } from './Visitor/visitor-home/visitor-home.component';
+import { UserHomeComponent } from './User/user-home/user-home.component';
 
 const routes: Routes = [
   {

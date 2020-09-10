@@ -1,8 +1,13 @@
-<img class="imgLogo" src="assets/logo.png" alt="Logo serwisu sportowego"/>
-<ul class="navOption nav flex-column">
-  <li class="active" *ngFor="let element of array"> <i class="fas fa-info-circle"></i>  <a href="">{{element}} Something</a>
- </li>
-</ul>
+<header>
+  <img class="imgLogo" src="assets/logo.png" alt="Logo serwisu sportowego" />
+</header>
+<nav>
+  <ul class="navOption nav flex-column">
+    <li class="active" *ngFor="let element of array"> <i class="fas fa-info-circle"></i> <a href="">{{element}}
+        Something</a>
+    </li>
+  </ul>
+</nav>
 <div class="searcherAndSocialMedia">
   <form class="input-group md-form form-sm form-2 pl-0">
     <input class="form-control my-0 py-1 amber-border" type="text" placeholder="Search" aria-label="Search">
@@ -11,10 +16,16 @@
           aria-hidden="true"></i></span>
     </div>
   </form>
-  <div class="socialMedia">
-    <i class="fab fa-facebook-f fa-2x media"></i>
-    <i class="fab fa-twitter fa-2x media"></i>
-    <i class="fab fa-instagram fa-2x media"></i>
-    <i class="fab fa-youtube fa-2x media"></i>
-</div>
+  <footer>
+    <div class="socialMedia">
+      <i class="fab fa-facebook-f fa-2x"></i>
+      <i class="fab fa-twitter fa-2x"></i>
+      <i class="fab fa-instagram fa-2x"></i>
+      <i class="fab fa-youtube fa-2x"></i>
+    </div>
+    <div class="rulesAndAuthor">
+      Wszystkie prawa zastrzeżone <br />
+      Autor: Karol Ścigała
+    </div>
+  </footer>
 </div>

@@ -4,11 +4,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserLayoutComponent } from './Layout/user-layout/user-layout.component';
 import { VisitorLayoutComponent } from './Layout/visitor-layout/visitor-layout.component';
-import { UserHomeComponent } from './Home/user-home/user-home.component';
-import { VisitorHomeComponent } from './Home/visitor-home/visitor-home.component';
+import { UserHomeComponent } from './User/user-home/user-home.component';
+import { VisitorHomeComponent } from './Visitor/visitor-home/visitor-home.component';
 import {MenuComponent} from './Layout/menu/menu.component';
-import {ScheduleAndScoreComponent} from './Layout/scheduleAndScore/scheduleAndScore.component';
-import {BarUserComponent} from './Layout/barUser/barUser.component';
+import {ScheduleAndScoreComponent} from './Visitor/scheduleAndScore/scheduleAndScore.component';
+import {BarUserComponent} from './Visitor/barUser/barUser.component';
 
 
 @NgModule({

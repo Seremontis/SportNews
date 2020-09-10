@@ -1,4 +1,4 @@
-.content{
+.contentSchedule{
     display: block;
     background: #CDEB77;
     height: 100%;
@@ -7,6 +7,7 @@
 .menuSchedule{
     padding-left: 15px;
     height: 40px;
+    display: inline-block;
 }
 .menuSchedule>*{
     margin-right: 5px;
@@ -27,20 +28,24 @@
 
 .scheduleAndResult{
     display: inline-flex;
-    height: calc( 100% - 40px);
+    height: calc(100% - 40px);
     width: 100%;
     overflow-y: auto;
+    padding-bottom: 15px;
 }
 .schedule, .result{
     border: 2px solid #C8C5C5;
     box-sizing: border-box;
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
     margin-top: auto;
     margin-bottom: auto;
     background: rgba(251, 246, 246, 0.53);
     padding-left: 10px;
     padding-right: 10px;
     font-weight: bold;
+    min-width: 190px;
+    width: 100%;
 }
 
 .result{

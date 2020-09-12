@@ -105,7 +105,7 @@
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #383333;
+  background: #948b8b;
   border: 0px none #ffffff;
   border-radius: 50px;
 }
@@ -113,10 +113,10 @@
   background: #90ada9;
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #171616;
+  background: #6b6767;
 }
 ::-webkit-scrollbar-track {
-  background: #262650;
+  background: #0a0a13;
   border: 0px none #ffffff;
   border-radius: 50px;
 }

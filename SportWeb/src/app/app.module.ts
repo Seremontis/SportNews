@@ -9,7 +9,7 @@ import { VisitorHomeComponent } from './Visitor/visitor-home/visitor-home.compon
 import {MenuComponent} from './Layout/menu/menu.component';
 import {ScheduleAndScoreComponent} from './Visitor/scheduleAndScore/scheduleAndScore.component';
 import {BarUserComponent} from './Visitor/barUser/barUser.component';
-
+import { CategoriesComponent } from './Visitor/Categories/Categories.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import {BarUserComponent} from './Visitor/barUser/barUser.component';
     VisitorHomeComponent,
     MenuComponent,
     ScheduleAndScoreComponent,
-    BarUserComponent
+    BarUserComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,

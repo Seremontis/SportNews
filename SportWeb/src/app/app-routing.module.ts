@@ -4,19 +4,25 @@ import { VisitorLayoutComponent} from './Layout/visitor-layout/visitor-layout.co
 import { UserLayoutComponent} from './Layout/user-layout/user-layout.component';
 import { VisitorHomeComponent } from './Visitor/visitor-home/visitor-home.component';
 import { UserHomeComponent } from './User/user-home/user-home.component';
+import { CategoriesComponent} from './Visitor/Categories/Categories.component'
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'visitor',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    path:'visitor',
+    path:'',
     component:VisitorLayoutComponent,
     children:[
-      { path: 'home',
+      { 
+        path: 'home',
         component: VisitorHomeComponent
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent
       }
     ]
   },

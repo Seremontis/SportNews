@@ -1,5 +1,24 @@
+.stickyMenu{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.standardItem{
+  position: relative;
+  height: auto;
+  width: 100%;
+}
+
+.stickyItem{
+  position: sticky;
+  top: 0;
+  height: 90vh;
+}
 .navOption {
   color: white;
+  overflow-y: auto;
 }
 .imgLogo {
   background: linear-gradient(
@@ -43,7 +62,14 @@ form{
   position: absolute;
   bottom: 0px;
   width: 95%;
-  margin-bottom: 15px;
+  margin-bottom: 15px; 
+}
+.searcherAndSocialMediaStandard{
+  display: block;
+  bottom: 0px;
+  width: 95%;
+  margin-bottom: 15px; 
+  margin-top: 20px;
 }
 
 .socialMedia{
@@ -76,11 +102,22 @@ form{
 }
 
 @media (max-width: 850px) {
+  .stickyMenu{
+    height: 100%;
+    position: relative;
+  }
   .socialMedia{
     margin-top:10px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     row-gap: 10px;
+  }
+  .searcherAndSocialMediaStandard{
+    display: block;
+    bottom: 0px;
+    width: 95%;
+    margin-bottom: 15px; 
+    margin-top: 20px;
   }
 }

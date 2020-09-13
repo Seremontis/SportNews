@@ -5,6 +5,7 @@ import { UserLayoutComponent} from './Layout/user-layout/user-layout.component';
 import { VisitorHomeComponent } from './Visitor/visitor-home/visitor-home.component';
 import { UserHomeComponent } from './User/user-home/user-home.component';
 import { CategoriesComponent} from './Visitor/Categories/Categories.component'
+import { ArticleComponent} from './Visitor/article/article.component'
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
       {
         path: 'categories',
         component: CategoriesComponent
+      },
+      
+      {
+        path: 'article',
+        component: ArticleComponent
       }
     ]
   },

@@ -1,7 +1,7 @@
 <main>
     <div class="lastArticle">
         <figure *ngFor="let element of arraytest | slice:0:2">
-            <a href="#" alt="">
+            <a routerLink="/article" alt="">
             <img src="{{element.name}}" />
             <header><h1>{{element.id}}</h1></header>       
             <div class="opacity"></div>
@@ -10,7 +10,7 @@
     </div>
     <div class="olderArticle">
         <figure *ngFor="let element of arraytest | slice:2:6">
-            <a href="#" alt="">
+            <a routerLink="/article" alt="">
             <div class="card">
                 <img class="card-img-top" src="{{element.name}}" alt="Card image cap">
                 <header class="card-body bgColor">

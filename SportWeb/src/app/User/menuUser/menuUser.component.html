@@ -1,0 +1,26 @@
+<div class="stickyMenu" (window:resize)="onResize($event)">
+  <div class="stickyItem">
+  <header>
+    <a routerLink="/home">
+      <img class="imgLogo" src="assets/logo.png" alt="Logo serwisu sportowego" />
+    </a>
+  </header>
+  <nav>
+    <ul class="navOption nav flex-column">
+      <li class="active" *ngFor="let element of AdminArray">
+        <i class="fas fa-info-circle"></i>
+        <a routerLink="{{element.url}}}}">{{element.text}}         
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="searcherAndSocialMedia">
+    <footer>
+      <div class="rulesAndAuthor">
+        Wszystkie prawa zastrzeżone <br />
+        Autor: Karol Ścigała
+      </div>
+    </footer>
+  </div>
+</div>
+</div>

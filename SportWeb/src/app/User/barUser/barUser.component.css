@@ -1,0 +1,36 @@
+.mainBar {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 320px;
+  }
+  
+  .logAndMap {
+    height: 100%;
+    width: 100%;
+    font-size: 1.2em;
+    display: inline-flex;
+  }
+
+.line{
+    height: 60%;
+    width: 1px;
+    border: white 1px solid;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+  a, span {
+    color: white;   
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .logAndMap>span:first-child{
+      margin-left: 20px;
+      font-style: italic;
+      font-weight: bold;
+  }

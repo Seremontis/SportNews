@@ -1,0 +1,87 @@
+.background {
+  background: radial-gradient(50% 50% at 50% 50%, #654747 0%, #403e3e 88.02%);
+  width: 100%;
+  height: 100%;
+}
+
+.loginForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+  width: 975px;
+  height: 507px;
+  max-width: 100%;
+
+  background: #ededed;
+  border: 2px solid #000000;
+  border-radius: 30px;
+  display: grid;
+  grid-template-columns: 45% auto;
+}
+
+.leftContent{
+    background: rgba(0, 0, 0, 0.56);
+    border-radius: 25px 0px 0px 25px;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding:0;
+    position: relative;
+}
+
+.rightContent{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: table;
+}
+
+.imgAndText{
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: grid;
+}
+
+.imgLogo{
+    margin: auto;
+    margin-bottom: 5%;
+}
+
+.aboutPage{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 250px;
+    text-align: center;
+    font-weight: bold;
+}
+
+form{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.formRow{
+    width: 75%;
+    margin: auto;
+    padding-top: 25px;
+}
+
+
+@media (max-width:850px){
+    .loginForm{
+        display: block;
+        margin: auto;
+        max-width: 95%;
+    }
+
+    .leftContent{
+        display: none;
+    }
+
+
+}

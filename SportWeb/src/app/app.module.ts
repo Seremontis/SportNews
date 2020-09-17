@@ -6,13 +6,19 @@ import { UserLayoutComponent } from './Layout/user-layout/user-layout.component'
 import { VisitorLayoutComponent } from './Layout/visitor-layout/visitor-layout.component';
 import { UserHomeComponent } from './User/user-home/user-home.component';
 import { VisitorHomeComponent } from './Visitor/visitor-home/visitor-home.component';
-import {MenuComponent} from './Layout/menu/menu.component';
+import {MenuComponent} from './Visitor/menu/menu.component';
 import {ScheduleAndScoreComponent} from './Visitor/scheduleAndScore/scheduleAndScore.component';
-import {BarUserComponent} from './Visitor/barUser/barUser.component';
+import {BarVisitorComponent} from './Visitor/barVisitor/barVisitor.component';
 import { CategoriesComponent } from './Visitor/Categories/Categories.component';
+import { LoginComponent } from './Login/Login.component';
+import {BarUserComponent} from './User/barUser/barUser.component';
+import {MenuUserComponent} from './User/menuUser/menuUser.component';
+import { HttpClientModule} from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { EditFormComponent } from './User/editForm/editForm.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     UserLayoutComponent,
     VisitorLayoutComponent,
@@ -20,12 +26,18 @@ import { CategoriesComponent } from './Visitor/Categories/Categories.component';
     VisitorHomeComponent,
     MenuComponent,
     ScheduleAndScoreComponent,
-    BarUserComponent,
-    CategoriesComponent
-  ],
+    BarVisitorComponent,
+    BarVisitorComponent,
+    CategoriesComponent,
+      LoginComponent,
+      BarUserComponent,
+      MenuUserComponent,
+      EditFormComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule, AngularEditorModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

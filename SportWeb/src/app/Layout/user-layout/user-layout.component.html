@@ -1,3 +1,13 @@
-<p>user-layout works!</p>
-<app-user-home></app-user-home>
-<router-outlet></router-outlet>
+<div class="container-fluid">
+    <div class="row">
+        <app-barUser class="NavTop col  p-0"></app-barUser>
+    </div>
+    <div class="row flex-grow-1 position-relative">
+        <app-menuUser class="col-sm-3 NavSide p-0 "></app-menuUser>
+        <div class="col-sm-9 flex-column fullColor">
+            <div class="row contentPage">
+                <router-outlet></router-outlet>
+            </div>         
+        </div>
+    </div>
+</div>

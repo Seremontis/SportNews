@@ -1,38 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { HostListener } from '@angular/core';
+import { HostListener,ElementRef,ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css'],
-  /*host: {
-    '(window:resize)': 'onResize($event)'
-  }*/
+  selector: 'app-menuUser',
+  templateUrl: './menuUser.component.html',
+  styleUrls: ['./menuUser.component.css']
 })
-export class MenuComponent implements OnInit {
-  array=[];
-
-  constructor() {
-    for(let i=0;i<10;i++){
-      this.array.push("Opcja "+(i+1))
-    }
-    
-   }
+export class MenuUserComponent implements OnInit {
+  AdminArray: { text: string, url: string, type:number }[] = [
+    { "text": "Strona główna", "url": "/MainPage","type": 0},
+    { "text": "Nowy artykuł", "url": "/editForm","type": 1},
+    { "text": "Artykuły", "url": "/tableForms","type": 1},
+    { "text": "Media", "url": "/","type": 1},
+    { "text": "Użytkownicy", "url": "/userTableForms","type": 2},
+    { "text": "Kategoria", "url": "/editCategory","type": 2}
+  ];
+  constructor() { }
 
   ngOnInit() {
   }
-
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     let header=document.querySelector('header');
-    console.log("header "+header);
     let nav=document.querySelector('nav');
-    console.log("nav "+nav);
     let footer=<HTMLElement>document.querySelector('.searcherAndSocialMedia')||<HTMLElement>document.querySelector('.searcherAndSocialMediaStandard');
-    console.log("footer "+footer);
     let height=header.offsetHeight+nav.offsetHeight+footer.offsetHeight;
-    console.log('lacznie '+height);
-    console.log(event.target.innerHeight);
     if(height>event.target.innerHeight){
       header.parentElement.classList.remove("stickyItem");
       header.parentElement.classList.add("standardItem");

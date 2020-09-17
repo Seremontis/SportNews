@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./barUser.component.css']
 })
 export class BarUserComponent implements OnInit {
-
+  userName='test';
   constructor() { }
 
   ngOnInit() {

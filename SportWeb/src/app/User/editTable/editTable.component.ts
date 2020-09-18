@@ -15,9 +15,9 @@ export class EditTableComponent implements OnInit {
     for(let i=0;i<10;i++){
       this.rows.push(i+1);
     }
-    this.flaga=false;
+    this.flaga=true;
     this.flaga2=false;
-    this.flaga3=true;
+    this.flaga3=false;
    }
 
   ngOnInit() {

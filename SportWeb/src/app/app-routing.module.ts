@@ -8,11 +8,13 @@ import { ArticleComponent } from './Visitor/article/article.component'
 import { LoginComponent } from './Login/Login.component';
 import { UserHomeComponent } from './User/user-home/user-home.component';
 import {EditFormComponent} from './User/editForm/editForm.component'
+import {EditTableComponent} from './User/editTable/editTable.component'
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    //redirectTo: 'home',
+    redirectTo: 'user/editTable',
     pathMatch: 'full'
   },
   {
@@ -54,6 +56,10 @@ const routes: Routes = [
       {
         path:'editForm',
         component:EditFormComponent
+      },
+      {
+        path:'editTable',
+        component:EditTableComponent
       }
     ]
   }

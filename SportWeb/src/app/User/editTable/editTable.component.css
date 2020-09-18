@@ -1,0 +1,23 @@
+:host{
+    width: 100%;
+}
+
+td{
+    vertical-align: middle;
+}
+
+tr>td:last-child{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 15px;
+}
+
+.Category{
+    width: 80%;
+    margin: auto;
+}
+
+.Category>form{
+    width: 75%;
+    margin: auto;
+}

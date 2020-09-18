@@ -16,6 +16,8 @@ import {MenuUserComponent} from './User/menuUser/menuUser.component';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditFormComponent } from './User/editForm/editForm.component';
+import {CommonModule} from '@angular/common';
+import { EditTableComponent } from './User/editTable/editTable.component';
 
 @NgModule({
   declarations: [	
@@ -32,10 +34,12 @@ import { EditFormComponent } from './User/editForm/editForm.component';
       LoginComponent,
       BarUserComponent,
       MenuUserComponent,
-      EditFormComponent
+      EditFormComponent,
+      EditTableComponent
    ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule, AngularEditorModule 
   ],

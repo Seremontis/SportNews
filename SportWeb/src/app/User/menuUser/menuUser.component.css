@@ -1,59 +1,82 @@
-.stickyMenu{
-    position: absolute;
-    top: 0;
+.stickyMenu {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.standardItem {
+  position: relative;
+  height: auto;
+  width: 100%;
+}
+
+.stickyItem {
+  position: sticky;
+  top: 0;
+  height: 90vh;
+}
+.navOption {
+  color: white;
+  overflow-y: auto;
+}
+
+.imgLogo {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+ul > li {
+  border-bottom: 1px solid white;
+  text-align: center;
+  background: rgba(196, 196, 196, 0.09);
+  padding: 5px;
+}
+
+ul > li:hover {
+  background: rgba(46, 44, 44, 0.09);
+}
+
+ul > li > a {
+  color: white;
+}
+
+.rulesAndAuthor {
+  padding-top: 10px;
+  color: white;
+  font-size: small;
+  text-align: center;
+  margin: auto;
+}
+
+@media (max-width: 850px) {
+  .stickyMenu {
     height: 100%;
-    width: 100%;
+    /*position: relative;*/
   }
-  
-  .standardItem{
-    position: relative;
-    height: auto;
-    width: 100%;
-  }
-  
-  .stickyItem{
-    position: sticky;
-    top: 0;
-    height: 90vh;
-  }
-  .navOption {
-    color: white;
-    overflow-y: auto;
-  }
-  
-  .imgLogo{
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: block;
-  }
-  
-  ul>li{
-      border-bottom: 1px solid white;
-      text-align: center;
-      background: rgba(196, 196, 196, 0.09);
-      padding: 5px;
-  }
-  
-  ul>li:hover{
-    background: rgba(46, 44, 44, 0.09);
-  }
-  
-  ul>li>a{
-      color: white;
-  }
-  
-  
   .rulesAndAuthor{
-    padding-top: 10px;
-    color:white;
-    font-size: small;
-    text-align: center;
+    word-wrap: break-word;
   }
-  
-  @media (max-width: 850px) {
-    .stickyMenu{
-      height: 100%;
-      position: relative;
-    }
+}
+
+@media (max-width: 768px) {
+.stickyMenu{
+  position: relative;
+}
+
+  .footerBottom {
+    background: #232121;
+    -webkit-box-shadow: -1px -12px 37px 1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px -12px 37px 1px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px -12px 37px 1px rgba(0, 0, 0, 0.75);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: absolute;
+    width: 100%;
   }
+  .stickyItem {
+    height: 100%;
+  }
+}

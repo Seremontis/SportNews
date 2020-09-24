@@ -27,6 +27,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using SportApi.Model;
 using Microsoft.IdentityModel.Logging;
+using Microsoft.AspNetCore.Server.IISIntegration;
 
 namespace SportApi
 {
@@ -42,6 +43,7 @@ namespace SportApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDbContext<SportNewsContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Database")),
                 ServiceLifetime.Transient);
@@ -61,7 +63,8 @@ namespace SportApi
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
                         ClockSkew = TimeSpan.Zero
                     };
-                    services.AddCors();
+                    //services.AddCors()
+
                     IdentityModelEventSource.ShowPII = true;// potem delete
                 });
             services.AddAuthorization(configure =>
@@ -71,6 +74,18 @@ namespace SportApi
                 configure.AddPolicy(Policies.FullJournalist, Policies.FullJournalistPolicy());
                 configure.AddPolicy(Policies.CustomJournalist, Policies.CustomJournalistPolicy());
             });
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowOrigin",
+            //    builder =>
+            //    {
+            //        builder.WithOrigins("http://localhost:4200")
+            //                            .AllowAnyHeader()
+            //                            .AllowAnyMethod()
+            //                            .AllowCredentials();
+            //    });
+            //}); ;
             services.AddControllers();
 
         }
@@ -81,11 +96,21 @@ namespace SportApi
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseCors(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod()
+                                            .AllowCredentials();
+                    });
+
+                app.UseDeveloperExceptionPage();            
             }
             app.UseExceptionHandler("/Error");
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors("AllowOrigin");
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
@@ -93,7 +118,8 @@ namespace SportApi
                 endpoints.MapControllers();
             });
             //app.UseMiddleware<ErrorHandler>();
-            app.UseStatusCodePages();
+            app.UseStatusCodePages(); 
+           
 
             //depency injection
             /*var container = new Container();

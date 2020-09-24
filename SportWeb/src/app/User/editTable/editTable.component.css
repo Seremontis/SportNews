@@ -1,6 +1,11 @@
 :host {
   width: 100%;
 }
+.addButton{
+  float: right;
+  margin: 10px;
+}
+
 .table {
   table-layout: fixed;
 }

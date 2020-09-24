@@ -13,8 +13,7 @@ import {EditTableComponent} from './User/editTable/editTable.component'
 const routes: Routes = [
   {
     path: '',
-    //redirectTo: 'home',
-    redirectTo: 'user/editTable',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -60,7 +59,7 @@ const routes: Routes = [
       {
         path:'editTable',
         component:EditTableComponent
-      }
+      },
     ]
   }
 ];

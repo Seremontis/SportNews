@@ -1,4 +1,6 @@
-<table class="table table-striped table-dark userTab" *ngIf = "flaga">
+<div class="User" *ngIf = "name==1">
+  <button class="btn btn-success addButton">Dodaj użytkownika</button>
+<table class="table table-striped table-dark userTab" >
   <thead>
     <th scope="col" class="lpSize">L.p.</th>
     <th scope="col">Login</th>
@@ -21,9 +23,9 @@
     </tr>
   </tbody>
 </table>
+</div>
 
-
-<table class="table table-striped table-dark articleTab" *ngIf = "flaga2">
+<table class="table table-striped table-dark articleTab" *ngIf = "name==2">
   <thead>
     <th scope="col" style="width: 10%">L.p.</th>
     <th scope="col">Tytuł</th>
@@ -50,7 +52,7 @@
 </table>
 
 
-<div class="Category" *ngIf = "flaga3">
+<div class="Category" *ngIf = "name==3">
   <form action="">
     <div class="input-group mb-3">
       <input type="text" class="form-control" placeholder="Nazwa kategorii" aria-label="Nazwa kategorii" aria-describedby="basic-addon2">

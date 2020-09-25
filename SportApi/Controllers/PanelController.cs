@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
@@ -18,8 +19,11 @@ using SportDatabase.Repository;
 
 namespace SportApi.Controllers
 {
+    //[AllowCrossSiteJson]
     [Route("Panel")]
     [ApiController]
+    //[EnableCors("AllowOrigin")]
+
     /// TODO :co zrobić z użytkownika których nie można usunąć oraz obiektami
     public class PanelController : ControllerBase
     {
@@ -125,7 +129,7 @@ namespace SportApi.Controllers
 
         [Route("GetCategory")]
         [HttpGet]
-        [Authorize(Roles = Policies.All)]
+        //[Authorize(Roles = Policies.All)]
         public async Task<IEnumerable<Category>> GetCategory()
         {
             try
@@ -141,7 +145,7 @@ namespace SportApi.Controllers
         [Route("GetGallery/{id}")]
         [HttpGet]
         [Authorize(Roles = Policies.All)]
-        public IEnumerable<Gallery> GetGallery(int id)
+        public async Task<IEnumerable<Gallery>> GetGallery(int id)
         {
             try
             {

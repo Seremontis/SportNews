@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HostListener, ElementRef, ViewChild } from '@angular/core';
+import { HostListener,ElementRef,ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-menuUser',
@@ -7,60 +7,35 @@ import { HostListener, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./menuUser.component.css']
 })
 export class MenuUserComponent implements OnInit {
-
-  AdminArray: { text: string, url: string, type: number ,queryParams:string}[] = [
-    { "text": "Strona główna", "url": "./", "type": 0 ,"queryParams":null},
-    { "text": "Nowy artykuł", "url": "./editForm", "type": 1,"queryParams":null },
-    { "text": "Artykuły", "url": "./tableForms", "type": 1 ,"queryParams":null},
-    { "text": "Media", "url": "/", "type": 1 ,"queryParams":null},
-    { "text": "Użytkownicy", "url": "./TableForms", "type": 2 ,"queryParams":null},
-    { "text": "Kategoria", "url": "./editTable", "type": 2 ,"queryParams": "3"}
+  AdminArray: { text: string, url: string, type:number }[] = [
+    { "text": "Strona główna", "url": "/MainPage","type": 0},
+    { "text": "Nowy artykuł", "url": "/editForm","type": 1},
+    { "text": "Artykuły", "url": "/tableForms","type": 1},
+    { "text": "Media", "url": "/","type": 1},
+    { "text": "Użytkownicy", "url": "/userTableForms","type": 2},
+    { "text": "Kategoria", "url": "/editCategory","type": 2}
   ];
-  constructor() {
-   }
+  constructor() { }
 
   ngOnInit() {
-    window.dispatchEvent(new Event('resize'));
   }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    let header = document.querySelector('header');
-    let nav = document.querySelector('nav');
-    let footer = <HTMLElement>document.querySelector('.searcherAndSocialMedia') || <HTMLElement>document.querySelector('.searcherAndSocialMediaStandard');
-    let height = header.offsetHeight + nav.offsetHeight + footer.offsetHeight;
-    if (height > event.target.innerHeight || event.target.innerWidth <= 768) {
+    let header=document.querySelector('header');
+    let nav=document.querySelector('nav');
+    let footer=<HTMLElement>document.querySelector('.searcherAndSocialMedia')||<HTMLElement>document.querySelector('.searcherAndSocialMediaStandard');
+    let height=header.offsetHeight+nav.offsetHeight+footer.offsetHeight;
+    if(height>event.target.innerHeight){
       header.parentElement.classList.remove("stickyItem");
       header.parentElement.classList.add("standardItem");
       footer.classList.remove('searcherAndSocialMedia');
       footer.classList.add('searcherAndSocialMediaStandard');
     }
-    else {
+    else{
       header.parentElement.classList.add("stickyItem");
       header.parentElement.classList.remove("standardItem");
       footer.classList.add('searcherAndSocialMedia');
       footer.classList.remove('searcherAndSocialMediaStandard');
     }
-
-    if (event.target.innerWidth <= 768) {
-      let menu = document.body.querySelector('.NavSide');
-      let footerbottom = document.body.querySelector('footer');
-      let container = document.body.querySelector('.container-fluid');
-      menu.appendChild(nav);
-      container.appendChild(footerbottom);
-    }
-    else {
-      let menu = document.body.querySelector('.stickyItem');
-      let footerbottom = document.body.querySelector('footer');
-      if (menu !== null) {
-        if (menu.querySelector('nav') == null) {
-          nav.style.visibility='visible';
-          menu.insertBefore(nav,footer);
-        }
-        if(footer.querySelector('footer')==null){
-          footer.appendChild(footerbottom);
-        }
-      }
-    }
-
   }
 }

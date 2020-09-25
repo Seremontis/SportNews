@@ -18,7 +18,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditFormComponent } from './User/editForm/editForm.component';
 import {CommonModule} from '@angular/common';
 import { EditTableComponent } from './User/editTable/editTable.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [	
@@ -42,9 +41,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    HttpClientModule, 
-    AngularEditorModule,
-    FormsModule       
+    HttpClientModule, AngularEditorModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

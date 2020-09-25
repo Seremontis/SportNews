@@ -7,25 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarUserComponent implements OnInit {
   userName='test';
-  model=true;
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
   }
-  
-  showHideMenu() {
-    if(this.model){
-      document.querySelector('nav').style.visibility='visible';
-      var navTop=<HTMLElement>document.querySelector('.NavTop');
-      navTop.classList.add('NavSelected');
-      navTop.style.position='fixed';
-    }
-    else{
-      document.querySelector('nav').style.visibility='hidden';
-      var navTop=<HTMLElement>document.querySelector('.NavTop');
-      navTop.classList.remove('NavSelected');
-      navTop.style.position='relative';
-    }
-    this.model=!this.model;
-  }
+
 }

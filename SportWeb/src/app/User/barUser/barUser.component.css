@@ -2,7 +2,7 @@
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 320px;
   }
   
   .logAndMap {
@@ -34,21 +34,3 @@
       font-style: italic;
       font-weight: bold;
   }
-
-
-  /*.menuToggle{
-    display: none;
-  }*/
-
-
-@media(max-width:768px){
-  .menuToggle{
-    display: block;
-    width: 100%;
-  }
-
-  .hamburger>i{
-    color: white;
-  }
-  
-}

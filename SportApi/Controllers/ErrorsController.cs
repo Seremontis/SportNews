@@ -37,7 +37,7 @@ namespace SportApi.Controllers
                 Date = DateTime.Now,
                 Message = exceptionDetails.Error.StackTrace,
                 Path = exceptionDetails.Path,
-                UserId = null,
+                UserId = 0,
             };          
             try
             {

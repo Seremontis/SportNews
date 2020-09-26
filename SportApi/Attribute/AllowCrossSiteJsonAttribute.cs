@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Web.Http.Filters;
 
+/// <summary>
+/// delete
+/// </summary>
 public class AllowCrossSiteJsonAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)

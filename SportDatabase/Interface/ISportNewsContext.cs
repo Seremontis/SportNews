@@ -9,7 +9,6 @@ namespace SportDatabase
     {
         DbSet<Article> Articles { get; set; }
         DbSet<Category> Categories { get; set; }
-        DbSet<Gallery> Gallery { get; set; }
         DbSet<LogException> LogExceptions { get; set; }
         DbSet<Permission> Permissions { get; set; }
         DbSet<Role> Roles { get; set; }

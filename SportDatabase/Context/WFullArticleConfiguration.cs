@@ -7,7 +7,7 @@ using System;
 
 namespace SportDatabase.Context
 {
-    public class WFullArticleConfiguration : IEntityTypeConfiguration<WFullArticle>
+    public class WfullArticleConfiguration : IEntityTypeConfiguration<WFullArticle>
     {
         public void Configure(EntityTypeBuilder<WFullArticle> entity)
         {
@@ -21,7 +21,7 @@ namespace SportDatabase.Context
 
             entity.Property(e => e.Name).IsUnicode(false);
 
-            entity.Property(e => e.SmallPicture).IsFixedLength();
+            entity.Property(e => e.Picture).IsFixedLength();
         }
     }
 }

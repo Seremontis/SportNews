@@ -7,17 +7,17 @@ using System;
 
 namespace SportDatabase.Context
 {
-    public class WlistArticleConfiguration : IEntityTypeConfiguration<WListArticle>
+    public class WcategoryConfiguration : IEntityTypeConfiguration<WCategory>
     {
-        public void Configure(EntityTypeBuilder<WListArticle> entity)
+        public void Configure(EntityTypeBuilder<WCategory> entity)
         {
             entity.HasNoKey();
 
-            entity.ToView("WListArticles");
+            entity.ToView("WCategory");
 
             entity.Property(e => e.Name).IsUnicode(false);
 
-            entity.Property(e => e.SmallPicture).IsFixedLength();
+            entity.Property(e => e.UserModified).IsUnicode(false);
         }
     }
 }

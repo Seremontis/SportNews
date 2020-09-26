@@ -11,6 +11,8 @@ namespace SportDatabase.Context
     {
         public void Configure(EntityTypeBuilder<Role> entity)
         {
+            entity.Property(e => e.CanModify).HasDefaultValueSql("((1))");
+
             entity.Property(e => e.NameRole).IsUnicode(false);
         }
     }

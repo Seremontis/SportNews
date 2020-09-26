@@ -8,20 +8,10 @@ namespace SportDatabase.Model
 {
     public partial class Role
     {
-        public Role()
-        {
-            Permissions = new HashSet<Permission>();
-            Users = new HashSet<User>();
-        }
-
         [Key]
         public int RoleId { get; set; }
         [StringLength(100)]
         public string NameRole { get; set; }
-
-        [InverseProperty(nameof(Permission.Role))]
-        public virtual ICollection<Permission> Permissions { get; set; }
-        [InverseProperty(nameof(User.Role))]
-        public virtual ICollection<User> Users { get; set; }
+        public bool? CanModify { get; set; }
     }
 }

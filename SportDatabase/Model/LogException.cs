@@ -17,10 +17,6 @@ namespace SportDatabase.Model
         public string Path { get; set; }
         [Required]
         public string Message { get; set; }
-        public int? UserId { get; set; }
-
-        [ForeignKey(nameof(UserId))]
-        [InverseProperty("LogExceptions")]
-        public virtual User User { get; set; }
+        public int UserId { get; set; }
     }
 }

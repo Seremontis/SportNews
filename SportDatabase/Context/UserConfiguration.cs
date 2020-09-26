@@ -18,11 +18,6 @@ namespace SportDatabase.Context
             entity.Property(e => e.Login).IsUnicode(false);
 
             entity.Property(e => e.Password).IsFixedLength();
-
-            entity.HasOne(d => d.Role)
-                .WithMany(p => p.Users)
-                .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK__Users__RoleId__398D8EEE");
         }
     }
 }

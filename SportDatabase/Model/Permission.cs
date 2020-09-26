@@ -10,14 +10,14 @@ namespace SportDatabase.Model
     {
         [Key]
         public int PermissionId { get; set; }
-        public int RoleId { get; set; }
-        [StringLength(100)]
-        public string Name { get; set; }
-        [StringLength(255)]
-        public string Description { get; set; }
+        public int UserId { get; set; }
+        public int? CategoryId { get; set; }
+        public int? UserModified { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? LastModified { get; set; }
 
-        [ForeignKey(nameof(RoleId))]
+        [ForeignKey(nameof(UserId))]
         [InverseProperty("Permissions")]
-        public virtual Role Role { get; set; }
+        public virtual User User { get; set; }
     }
 }

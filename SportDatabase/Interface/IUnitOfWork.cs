@@ -13,8 +13,7 @@ namespace SportDatabase.Interface
     public interface IUnitOfWork : IDisposable
     {
         IArticleRepo<Article> IRepoArticle {get;}
-        IRepository<Category> IRepoCategory{get;}
-        IGalleryRepo<Gallery> IRepoGallery{get;}
+        ICategoryRepo<Category> IRepoCategory{get;}
         IRepository<Permission> IRepoPermission{get;}
         IRepository<Role> IRepoRole{ get; }
         IUserRepo<User> IRepoUser{ get; }

@@ -2,11 +2,13 @@
    "ContextClassName": "SportNewsContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
    "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": "Context",
    "OutputPath": "Model",
    "ProjectRootNamespace": "SportDatabase",
+   "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
@@ -17,10 +19,6 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[Categories]"
-      },
-      {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Gallery]"
       },
       {
          "HasPrimaryKey": true,
@@ -41,6 +39,10 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[Users]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[WCategory]"
       },
       {
          "HasPrimaryKey": true,

@@ -12,18 +12,16 @@ namespace SportDatabase.Model
         [Required]
         [Column(TypeName = "text")]
         public string Title { get; set; }
-        [MaxLength(1)]
-        public byte[] SmallPicture { get; set; }
-        [Required]
+        [StringLength(300)]
+        public string Picture { get; set; }
         [Column(TypeName = "text")]
         public string ShortArticle { get; set; }
         [Column(TypeName = "text")]
         public string Article { get; set; }
         [Column(TypeName = "date")]
-        public DateTime? PublicationTime { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime? LastUpdate { get; set; }
-        public bool? IsGallery { get; set; }
+        public DateTime PublicationTime { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime LastModified { get; set; }
         [StringLength(50)]
         public string Name { get; set; }
         public int? CategoryId { get; set; }

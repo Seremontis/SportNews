@@ -11,18 +11,11 @@ namespace SportDatabase.Context
     {
         public void Configure(EntityTypeBuilder<Article> entity)
         {
-            entity.Property(e => e.IsGallery).HasDefaultValueSql("((0))");
-
             entity.Property(e => e.Keywords).IsFixedLength();
 
-            entity.Property(e => e.MainPicture).IsFixedLength();
+            entity.Property(e => e.Picture).IsFixedLength();
 
             entity.Property(e => e.SmallPicture).IsFixedLength();
-
-            entity.HasOne(d => d.Author)
-                .WithMany(p => p.Articles)
-                .HasForeignKey(d => d.AuthorId)
-                .HasConstraintName("FK__Articles__Author__412EB0B6");
         }
     }
 }

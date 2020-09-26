@@ -1,18 +1,33 @@
-INSERT INTO Roles VALUES ('SuperAdmin')
-INSERT INTO Roles VALUES ('Admin')
-INSERT INTO Roles VALUES ('Dziennikarz')
-INSERT INTO Roles VALUES ('Specjalne uprawnienia')
+use SportNews
+go
 
-INSERT INTO Users VALUES ('Test','Testowy','Test',HASHBYTES('SHA-512/256','test'),null,1)
-INSERT INTO Users VALUES ('Test2','Testowy2','Test2',HASHBYTES('SHA-512/256','test'),null,2)
-INSERT INTO Users VALUES ('Test3','Testowy3','Test3',HASHBYTES('SHA-512/256','test'),null,3)
+INSERT INTO Roles(NameRole,CanModify) VALUES ('SuperAdmin',0)
+INSERT INTO Roles(NameRole,CanModify) VALUES ('Admin',0)
+INSERT INTO Roles(NameRole,CanModify) VALUES ('Dziennikarz',0)
+INSERT INTO Roles(NameRole,CanModify) VALUES ('Dziennikarz ograniczone uprawnienia',1)
 
-INSERT INTO Categories VALUES ('Test')
-INSERT INTO Categories VALUES ('Pi³ka')
-INSERT INTO Categories VALUES ('Hokej')
-INSERT INTO Categories VALUES ('Formu³a 1')
+INSERT INTO Users(FirstName,LastName,Login,Password,RoleId,UserModified,LastModified) VALUES ('Test','Testowy','Test',HASHBYTES('SHA-512/256','test'),1,null, GETDATE())
+INSERT INTO Users(FirstName,LastName,Login,Password,RoleId,UserModified,LastModified) VALUES ('Test2','Testowy2','Test2',HASHBYTES('SHA-512/256','test'),2,null, GETDATE())
+INSERT INTO Users(FirstName,LastName,Login,Password,RoleId,UserModified,LastModified) VALUES ('Test3','Testowy3','Test3',HASHBYTES('SHA-512/256','test'),3,null, GETDATE())
 
-INSERT INTO Articles VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,NULL,
+INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Test',1,1,GETDATE())
+INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Pi³ka',2,1,GETDATE())
+INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Hokej',3,1,GETDATE())
+INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Formu³a 1',4,1,GETDATE())
+
+INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
+ VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,NULL,
+'"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
+"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac nibh felis. Sed at vestibulum diam. Ut eleifend tellus eu enim consequat, eu mattis neque feugiat. Donec augue lacus, ultrices vitae interdum id, sagittis vel sapien. Cras sit amet elementum lectus. Phasellus purus elit, consequat eget nunc non, cursus vulputate mi. Integer lacinia nisi pulvinar libero facilisis dictum. Donec id viverra tortor. Quisque iaculis orci a metus mollis, nec sodales leo pellentesque. Ut malesuada pharetra purus eget laoreet. Duis id neque sed urna suscipit ultricies ac ut massa. Maecenas pellentesque ullamcorper bibendum.
+Proin rhoncus arcu in diam rhoncus sodales. Sed sollicitudin laoreet odio vitae blandit. Donec interdum condimentum egestas. Nulla id sodales risus, at fermentum orci. Donec pharetra gravida porta. Nunc eu turpis non erat accumsan porta. Mauris imperdiet malesuada dignissim. Sed eget faucibus est. Donec ut imperdiet odio. In hac habitasse platea dictumst. Nam eu erat elit. Phasellus dignissim porttitor placerat. Nam in massa eleifend, fermentum lorem sed, malesuada sapien.
+Donec bibendum placerat leo, non lacinia erat dictum id. Sed ultricies ligula in felis ullamcorper, et interdum risus imperdiet. Quisque luctus dolor in molestie rutrum. Nam malesuada sollicitudin volutpat. Ut imperdiet suscipit dui, id placerat ante hendrerit sed. Suspendisse consequat porttitor feugiat. Nam aliquam, ligula a interdum consequat, lacus sapien interdum diam, semper vulputate nulla ex quis nunc. Duis finibus vitae arcu eu malesuada. Donec quis tempor tellus. Vivamus arcu mauris, tempor eu quam sit amet, finibus tempus enim. Donec placerat massa eget dui feugiat pellentesque.
+Pellentesque sagittis eleifend purus, rhoncus varius nibh faucibus id. Donec vitae consequat massa. Donec viverra consequat risus eget congue. Donec sodales risus arcu, sit amet egestas ante aliquam nec. Donec eget lorem luctus, feugiat eros sit amet, laoreet urna. Sed pharetra ipsum ut purus gravida pretium vel sed leo. Duis vitae lectus in tellus pretium fermentum. Vivamus tincidunt convallis quam ut pellentesque. Maecenas tortor diam, sollicitudin vitae justo eu, scelerisque suscipit erat. Curabitur orci magna, rhoncus eget varius id, finibus at lorem. Vivamus lacus nisi, lacinia sed aliquet id, venenatis id nisi.
+Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tristique ac pellentesque ac, hendrerit vitae ligula. Suspendisse nisl arcu, pretium ut vulputate eget, dignissim quis metus. Cras vestibulum maximus dolor ut sollicitudin. Cras rutrum condimentum gravida. Ut vehicula pulvinar nulla vel molestie. Donec purus ex, hendrerit id dui vitae, consectetur accumsan sapien.',
+'lorem ipsum test 5',GETDATE(),null,1,GETDATE())
+
+INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified) 
+VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
 "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
 
@@ -22,9 +37,10 @@ Donec bibendum placerat leo, non lacinia erat dictum id. Sed ultricies ligula in
 Pellentesque sagittis eleifend purus, rhoncus varius nibh faucibus id. Donec vitae consequat massa. Donec viverra consequat risus eget congue. Donec sodales risus arcu, sit amet egestas ante aliquam nec. Donec eget lorem luctus, feugiat eros sit amet, laoreet urna. Sed pharetra ipsum ut purus gravida pretium vel sed leo. Duis vitae lectus in tellus pretium fermentum. Vivamus tincidunt convallis quam ut pellentesque. Maecenas tortor diam, sollicitudin vitae justo eu, scelerisque suscipit erat. Curabitur orci magna, rhoncus eget varius id, finibus at lorem. Vivamus lacus nisi, lacinia sed aliquet id, venenatis id nisi.
 Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tristique ac pellentesque ac, hendrerit vitae ligula. Suspendisse nisl arcu, pretium ut vulputate eget, dignissim quis metus. Cras vestibulum maximus dolor ut sollicitudin. Cras rutrum condimentum gravida. Ut vehicula pulvinar nulla vel molestie. Donec purus ex, hendrerit id dui vitae, consectetur accumsan sapien.',
 
-'lorem ipsum test 5',GETDATE(),null,1,0)
+'lorem ipsum test 5',GETDATE(),null,3,GETDATE())
 
-INSERT INTO Articles VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,NULL,
+INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
+ VALUES (3,'Lorem Ipsum2',NULL,NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
 "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
 
@@ -34,21 +50,10 @@ Donec bibendum placerat leo, non lacinia erat dictum id. Sed ultricies ligula in
 Pellentesque sagittis eleifend purus, rhoncus varius nibh faucibus id. Donec vitae consequat massa. Donec viverra consequat risus eget congue. Donec sodales risus arcu, sit amet egestas ante aliquam nec. Donec eget lorem luctus, feugiat eros sit amet, laoreet urna. Sed pharetra ipsum ut purus gravida pretium vel sed leo. Duis vitae lectus in tellus pretium fermentum. Vivamus tincidunt convallis quam ut pellentesque. Maecenas tortor diam, sollicitudin vitae justo eu, scelerisque suscipit erat. Curabitur orci magna, rhoncus eget varius id, finibus at lorem. Vivamus lacus nisi, lacinia sed aliquet id, venenatis id nisi.
 Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tristique ac pellentesque ac, hendrerit vitae ligula. Suspendisse nisl arcu, pretium ut vulputate eget, dignissim quis metus. Cras vestibulum maximus dolor ut sollicitudin. Cras rutrum condimentum gravida. Ut vehicula pulvinar nulla vel molestie. Donec purus ex, hendrerit id dui vitae, consectetur accumsan sapien.',
 
-'lorem ipsum test 5',GETDATE(),null,1,0)
+'lorem ipsum test 5',GETDATE(),null,3,GETDATE())
 
-INSERT INTO Articles VALUES (3,'Lorem Ipsum2',NULL,NULL,NULL,NULL,
-'"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
-"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
-
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac nibh felis. Sed at vestibulum diam. Ut eleifend tellus eu enim consequat, eu mattis neque feugiat. Donec augue lacus, ultrices vitae interdum id, sagittis vel sapien. Cras sit amet elementum lectus. Phasellus purus elit, consequat eget nunc non, cursus vulputate mi. Integer lacinia nisi pulvinar libero facilisis dictum. Donec id viverra tortor. Quisque iaculis orci a metus mollis, nec sodales leo pellentesque. Ut malesuada pharetra purus eget laoreet. Duis id neque sed urna suscipit ultricies ac ut massa. Maecenas pellentesque ullamcorper bibendum.
-Proin rhoncus arcu in diam rhoncus sodales. Sed sollicitudin laoreet odio vitae blandit. Donec interdum condimentum egestas. Nulla id sodales risus, at fermentum orci. Donec pharetra gravida porta. Nunc eu turpis non erat accumsan porta. Mauris imperdiet malesuada dignissim. Sed eget faucibus est. Donec ut imperdiet odio. In hac habitasse platea dictumst. Nam eu erat elit. Phasellus dignissim porttitor placerat. Nam in massa eleifend, fermentum lorem sed, malesuada sapien.
-Donec bibendum placerat leo, non lacinia erat dictum id. Sed ultricies ligula in felis ullamcorper, et interdum risus imperdiet. Quisque luctus dolor in molestie rutrum. Nam malesuada sollicitudin volutpat. Ut imperdiet suscipit dui, id placerat ante hendrerit sed. Suspendisse consequat porttitor feugiat. Nam aliquam, ligula a interdum consequat, lacus sapien interdum diam, semper vulputate nulla ex quis nunc. Duis finibus vitae arcu eu malesuada. Donec quis tempor tellus. Vivamus arcu mauris, tempor eu quam sit amet, finibus tempus enim. Donec placerat massa eget dui feugiat pellentesque.
-Pellentesque sagittis eleifend purus, rhoncus varius nibh faucibus id. Donec vitae consequat massa. Donec viverra consequat risus eget congue. Donec sodales risus arcu, sit amet egestas ante aliquam nec. Donec eget lorem luctus, feugiat eros sit amet, laoreet urna. Sed pharetra ipsum ut purus gravida pretium vel sed leo. Duis vitae lectus in tellus pretium fermentum. Vivamus tincidunt convallis quam ut pellentesque. Maecenas tortor diam, sollicitudin vitae justo eu, scelerisque suscipit erat. Curabitur orci magna, rhoncus eget varius id, finibus at lorem. Vivamus lacus nisi, lacinia sed aliquet id, venenatis id nisi.
-Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tristique ac pellentesque ac, hendrerit vitae ligula. Suspendisse nisl arcu, pretium ut vulputate eget, dignissim quis metus. Cras vestibulum maximus dolor ut sollicitudin. Cras rutrum condimentum gravida. Ut vehicula pulvinar nulla vel molestie. Donec purus ex, hendrerit id dui vitae, consectetur accumsan sapien.',
-
-'lorem ipsum test 5',GETDATE(),null,1,0)
-
-INSERT INTO Articles VALUES (3,'Jak to siê zaczê³o? – historia pierwszego wyœcigu F1',NULL,NULL,NULL,NULL,
+INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
+ VALUES (3,'Jak to siê zaczê³o? – historia pierwszego wyœcigu F1',NULL,NULL,NULL,NULL,
 '70 lat minê³o, jak jeden dzieñ – parafrazuj¹c tytu³owy utwór serialu „Czterdziestolatek”. Minê³o dok³adnie 13 maja, bo w³aœnie tego dnia 1950 roku, kierowcy po raz pierwszy œcigali siê w ramach Mistrzostw Œwiata Formu³y 1. W ubieg³¹ niedzielê odby³o siê inauguracyjne Grand Prix 70-lecia, a jak w³aœciwie dosz³o do tego pierwszego GP w dziejach F1?',
 
 'Historia wyœcigów Grand Prix siêga roku 1906, kiedy to Automobilklub Francuski zorganizowa³ wyœcig w pobli¿u Le Mans i okolicznych miejscowoœci. Warunki rozgrywania tych zawodów odbiega³y jednak znacznie od obecnych. Jedno okr¹¿enie toru, który wykorzystywa³ g³ównie pobliskie drogi, liczy³o ponad 103 kilometry! Mierz¹c dzisiejsz¹ miar¹, przypomina³o to bardziej rajd terenowy, ni¿ rywalizacjê wyœcigow¹.
@@ -94,14 +99,10 @@ Pierwszy wyœcig w historii Formu³y 1 liczy³ 70. okr¹¿eñ, a zwyciêzca Farina prze
 
 Niedzielne Grand Prix 70-lecia by³o 1023. wyœcigiem w historii Formu³y 1 oraz 55. zorganizowanym na torze Silverstone, gdzie siedemdziesi¹t lat temu wszystko siê zaczê³o.',
 
-'lorem ipsum test 5',GETDATE(),null,1,4)
+'lorem ipsum test 5',GETDATE(),null,3,GETDATE())
 
-INSERT INTO Articles VALUES (2,'Lorem Ipsum Small',NULL,NULL,NULL,NULL,
+INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
+ VALUES (2,'Lorem Ipsum Small',NULL,NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"',
 '"Tristique nulla vel molestie. Donec purus ex, hendrerit id dui vitae, consectetur accumsan sapien.',
-'lorem ipsum test 5',GETDATE(),null,1,0)
-
-
-Insert into Roles values ('FullAdmin',0)
-Insert into Roles values ('Admin',0)
-Insert into Roles values ('FullJournalist',0)
+'lorem ipsum test 5',GETDATE(),null,3,GETDATE())

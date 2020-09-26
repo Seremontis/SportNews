@@ -11,15 +11,11 @@ namespace SportDatabase.Context
     {
         public void Configure(EntityTypeBuilder<Permission> entity)
         {
-            entity.Property(e => e.Description).IsUnicode(false);
-
-            entity.Property(e => e.Name).IsUnicode(false);
-
-            entity.HasOne(d => d.Role)
+            entity.HasOne(d => d.User)
                 .WithMany(p => p.Permissions)
-                .HasForeignKey(d => d.RoleId)
+                .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Permissio__RoleI__3C69FB99");
+                .HasConstraintName("FK__Permissio__UserI__3E52440B");
         }
     }
 }

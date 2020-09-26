@@ -91,15 +91,14 @@ namespace SportApi.Controllers
         }
 
         [Route("AddCategory")]
-        [ValidateModel]
+        //[ValidateModel]
         [HttpPost]
-        [Authorize(Roles = Policies.AllAdmin)]
-        public async Task<HttpResponseMessage> AddCategory([FromBody] Category[] categories)
+        //[Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> AddCategory([FromBody] Category category)
         {
             sendOperation = async()=>
             {
-                foreach (var item in categories)
-                   await unitOfWork.IRepoCategory.Add(item);
+                   await unitOfWork.IRepoCategory.Add(category);
             };
             return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
         }
@@ -120,7 +119,7 @@ namespace SportApi.Controllers
 
         [Route("DeleteCategory/{id}")]
         [HttpDelete]
-        [Authorize(Roles = Policies.AllAdmin)]
+        //[Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> DeleteCategory(int id)
         {
             sendOperation = async () => { await unitOfWork.IRepoCategory.Delete(id); };
@@ -130,61 +129,40 @@ namespace SportApi.Controllers
         [Route("GetCategory")]
         [HttpGet]
         //[Authorize(Roles = Policies.All)]
-        public async Task<IEnumerable<Category>> GetCategory()
+        public async Task<IEnumerable<WCategory>> GetCategory()
         {
             try
             {
-                return await unitOfWork.IRepoCategory.Get();
+                return await unitOfWork.IRepoCategory.GetView();
             }
             catch (Exception)
             {
                 throw;
+                //return Ok((object)"Wystąpił nieoczekiwany błąd");
             }
         }
 
-        [Route("GetGallery/{id}")]
-        [HttpGet]
-        [Authorize(Roles = Policies.All)]
-        public async Task<IEnumerable<Gallery>> GetGallery(int id)
+        [Route("MoveUpCategory")]
+        [HttpPut]
+        //[Authorize(Roles = Policies.All)]
+        public async Task<HttpResponseMessage> MoveUpCategory([FromBody]int id)
         {
-            try
+            sendOperation = async () =>
             {
-                return await unitOfWork.IRepoGallery.GetList(id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        [Route("AddGallery")]
-        [ValidateModel]
-        [HttpPost]
-        [Authorize(Roles = Policies.AllWithoutAdmin)]
-        public async Task<HttpResponseMessage> AddGallery([FromBody] Gallery[] galleries)
-        {
-            sendOperation = async()=>
-            {
-                foreach (var item in galleries)
-                    await unitOfWork.IRepoGallery.Add(item);
+                await unitOfWork.IRepoCategory.MoveUp(id);
             };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
         }
-
-        [Route("DeleteGallery")]
-        [HttpDelete]
-        [Authorize(Roles = Policies.AllWithoutAdmin)]
-        public async Task<HttpResponseMessage> DeleteGallery(int[] galleries)
+        [Route("MoveDownCategory")]
+        [HttpPut]
+        //[Authorize(Roles = Policies.All)]
+        public async Task<HttpResponseMessage> MoveDowCategory(int id)
         {
-            sendOperation = async() =>
+            sendOperation = async () =>
             {
-                foreach (var item in galleries)
-                    await unitOfWork.IRepoGallery.Delete(item);
+                await unitOfWork.IRepoCategory.MoveDown(id);
             };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
-
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
         }
-
-
     }
 }

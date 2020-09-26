@@ -8,12 +8,11 @@ namespace SportDatabase.Model
     {
         public int ArticleId { get; set; }
         public string Title { get; set; }
-        public byte[] SmallPicture { get; set; }
+        public string Picture { get; set; }
         public string ShortArticle { get; set; }
         public string Article { get; set; }
-        public DateTime? PublicationTime { get; set; }
-        public DateTime? LastUpdate { get; set; }
-        public bool? IsGallery { get; set; }
+        public DateTime PublicationTime { get; set; }
+        public DateTime LastModified { get; set; }
         public string Name { get; set; }
         public int? CategoryId { get; set; }
         public string FirstName { get; set; }

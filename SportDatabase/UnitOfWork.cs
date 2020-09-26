@@ -16,8 +16,7 @@ namespace SportDatabase.Repository
         private SportNewsContext _Context { get; }
 
         private IArticleRepo<Article> _IRepoArticle;
-        private IRepository<Category> _IRepoCategory;
-        private IGalleryRepo<Gallery> _IRepoGallery;
+        private ICategoryRepo<Category> _IRepoCategory;
         private IRepository<LogException> _IRepoLogException;
         private IRepository<Permission> _IRepoPermission;
         private IRepository<Role> _IRepoRole;
@@ -29,7 +28,6 @@ namespace SportDatabase.Repository
             _Context = context;
         }
 
-        //add async task
         public async Task Commit()
         {
             await _Context.SaveChangesAsync();
@@ -46,9 +44,7 @@ namespace SportDatabase.Repository
         }
         public IArticleRepo<Article> IRepoArticle => _IRepoArticle=_IRepoArticle??new ArticleRepo(_Context);
 
-        public IRepository<Category> IRepoCategory => _IRepoCategory = _IRepoCategory ?? new Repository<Category>(_Context);
-
-        public IGalleryRepo<Gallery> IRepoGallery => _IRepoGallery = _IRepoGallery ?? new GalleryRepo(_Context);
+        public ICategoryRepo<Category> IRepoCategory => _IRepoCategory = _IRepoCategory ?? new CategoryRepo(_Context);
 
         public IRepository<LogException> IRepoLogException => _IRepoLogException = _IRepoLogException ?? new Repository<LogException>(_Context);
 

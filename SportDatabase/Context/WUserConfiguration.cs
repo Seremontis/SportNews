@@ -7,7 +7,7 @@ using System;
 
 namespace SportDatabase.Context
 {
-    public class WUserConfiguration : IEntityTypeConfiguration<WUser>
+    public class WuserConfiguration : IEntityTypeConfiguration<WUser>
     {
         public void Configure(EntityTypeBuilder<WUser> entity)
         {

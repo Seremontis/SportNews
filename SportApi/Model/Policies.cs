@@ -10,8 +10,8 @@ namespace SportApi.Model
     {
         public const string SuperAdmin = "SuperAdmin";
         public const string Admin = "Admin";
-        public const string FullJournalist = "FullJournalist";
-        public const string CustomJournalist = "CustomJounrnalist";
+        public const string FullJournalist = "Dziennikarz";
+        public const string CustomJournalist = "Dziennikarz ograniczone uprawnienia";
         public const string All = SuperAdmin +","+ Admin + "," + FullJournalist + "," + CustomJournalist;
         public const string AllAdmin = SuperAdmin + "," + Admin;
         public const string AllWithoutAdmin = SuperAdmin + "," + FullJournalist + "," + CustomJournalist;

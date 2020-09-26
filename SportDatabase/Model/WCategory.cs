@@ -6,14 +6,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SportDatabase.Model
 {
-    public partial class Category
+    public partial class WCategory
     {
-        [Key]
         public int CategoryId { get; set; }
         [StringLength(50)]
         public string Name { get; set; }
         public int? SortField { get; set; }
-        public int UserModified { get; set; }
+        [StringLength(131)]
+        public string UserModified { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime LastModified { get; set; }
     }

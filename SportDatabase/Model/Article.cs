@@ -8,11 +8,6 @@ namespace SportDatabase.Model
 {
     public partial class Article
     {
-        public Article()
-        {
-            Galleries = new HashSet<Gallery>();
-        }
-
         [Key]
         public int ArticleId { get; set; }
         public int? AuthorId { get; set; }
@@ -22,8 +17,11 @@ namespace SportDatabase.Model
         [MaxLength(1)]
         public byte[] SmallPicture { get; set; }
         [StringLength(300)]
-        public string MainPicture { get; set; }
-        [Required]
+        public string Picture { get; set; }
+        [StringLength(300)]
+        public string DescritpionPicture { get; set; }
+        [StringLength(100)]
+        public string SourcePicture { get; set; }
         [Column(TypeName = "text")]
         public string ShortArticle { get; set; }
         [Column("Article", TypeName = "text")]
@@ -31,16 +29,10 @@ namespace SportDatabase.Model
         [StringLength(100)]
         public string Keywords { get; set; }
         [Column(TypeName = "date")]
-        public DateTime? PublicationTime { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime? LastUpdate { get; set; }
+        public DateTime PublicationTime { get; set; }
         public int? CategoryId { get; set; }
-        public bool? IsGallery { get; set; }
-
-        [ForeignKey(nameof(AuthorId))]
-        [InverseProperty(nameof(User.Articles))]
-        public virtual User Author { get; set; }
-        [InverseProperty(nameof(Gallery.Article))]
-        public virtual ICollection<Gallery> Galleries { get; set; }
+        public int UserModified { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime LastModified { get; set; }
     }
 }

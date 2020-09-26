@@ -20,9 +20,5 @@ namespace SportDatabase.Model
         [StringLength(50)]
         public string Description { get; set; }
         public int? UserId { get; set; }
-
-        [ForeignKey(nameof(UserId))]
-        [InverseProperty("LogOperations")]
-        public virtual User User { get; set; }
     }
 }

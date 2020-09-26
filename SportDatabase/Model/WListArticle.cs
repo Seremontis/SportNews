@@ -10,14 +10,14 @@ namespace SportDatabase.Model
     {
         public int ArticleId { get; set; }
         [Required]
-        [StringLength(100)]
+        [Column(TypeName = "text")]
         public string Title { get; set; }
         [MaxLength(1)]
         public byte[] SmallPicture { get; set; }
-        [StringLength(150)]
+        [Column(TypeName = "text")]
         public string ShortArticle { get; set; }
         [Column(TypeName = "date")]
-        public DateTime? PublicationTime { get; set; }
+        public DateTime PublicationTime { get; set; }
         [StringLength(50)]
         public string Name { get; set; }
         public int? CategoryId { get; set; }

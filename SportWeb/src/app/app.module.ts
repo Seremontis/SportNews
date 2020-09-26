@@ -16,9 +16,10 @@ import {MenuUserComponent} from './User/menuUser/menuUser.component';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditFormComponent } from './User/editForm/editForm.component';
-import {CommonModule} from '@angular/common';
+import {CommonModule, formatCurrency} from '@angular/common';
 import { EditTableComponent } from './User/editTable/editTable.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [	
@@ -44,7 +45,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule, 
     AngularEditorModule,
-    FormsModule       
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

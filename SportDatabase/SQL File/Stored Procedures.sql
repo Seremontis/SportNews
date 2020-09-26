@@ -1,3 +1,6 @@
+use SportNews
+GO
+
 CREATE OR ALTER PROCEDURE SingleShortArticle 
 @SportId int
 AS 
@@ -36,7 +39,7 @@ go
 CREATE OR ALTER PROCEDURE SingleFullArticle
 @ArticleId int
 AS
-SELECT ArticleId,Title,SmallPicture,ShortArticle,Article,PublicationTime,LastUpdate,IsGallery,Name,CategoryId,FirstName,LastName
+SELECT ArticleId,Title,Picture,ShortArticle,Article,PublicationTime,LastModified,Name,CategoryId,FirstName,LastName
 FROM WFullArticle
 where ArticleId=@ArticleId
 go
@@ -49,9 +52,60 @@ FROM WUser
 where UserId=@userid
 GO
 
-CREATE OR ALTER PROCEDURE GetGallery
-@articleId int
-AS
-SELECT ArticleId,GalleryId,Path
-FROM Gallery
+CREATE OR ALTER PROCEDURE MoveUpCategory
+(
+    @CategoryId      As INT,
+	@SortField		as INT
+) As
+
+	DECLARE @AnotherRowId int
+	DECLARE @AnotherRowSortField int
+	SELECT @AnotherRowId=CategoryId,@AnotherRowSortField=SortField 
+	FROM Categories
+	WHERE SortField=@SortField-1
+
+	BEGIN TRANSACTION 
+	Update Categories 
+	SET SortField=@SortField-1 
+	WHERE CategoryId=@CategoryId
+
+	Update Categories 
+	SET SortField=@AnotherRowSortField+1 
+	WHERE CategoryId=@AnotherRowId
+
+	COMMIT TRANSACTION  
 GO
+
+CREATE OR ALTER PROCEDURE MoveDownCategory
+(
+    @CategoryId      As INT,
+	@SortField		as INT
+) As
+
+	DECLARE @AnotherRowId int
+	DECLARE @AnotherRowSortField int
+	SELECT @AnotherRowId=CategoryId,@AnotherRowSortField=SortField
+	FROM Categories
+	WHERE SortField=@SortField+1
+
+	BEGIN TRANSACTION 
+	Update Categories 
+	SET SortField=@SortField+1 
+	WHERE CategoryId=@CategoryId
+
+	Update Categories 
+	SET SortField=@AnotherRowSortField-1 
+	WHERE CategoryId=@AnotherRowId
+
+	COMMIT TRANSACTION  
+GO
+
+CREATE OR ALTER PROCEDURE AddCategory
+@NameCategory varchar(50),
+@UserId int
+AS
+DECLARE @lastNumberSort int
+SET @lastNumberSort= (SELECT MAX(SortField) FROM Categories)
+INSERT INTO Categories (Name,SortField,UserModified,LastModified)
+VALUES (@NameCategory,@lastNumberSort,@UserId,GETDATE())
+go

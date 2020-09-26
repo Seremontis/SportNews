@@ -13,13 +13,17 @@
 td,th {
   vertical-align: middle;
   word-wrap: break-word;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 tr > td:last-child {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 15px;
+}
+
+tr,th{
+  text-align: center;
 }
 
 .Category {
@@ -30,6 +34,12 @@ tr > td:last-child {
 .Category > form {
   width: 75%;
   margin: auto;
+}
+
+.Category>table>tbody>tr > td:last-child {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 5px;
 }
 
 .lpSize{

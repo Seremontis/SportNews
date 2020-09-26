@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouteReuseStrategy } from '@angular/router';
 import { HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {ApiService} from 'src/app/model/ApiService'
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ApiService } from 'src/service/ApiService'
+import { WCategory } from 'src/service/model/WCategory';
 
 
 @Component({
@@ -11,11 +13,16 @@ import {ApiService} from 'src/app/model/ApiService'
   styleUrls: ['./editTable.component.css']
 })
 export class EditTableComponent implements OnInit {
+  isLoading: boolean = false;
+  isError: boolean = false;
+  form: FormGroup;
   queryParam;
   name: number;
   mySubscription: any;
   rows = [];
-  constructor(private _routeParams: ActivatedRoute, private router: Router,public service: ApiService) {
+  CategoryList: WCategory[];
+
+  constructor(private _routeParams: ActivatedRoute, private router: Router, public service: ApiService) {
     this.queryParam = this._routeParams.queryParamMap
       .subscribe(params => {
         this.name = Number(params.get('Name'));
@@ -44,23 +51,70 @@ export class EditTableComponent implements OnInit {
       case 2:
         break;
       case 3:
-        this.service.GetCategory().subscribe(
-          (response) => {                           //next() callback
-            console.log('response received')
-          },
-          (error) => {                              //error() callback
-            console.error('Request failed with error')
-          },
-          () => {                                   //complete() callback
-            console.error('Request completed')      //This is actually not needed 
-          })
+        this.GetCategory();
         break;
     }
   }
 
-  ngOnDestroy() {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
+
+  GetCategory() {
+    this.isLoading = true;
+    this.service.GetCategory().subscribe(
+      (response) => {                           //next() callback
+        console.log('response received');
+        this.isLoading = this.isError = false;
+        this.CategoryList = response;
+      },
+      (error) => {
+        this.isLoading = false;
+        this.isError = true;                           //error() callback
+        console.error('Request failed with error')
+      },
+      () => {
+        console.info('Request completed')      //This is actually not needed 
+      });
   }
+
+  AddCategoryForm(data) {
+    this.service.AddCategory(data.value.CategoryName, 0).subscribe(
+      (response) => {
+        console.info('succes');
+        this.GetCategory();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
+  MoveUpCategory(id: number) {
+    this.service.MoveUpCategory(id).subscribe(
+      (response) => {
+        this.GetCategory();
+      }
+    )
+  }
+
+  MoveDownCategory(id: number) {
+    this.service.MoveDownCategory(id).subscribe(
+      (response) => {
+        this.GetCategory();
+      }
+    )
+  }
+
+  DeleteCategory(id: number) {
+    this.service.DeleteCategory(id).subscribe(
+      (response) => {
+        this.GetCategory();
+      }
+    )
+  }
+
+ngOnDestroy() {
+  if (this.mySubscription) {
+    this.mySubscription.unsubscribe();
+  }
+}
 }

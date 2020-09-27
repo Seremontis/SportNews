@@ -104,15 +104,15 @@ namespace SportApi.Controllers
         }
 
         [Route("UpdateCategory")]
-        [ValidateModel]
+        //[ValidateModel]
         [HttpPut]
-        [Authorize(Roles = Policies.AllAdmin)]
-        public async Task<HttpResponseMessage> UpdateCategory([FromBody] Category[] categories)
+        //[Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> UpdateCategory([FromBody] Category categories)
         {
             sendOperation = async() =>
             {
-                foreach (var item in categories)
-                    unitOfWork.IRepoCategory.Update(item);
+                    categories.LastModified = DateTime.Now;
+                    unitOfWork.IRepoCategory.Update(categories);
             };
             return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
         }

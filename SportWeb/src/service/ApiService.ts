@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Category } from './model/Category';
 import { WCategory } from './model/WCategory';
 import { HttpHeaders } from '@angular/common/http';
+import { JsonPipe } from '@angular/common';
 
 @Injectable({
     providedIn: 'root'
@@ -50,5 +51,9 @@ export class ApiService {
 
     DeleteCategory(id:number): Observable<any>{
         return this.http.delete(this.rootURL + 'panel/DeleteCategory/'+id);
+    }
+
+    UpdateCategory(category:Category):Observable<Category>{
+        return this.http.put<Category>(this.rootURL + 'panel/UpdateCategory', JSON.stringify(category),this.httpOptions)
     }
 }

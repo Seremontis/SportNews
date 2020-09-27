@@ -5,6 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/service/ApiService'
 import { WCategory } from 'src/service/model/WCategory';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalUserComponent } from 'src/app/User/ModalUser/ModalUser.component';
+import { UserHomeComponent } from '../user-home/user-home.component';
+import { Category } from 'src/service/model/Category';
 
 
 @Component({
@@ -22,7 +26,7 @@ export class EditTableComponent implements OnInit {
   rows = [];
   CategoryList: WCategory[];
 
-  constructor(private _routeParams: ActivatedRoute, private router: Router, public service: ApiService) {
+  constructor(private _routeParams: ActivatedRoute, private router: Router, public service: ApiService, private modalService: NgbModal) {
     this.queryParam = this._routeParams.queryParamMap
       .subscribe(params => {
         this.name = Number(params.get('Name'));
@@ -56,6 +60,21 @@ export class EditTableComponent implements OnInit {
     }
   }
 
+  openFormModal(data) {
+    const modalRef = this.modalService.open(ModalUserComponent);
+    modalRef.componentInstance.id = 10; // should be the id
+    modalRef.componentInstance.category = data;
+    modalRef.result.then((result: Category) => {
+      console.log(result);
+      result.userModified = 0;       ///replace after
+      this.UpdateCategory(result)
+   
+      
+
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
   GetCategory() {
     this.isLoading = true;
@@ -112,9 +131,23 @@ export class EditTableComponent implements OnInit {
     )
   }
 
-ngOnDestroy() {
-  if (this.mySubscription) {
-    this.mySubscription.unsubscribe();
+  UpdateCategory(category: Category) {
+    this.service.UpdateCategory(category).subscribe(
+      (response) => {                           //next() callback
+        console.log('response received');
+        this.GetCategory();
+      },
+      (error) => {                          //error() callback
+        console.error('Request failed with error')
+      },
+      () => {
+        console.info('Request completed')      //This is actually not needed 
+      });
   }
-}
+
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
+  }
 }

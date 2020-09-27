@@ -80,7 +80,7 @@
         <td>
           <button class="btn btn-info" (click) = "MoveUpCategory(element.categoryId)"><i class="fas fa-angle-up"></i></button>
           <button class="btn btn-info" (click) = "MoveDownCategory(element.categoryId)"><i class="fas fa-angle-down"></i></button>
-          <button class="btn btn-warning" ><i class="fas fa-edit"></i></button>
+          <button class="btn btn-warning" (click)= "openFormModal(element)" ><i class="fas fa-edit"></i></button>
           <button class="btn btn-warning" (click) = "DeleteCategory(element.categoryId)"><i class="fas fa-times"></i></button>
         </td>        
       </tr>
@@ -89,4 +89,3 @@
     <div *ngIf = "isError">Wystąpił błąd połączenia</div>
   </table>
 </div>
-

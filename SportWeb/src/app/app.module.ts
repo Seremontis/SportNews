@@ -20,6 +20,10 @@ import {CommonModule, formatCurrency} from '@angular/common';
 import { EditTableComponent } from './User/editTable/editTable.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import {ModalUserComponent} from 'src/app/User/ModalUser/ModalUser.component';
+
 
 @NgModule({
   declarations: [	
@@ -37,7 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
       BarUserComponent,
       MenuUserComponent,
       EditFormComponent,
-      EditTableComponent
+      EditTableComponent,
+      ModalUserComponent
    ],
   imports: [
     BrowserModule,
@@ -46,9 +51,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule, 
     AngularEditorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
+    NgbPaginationModule, NgbAlertModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[ModalUserComponent]
 })
 export class AppModule { }

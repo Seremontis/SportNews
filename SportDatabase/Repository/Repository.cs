@@ -58,7 +58,8 @@ namespace SportDatabase.Repository
         public void Update(T model)
         {
             _SportNewsContext.Entry(model).State = EntityState.Modified;
-            _SportNewsContext.Set<T>().Attach(model);
+            //_SportNewsContext.Set<T>().Attach(model);
+            _SportNewsContext.Set<T>().Update(model);
         }
     }
 }

@@ -57,6 +57,10 @@ const routes: Routes = [
         component:EditFormComponent
       },
       {
+        path:'editForm/:id',
+        component:EditFormComponent
+      },
+      {
         path:'editTable',
         component:EditTableComponent
       },

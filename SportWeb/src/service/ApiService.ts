@@ -5,6 +5,7 @@ import { Category } from './model/Category';
 import { WCategory } from './model/WCategory';
 import { HttpHeaders } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
+import { Article } from './model/Article';
 
 @Injectable({
     providedIn: 'root'
@@ -24,8 +25,8 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
 
-    GetCategory(): Observable<WCategory[]> {
-        return this.http.get<WCategory[]>(this.rootURL + 'panel/GetCategory');
+    GetCategory(idUser:number=null): Observable<WCategory[]> {
+        return this.http.get<WCategory[]>(this.rootURL + 'panel/GetCategory/'+idUser);
     }
 
     AddCategory(nameCategory: string,userId:number): Observable<any> {
@@ -55,5 +56,9 @@ export class ApiService {
 
     UpdateCategory(category:Category):Observable<Category>{
         return this.http.put<Category>(this.rootURL + 'panel/UpdateCategory', JSON.stringify(category),this.httpOptions)
+    }
+
+    GetArticle(id:number):Observable<Article>{
+        return this.http.get<Article>(this.rootURL + 'panel/GetArticle/'+id);
     }
 }

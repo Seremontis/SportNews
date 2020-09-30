@@ -8,12 +8,12 @@ import { HostListener, ElementRef, ViewChild } from '@angular/core';
 })
 export class MenuUserComponent implements OnInit {
 
-  AdminArray: { text: string, url: string, type: number ,queryParams:string}[] = [
+  readonly AdminArray: readonly { text: string, url: string, type: number ,queryParams:string}[] = [
     { "text": "Strona główna", "url": "./", "type": 0 ,"queryParams":null},
     { "text": "Nowy artykuł", "url": "./editForm", "type": 1,"queryParams":null },
-    { "text": "Artykuły", "url": "./tableForms", "type": 1 ,"queryParams":null},
+    { "text": "Artykuły", "url": "./editTable", "type": 1 ,"queryParams":"2"},
     { "text": "Media", "url": "/", "type": 1 ,"queryParams":null},
-    { "text": "Użytkownicy", "url": "./TableForms", "type": 2 ,"queryParams":null},
+    { "text": "Użytkownicy", "url": "./editTable", "type": 2 ,"queryParams":"1"},
     { "text": "Kategoria", "url": "./editTable", "type": 2 ,"queryParams": "3"}
   ];
   constructor() {

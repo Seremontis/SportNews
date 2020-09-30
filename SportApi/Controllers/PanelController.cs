@@ -25,6 +25,7 @@ namespace SportApi.Controllers
     //[EnableCors("AllowOrigin")]
 
     /// TODO :co zrobić z użytkownika których nie można usunąć oraz obiektami
+    ///  breadcrumbs to Angular
     public class PanelController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
@@ -43,6 +44,21 @@ namespace SportApi.Controllers
         public string Start()
         {
             return "Witaj w panelu użytkownika";
+        }
+
+        [Route("GetArticle/{id}")]
+        [HttpGet]
+        //[Authorize(Roles = Policies.AllAdmin)]
+        public async Task<Article> GetArticle(int id)
+        {
+            try
+            {
+                return await unitOfWork.IRepoArticle.Get(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [Route("GetUser/{id}")]
@@ -126,10 +142,10 @@ namespace SportApi.Controllers
             return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
         }
 
-        [Route("GetCategory")]
+        [Route("GetCategory/{idUser}")]
         [HttpGet]
         //[Authorize(Roles = Policies.All)]
-        public async Task<IEnumerable<WCategory>> GetCategory()
+        public async Task<IEnumerable<WCategory>> GetCategory(int? idUser=null)     //parameter id and return category from Table permission
         {
             try
             {

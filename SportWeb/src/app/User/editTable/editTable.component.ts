@@ -145,6 +145,11 @@ export class EditTableComponent implements OnInit {
       });
   }
 
+
+  ModalDelete(id:number){
+
+  }
+
   ngOnDestroy() {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();

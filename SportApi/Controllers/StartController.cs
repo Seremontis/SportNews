@@ -51,11 +51,11 @@ namespace SportApi.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("GetAllArticles/{size}/{page}")]
-        public async Task<IEnumerable<WListArticle>> GetAllArticles(int page=1,int size=10)
+        public async Task<IEnumerable<WListArticle>> GetAllArticles(int page=1)
         {
             try
             {
-                return await _unitOfWork.IRepoArticle.GetListArticles(page,size);
+                return await _unitOfWork.IRepoArticle.GetListArticles(page);
             }
             catch (Exception)
             {
@@ -63,13 +63,13 @@ namespace SportApi.Controllers
             }
         }
         [HttpGet]
-        [Route("GetAllArticlesSport/{categoryId}/{size}/{page}")]
+        [Route("GetAllArticlesSport/{categoryId}/{size}")]
         [AllowAnonymous]
-        public async Task<IEnumerable<WListArticle>> GetAllArticlesSport(int categoryId,int page = 1, int size = 10)
+        public async Task<IEnumerable<WListArticle>> GetAllArticlesSport(int categoryId,int page = 1)
         {
             try
             {
-                return await _unitOfWork.IRepoArticle.GetListArticlesByCategory(categoryId,page, size);
+                return await _unitOfWork.IRepoArticle.GetListArticlesByCategory(categoryId,page);
             }
             catch (Exception)
             {

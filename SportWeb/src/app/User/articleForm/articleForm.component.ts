@@ -5,35 +5,38 @@ import { ApiService } from 'src/service/ApiService';
 import { Article} from 'src/service/model/Article';
 import { WCategory } from 'src/service/model/WCategory';
 import { ActivatedRoute } from '@angular/router';
+import { flatten } from '@angular/compiler';
 
 @Component({
-  selector: 'app-editForm',
-  templateUrl: './editForm.component.html',
-  styleUrls: ['./editForm.component.css']
+  selector: 'app-articleForm',
+  templateUrl: './articleForm.component.html',
+  styleUrls: ['./articleForm.component.css']
 })
 
 
-export class EditFormComponent implements OnInit {
+export class ArticleFormComponent implements OnInit {
   
   categoryList:WCategory[];
   selectedOption:number;
   article:  Article=new  Article();
   model:Article;
-  articleid:number;
-  queryparam;
+  articleid:number=0;
+  addOrUpdateFlag:boolean=true;
 
   constructor( public service: ApiService,private route: ActivatedRoute) { 
     this.LoadCategory(0)
     this.route.params.subscribe( params => {
-      this.articleid=Number(params.id)
-      this.LoadArticle(this.articleid)
+      this.articleid=Number(params.id);
+      if(!Number.isNaN(this.articleid)){
+        this.LoadArticle(this.articleid);
+        this.addOrUpdateFlag=false;
+      }
     });
   }
 
 
   ngOnInit() {
   }
-  //htmlContent = '';
 
   config: AngularEditorConfig = {
     editable: true,
@@ -44,22 +47,10 @@ export class EditFormComponent implements OnInit {
     translate: 'no',
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
-    toolbarHiddenButtons: [],
-    customClasses: [
-      {
-        name: "quote",
-        class: "quote",
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: "titleText",
-        class: "titleText",
-        tag: "h1",
-      }
-    ]
+    toolbarHiddenButtons: [
+      ['textColor','backgroundColor','customClasses','link',
+    'unlink','insertImage','insertVideo']],
+    customClasses: []
   };
 
   LoadCategory(userId){
@@ -75,18 +66,43 @@ export class EditFormComponent implements OnInit {
         console.info('Request completed')      //This is actually not needed 
         this.LoadOrErrorOption(true);
       });
+  }
 
+  RunArticle(data){
+    if(this.addOrUpdateFlag)
+      this.CreateArticle(data.value);    
+    else
+      this.UpdateArticle(data.value);
   }
 
 
   CreateArticle(data){
-
+    this.service.AddArticle(data,1).subscribe(
+      (response) => {                           //next() callback
+        console.log('response received');     },
+      (error) => {                        //error() callback
+        console.error('Request failed with error');
+      },
+      () => {
+        console.info('Request completed')      //This is actually not needed 
+      });
+  }
+  UpdateArticle(data){
+    this.service.UpdateArticle(data).subscribe(
+      (response) => {                           //next() callback
+        console.log('response received');     },
+      (error) => {                        //error() callback
+        console.error('Request failed with error');
+      },
+      () => {
+        console.info('Request completed')      //This is actually not needed 
+      });
   }
 
   LoadArticle(id:number){
     this.service.GetArticle(id).subscribe(
       (response) => {                           //next() callback
-        this.article=response;          },
+        this.article=response;        },
       (error) => {                        //error() callback
         console.error('Request failed with error');
       })

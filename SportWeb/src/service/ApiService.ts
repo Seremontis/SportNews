@@ -6,6 +6,8 @@ import { WCategory } from './model/WCategory';
 import { HttpHeaders } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
 import { Article } from './model/Article';
+import { WUser } from './model/WUser';
+import { WListArticle } from './model/WListArticle';
 
 @Injectable({
     providedIn: 'root'
@@ -25,8 +27,11 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
 
-    GetCategory(idUser:number=null): Observable<WCategory[]> {
-        return this.http.get<WCategory[]>(this.rootURL + 'panel/GetCategory/'+idUser);
+    GetCategory(number:number=0): Observable<WCategory[]> {
+        if(number==0)
+            return this.http.get<WCategory[]>(this.rootURL + 'panel/GetCategory/');
+        else
+            return this.http.get<WCategory[]>(this.rootURL + 'panel/GetCategory/'+number);
     }
 
     AddCategory(nameCategory: string,userId:number): Observable<any> {
@@ -60,5 +65,26 @@ export class ApiService {
 
     GetArticle(id:number):Observable<Article>{
         return this.http.get<Article>(this.rootURL + 'panel/GetArticle/'+id);
+    }
+
+    AddArticle(model: Article,userId:number): Observable<any> {
+        let data = JSON.stringify(model);
+        return this.http.post(this.rootURL + 'panel/AddArticle', data, this.httpOptions);
+    }
+
+    DeleteArticle(id:number): Observable<any>{
+        return this.http.delete(this.rootURL + 'panel/DeleteArticle/'+id);
+    }
+
+    UpdateArticle(category:Category):Observable<Category>{
+        return this.http.put<Category>(this.rootURL + 'panel/UpdateArticle', JSON.stringify(category),this.httpOptions)
+    }
+
+    GetUsers(page:number): Observable<WUser[]>{
+        return this.http.get<WUser[]>(this.rootURL + 'panel/GetWUser/'+page);
+    }
+
+    GetListArticle(page:number): Observable<WListArticle[]>{
+        return this.http.get<WListArticle[]>(this.rootURL + 'panel/GetListArticle/'+page);
     }
 }

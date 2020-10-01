@@ -7,7 +7,7 @@ export class Article {
     descritpionPicture: string;
     sourcePicture: string;
     shortArticle: string;
-    article: Text;
+    fullArticle: string;
     keywords: string;
     publicationTime: Date;
     categoryId: number

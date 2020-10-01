@@ -17,6 +17,11 @@ input,.bgTextaAre,select{
     padding: 15px;
 }
 
+select{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .bgAreaColor{
     border-radius: 20px;
     background:  #797474;
@@ -25,7 +30,7 @@ input,.bgTextaAre,select{
     margin:auto;
 }
 
-input,textarea,select{
+input,textarea,select,angular-editor{
     color: rgb(238, 232, 212);
 }
 
@@ -45,3 +50,5 @@ textarea:focus{
     background:#494949;
     color: white;
 }
+
+

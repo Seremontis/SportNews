@@ -86,7 +86,8 @@ namespace SportApi
             //                            .AllowCredentials();
             //    });
             //}); ;
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+                options.JsonSerializerOptions.Converters.Add(new IntToStringConverter())); ;
 
         }
 

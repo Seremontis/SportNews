@@ -61,6 +61,21 @@ namespace SportApi.Controllers
             }
         }
 
+        [Route("GetListArticle/{pageId}")]
+        [HttpGet]
+        //[Authorize(Roles = Policies.AllAdmin)]
+        public async Task<IEnumerable<WListArticle>> GetListArticle(int pageId)
+        {
+            try
+            {
+                return await unitOfWork.IRepoArticle.GetListArticles(pageId);               
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [Route("GetUser/{id}")]
         [HttpGet]
         [Authorize(Roles=Policies.AllAdmin)]
@@ -76,15 +91,55 @@ namespace SportApi.Controllers
             }
         }
 
+
+        [Route("GetWUser/{pageid}")]
+        [HttpGet]
+        //[Authorize(Roles = Policies.AllAdmin)]
+        public async Task<List<WUser>> GetWUser(int pageid)
+        {
+            try
+            {
+                return await unitOfWork.IRepoUser.GetWList(pageid);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [Route("AddUser")]
-        [ValidateModel]
+        //[ValidateModel]
         [HttpPost]
-        [Authorize(Roles = Policies.AllAdmin)]
+        //[Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> AddUser([FromBody] SportDatabase.Model.User user)
         {
 
             sendOperation = async()=> { await unitOfWork.IRepoUser.Add(user); };
             return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+        }
+
+        [Route("AddArticle")]
+        //[ValidateModel]
+        [HttpPost]
+        //[Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> AddArticle([FromBody] SportDatabase.Model.Article article)
+        {
+            article.LastModified = DateTime.Now;
+            sendOperation = async () => { await unitOfWork.IRepoArticle.Add(article); };
+            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+        }
+
+
+        [Route("UpdateArticle")]
+        //[ValidateModel]
+        [HttpPut]
+        //[Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> UpdateUser([FromBody] SportDatabase.Model.Article article)
+        {
+            article.LastModified = DateTime.Now;
+            //article.UserModified =;
+            sendOperation = async () => { unitOfWork.IRepoArticle.Update(article); };
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
         }
 
         [Route("DeleteUser/{id}")]
@@ -142,10 +197,10 @@ namespace SportApi.Controllers
             return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
         }
 
-        [Route("GetCategory/{idUser}")]
+        [Route("GetCategory")]
         [HttpGet]
         //[Authorize(Roles = Policies.All)]
-        public async Task<IEnumerable<WCategory>> GetCategory(int? idUser=null)     //parameter id and return category from Table permission
+        public async Task<IEnumerable<WCategory>> GetCategory()     //parameter id and return category from Table permission
         {
             try
             {

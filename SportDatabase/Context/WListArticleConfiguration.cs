@@ -18,6 +18,7 @@ namespace SportDatabase.Context
             entity.Property(e => e.Name).IsUnicode(false);
 
             entity.Property(e => e.SmallPicture).IsFixedLength();
+
         }
     }
 }

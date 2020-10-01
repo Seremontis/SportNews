@@ -15,7 +15,7 @@ import {BarUserComponent} from './User/barUser/barUser.component';
 import {MenuUserComponent} from './User/menuUser/menuUser.component';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { EditFormComponent } from './User/editForm/editForm.component';
+import { ArticleFormComponent } from './User/articleForm/articleForm.component';
 import {CommonModule, formatCurrency} from '@angular/common';
 import { EditTableComponent } from './User/editTable/editTable.component';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {ModalUserComponent} from 'src/app/User/ModalUser/ModalUser.component';
+import { ArticleComponent } from './Visitor/article/article.component';
 
 
 @NgModule({
@@ -40,9 +41,10 @@ import {ModalUserComponent} from 'src/app/User/ModalUser/ModalUser.component';
       LoginComponent,
       BarUserComponent,
       MenuUserComponent,
-      EditFormComponent,
+      ArticleComponent,
       EditTableComponent,
-      ModalUserComponent
+      ModalUserComponent,
+      ArticleFormComponent
    ],
   imports: [
     BrowserModule,

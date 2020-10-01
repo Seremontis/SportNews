@@ -9,6 +9,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalUserComponent } from 'src/app/User/ModalUser/ModalUser.component';
 import { UserHomeComponent } from '../user-home/user-home.component';
 import { Category } from 'src/service/model/Category';
+import { WUser } from 'src/service/model/WUser';
+import { WListArticle } from 'src/service/model/WListArticle';
 
 
 @Component({
@@ -19,40 +21,29 @@ import { Category } from 'src/service/model/Category';
 export class EditTableComponent implements OnInit {
   isLoading: boolean = false;
   isError: boolean = false;
-  form: FormGroup;
-  queryParam;
-  name: number;
+  id: number;
   mySubscription: any;
-  rows = [];
   CategoryList: WCategory[];
+  UserList: WUser[];
+  ArticleList: WListArticle[];
 
-  constructor(private _routeParams: ActivatedRoute, private router: Router, public service: ApiService, private modalService: NgbModal) {
-    this.queryParam = this._routeParams.queryParamMap
-      .subscribe(params => {
-        this.name = Number(params.get('Name'));
-      });
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
-    this.mySubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // Trick the Router into believing it's last link wasn't previously loaded
-        this.router.navigated = false;
-      }
+
+  constructor(private route: ActivatedRoute, public service: ApiService, private modalService: NgbModal) {
+    this.route.params.subscribe(params => {
+      this.id = Number(params.id);
+      this.runTable();
     });
-    for (let i = 0; i < 10; i++) {
-      this.rows.push(i + 1);
-    }
-    this.runTable();
   }
   ngOnInit() {
   }
 
   runTable() {
-    switch (this.name) {
+    switch (this.id) {
       case 1:
+        this.GetListUser(1);
         break;
       case 2:
+        this.GetListArticle(1);
         break;
       case 3:
         this.GetCategory();
@@ -68,8 +59,8 @@ export class EditTableComponent implements OnInit {
       console.log(result);
       result.userModified = 0;       ///replace after
       this.UpdateCategory(result)
-   
-      
+
+
 
     }).catch((error) => {
       console.log(error);
@@ -146,7 +137,34 @@ export class EditTableComponent implements OnInit {
   }
 
 
-  ModalDelete(id:number){
+  GetListUser(page: number) {
+    this.service.GetUsers(page).subscribe(
+      (response) => {
+        this.UserList = response;                    //next() callback
+        console.log('response received');
+      },
+      (error) => {                          //error() callback
+        console.error('Request failed with error')
+      },
+      () => {
+        console.info('Request completed')      //This is actually not needed 
+      });
+  }
+  GetListArticle(page: number) {
+    this.service.GetListArticle(page).subscribe(
+      (response) => {
+        this.ArticleList = response;                    //next() callback
+        console.log('response received');
+      },
+      (error) => {                          //error() callback
+        console.error('Request failed with error')
+      },
+      () => {
+        console.info('Request completed')      //This is actually not needed 
+      });
+  }
+
+  ModalDelete(id: number) {
 
   }
 

@@ -29,7 +29,7 @@ namespace SportApi
                 await unitOfWork.Commit();
                 return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
-            catch (Exception exception)
+            catch (Exception exception) //dopisac message i innerexcepetion do pol w celu lepszej ilustracji bledow
             {
                 unitOfWork.Rollback();
                 unitOfWork.IRepoLogException.Add(GetLogException(exception));

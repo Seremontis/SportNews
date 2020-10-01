@@ -11,7 +11,7 @@ namespace SportDatabase.Interface
     {
         Task<WListArticle> GetOne(int id);
         Task<WFullArticle> GetFullArticle(int id);
-        Task<IEnumerable<WListArticle>> GetListArticles(int page, int size);
-        Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId, int page, int size);
+        Task<IEnumerable<WListArticle>> GetListArticles(int page);
+        Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId, int page);
     }
 }

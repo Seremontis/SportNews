@@ -10,7 +10,7 @@ export class MenuUserComponent implements OnInit {
 
   readonly AdminArray: readonly { text: string, url: string, type: number ,queryParams:string}[] = [
     { "text": "Strona główna", "url": "./", "type": 0 ,"queryParams":null},
-    { "text": "Nowy artykuł", "url": "./editForm", "type": 1,"queryParams":null },
+    { "text": "Nowy artykuł", "url": "./articleForm", "type": 1,"queryParams":null },
     { "text": "Artykuły", "url": "./editTable", "type": 1 ,"queryParams":"2"},
     { "text": "Media", "url": "/", "type": 1 ,"queryParams":null},
     { "text": "Użytkownicy", "url": "./editTable", "type": 2 ,"queryParams":"1"},

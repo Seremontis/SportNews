@@ -21,11 +21,13 @@ namespace SportDatabase.Repository
         }
         public async Task<WUser> Get(int id)
         {
-            SqlParameter idparam = new SqlParameter("@userId", id);
-            return (await _SportNewsContext.Set<WUser>()
-                .FromSqlRaw("GetWUser @userId", idparam)
-                .AsNoTracking()
-                .ToListAsync()).SingleOrDefault();
+            return await _SportNewsContext.WUsers.FindAsync((object)id);
+        }
+
+        public async Task<List<WUser>> GetWList(int idpage)
+        {
+            _Page *= (idpage-1);
+            return await _SportNewsContext.WUsers.Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
     }
 }

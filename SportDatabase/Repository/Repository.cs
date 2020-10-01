@@ -19,6 +19,8 @@ namespace SportDatabase.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
         public readonly SportNewsContext _SportNewsContext;
+        internal int _Page=10;
+        internal int _DefaultPageSize = 10;
 
         public Repository(SportNewsContext sportNews)
         {

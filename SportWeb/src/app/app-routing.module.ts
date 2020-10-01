@@ -7,7 +7,7 @@ import { CategoriesComponent } from './Visitor/Categories/Categories.component'
 import { ArticleComponent } from './Visitor/article/article.component'
 import { LoginComponent } from './Login/Login.component';
 import { UserHomeComponent } from './User/user-home/user-home.component';
-import {EditFormComponent} from './User/editForm/editForm.component'
+import {ArticleFormComponent } from './User/articleForm/articleForm.component'
 import {EditTableComponent} from './User/editTable/editTable.component'
 
 const routes: Routes = [
@@ -53,15 +53,19 @@ const routes: Routes = [
         component: UserHomeComponent
       },
       {
-        path:'editForm',
-        component:EditFormComponent
+        path:'articleForm',
+        component:ArticleFormComponent
       },
       {
-        path:'editForm/:id',
-        component:EditFormComponent
+        path:'articleForm/:id',
+        component:ArticleFormComponent
       },
       {
         path:'editTable',
+        component:EditTableComponent
+      },
+      {
+        path:'editTable/:id',
         component:EditTableComponent
       },
     ]

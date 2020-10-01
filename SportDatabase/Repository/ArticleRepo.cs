@@ -28,31 +28,21 @@ namespace SportDatabase.Repository
 
         public async Task<WFullArticle> GetFullArticle(int id)
         {
-            SqlParameter paramArticle = new SqlParameter("@ArticleId", id);
-            return (await _SportNewsContext.Set<WFullArticle>()
-                .FromSqlRaw("SingleFullArticle @ArticleId", paramArticle)
-                .ToListAsync()).FirstOrDefault();
+            return await _SportNewsContext.WFullArticles.FindAsync((object)id);
         }
 
-        public async Task<IEnumerable<WListArticle>> GetListArticles(int page,int size)
+        public async Task<IEnumerable<WListArticle>> GetListArticles(int page)
         {
-            SqlParameter paramPage = new SqlParameter("@PageNumber", page);
-            SqlParameter paramSize = new SqlParameter("@PageSize", size);
-            return await  _SportNewsContext.Set<WListArticle>()
-                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize", paramPage, paramSize)
-                .AsNoTracking()
-                .ToListAsync();
+            _Page *= (page - 1);
+            return await _SportNewsContext.WListArticles.Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
 
-        public async Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId,int page, int size)
+        public async Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId, int page)
         {
-            SqlParameter paramPage = new SqlParameter("@PageNumber", page);
-            SqlParameter paramSize = new SqlParameter("@PageSize", size);
-            SqlParameter paramCategory = new SqlParameter("@CategoryId", categoryId);
-            return await _SportNewsContext.Set<WListArticle>()
-                .FromSqlRaw("ListShortArticles @PageNumber,@PageSize,@CategoryId", paramPage, paramSize, paramCategory)
-                .AsNoTracking()
-                .ToListAsync();
+            _Page *= (page - 1);
+            return await _SportNewsContext.WListArticles
+                .Where(x => x.CategoryId == categoryId)
+                .Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
 
     }

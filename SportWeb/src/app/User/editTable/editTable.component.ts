@@ -12,12 +12,13 @@ import { Category } from 'src/service/model/Category';
 import { WUser } from 'src/service/model/WUser';
 import { WListArticle } from 'src/service/model/WListArticle';
 
-
 @Component({
   selector: 'app-editTable',
   templateUrl: './editTable.component.html',
   styleUrls: ['./editTable.component.css']
 })
+
+
 export class EditTableComponent implements OnInit {
   isLoading: boolean = false;
   isError: boolean = false;

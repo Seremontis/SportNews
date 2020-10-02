@@ -9,7 +9,7 @@ import { HostListener, ElementRef, ViewChild } from '@angular/core';
 export class MenuUserComponent implements OnInit {
 
   readonly AdminArray: readonly { text: string, url: string, type: number ,queryParams:string}[] = [
-    { "text": "Strona główna", "url": "./", "type": 0 ,"queryParams":null},
+    { "text": "Strona główna", "url": "../user/home", "type": 0 ,"queryParams":""},
     { "text": "Nowy artykuł", "url": "./articleForm", "type": 1,"queryParams":null },
     { "text": "Artykuły", "url": "./editTable", "type": 1 ,"queryParams":"2"},
     { "text": "Media", "url": "/", "type": 1 ,"queryParams":null},

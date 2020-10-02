@@ -36,11 +36,6 @@
   }
 
 
-  /*.menuToggle{
-    display: none;
-  }*/
-
-
 @media(max-width:768px){
   .menuToggle{
     display: block;

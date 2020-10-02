@@ -1,5 +1,5 @@
 <div class="stickyMenu" (window:resize)="onResize($event)">
-  <div class="stickyItem">
+  <div class="stickyItem flex-column">
   <header>
     <a routerLink="/home">
       <img class="imgLogo" src="assets/logo.png" alt="Logo serwisu sportowego" />
@@ -7,15 +7,14 @@
   </header>
   <nav>
     <ul class="navOption nav flex-column">
-      <li class="active" *ngFor="let element of array">
+      <li class="active" *ngFor="let element of CategoryList">
         <i class="fas fa-info-circle"></i>
-        <a routerLink="/categories" [queryParams]="{Name: element}">{{element}}
-          Something
+        <a routerLink="/categories" [queryParams]="{Name: element.categoryId}">{{element.name}}
         </a>
       </li>
     </ul>
   </nav>
-  <div class="searcherAndSocialMedia">
+  <div class="searcherAndSocialMedia flex-grow">
     <form class="input-group md-form form-sm form-2 pl-0">
       <input class="form-control my-0 py-1 amber-border" type="text" placeholder="Search" aria-label="Search">
       <div class="input-group-append">
@@ -33,7 +32,6 @@
       <div class="rulesAndAuthor">
         Wszystkie prawa zastrzeżone <br />
         Autor: Karol Ścigała
-        <a href="#">test</a>
       </div>
     </footer>
   </div>

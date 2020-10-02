@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {ModalUserComponent} from 'src/app/User/ModalUser/ModalUser.component';
 import { ArticleComponent } from './Visitor/article/article.component';
+import {TruncatePipe} from '../service/TruncatePipe'
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ArticleComponent } from './Visitor/article/article.component';
       ArticleComponent,
       EditTableComponent,
       ModalUserComponent,
-      ArticleFormComponent
+      ArticleFormComponent,
+      TruncatePipe
    ],
   imports: [
     BrowserModule,

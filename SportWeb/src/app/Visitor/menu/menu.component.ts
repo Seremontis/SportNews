@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HostListener,ElementRef,ViewChild } from '@angular/core';
+import { ApiService} from 'src/service/ApiService'
+import { WCategory } from 'src/service/model/WCategory';
 
 @Component({
   selector: 'app-menu',
@@ -11,11 +13,9 @@ import { HostListener,ElementRef,ViewChild } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  array=[];
-  constructor() {
-    for(let i=0;i<10;i++){
-      this.array.push("Opcja "+(i+1))
-    }
+  CategoryList:WCategory[];
+  constructor(private apiSevice: ApiService) {
+    this.LoadCategory();
    }
 
   ngOnInit() {
@@ -39,5 +39,19 @@ export class MenuComponent implements OnInit {
       footer.classList.add('searcherAndSocialMedia');
       footer.classList.remove('searcherAndSocialMediaStandard');
     }
+  }
+
+  LoadCategory(){
+    this.apiSevice.GetCategory().subscribe(
+      (response) => {                           //next() callback
+        console.log('response received');
+        this.CategoryList = response;
+      },
+      (error) => {                        //error() callback
+        console.error('Request failed with error')
+      },
+      () => {
+        console.info('Request completed')      //This is actually not needed 
+      });
   }
 }

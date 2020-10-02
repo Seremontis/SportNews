@@ -23,7 +23,7 @@ body {
 
 .contentPage {
   min-height: calc(100% - 156px);
-  max-height: 100%; /*calc(100% - 180px);*/
+  max-height: 100%;
   background: #e9e7e7;
   padding: 50px;
 }
@@ -39,7 +39,7 @@ body {
   z-index: 10;
 }
 
-#menuToggle {
+.menuToggle {
   display: none;
 }
 
@@ -61,7 +61,7 @@ body {
   height: auto;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
   .contentPage {
     padding: 2%;
     padding-top: 20px;
@@ -80,11 +80,14 @@ body {
   .NavTop {
     height: 100%;
   }
-
+  .mobileSticky {
+    position: sticky;
+    top: 0;
+    z-index: 11;
+  }
 }
 
 @media (max-width: 768px) {
-  
   .NavSide {
     min-height: auto;
   }
@@ -95,13 +98,13 @@ body {
     right: 0;
     height: 100vh;
     width: 100vw;
-    background:#232121;
+    background: #232121;
     visibility: hidden;
     z-index: 11;
-    padding-top:20px;
+    padding-top: 20px;
   }
 
-  .NavSelected{
+  .NavSelected {
     position: fixed;
     top: 0;
     width: 100%;

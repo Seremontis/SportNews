@@ -61,6 +61,10 @@ const routes: Routes = [
         component:ArticleFormComponent
       },
       {
+        path:'editTable/articleForm/:id',
+        component:ArticleFormComponent
+      },
+      {
         path:'editTable',
         component:EditTableComponent
       },

@@ -54,7 +54,6 @@ ul > li > a {
 @media (max-width: 850px) {
   .stickyMenu {
     height: 100%;
-    /*position: relative;*/
   }
   .rulesAndAuthor{
     word-wrap: break-word;

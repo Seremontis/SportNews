@@ -51,10 +51,11 @@ form{
 }
 .searcherAndSocialMedia{
   display: block;
-  position: absolute;
+  /*position: absolute;
   bottom: 0px;
-  width: 95%;
+  width: 95%;*/
   margin-bottom: 15px; 
+  margin-top: 25px;
 }
 .searcherAndSocialMediaStandard{
   display: block;

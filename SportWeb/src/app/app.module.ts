@@ -16,7 +16,7 @@ import {MenuUserComponent} from './User/menuUser/menuUser.component';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ArticleFormComponent } from './User/articleForm/articleForm.component';
-import {CommonModule, formatCurrency} from '@angular/common';
+import {CommonModule, formatCurrency,DatePipe} from '@angular/common';
 import { EditTableComponent } from './User/editTable/editTable.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +25,6 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {ModalUserComponent} from 'src/app/User/ModalUser/ModalUser.component';
 import { ArticleComponent } from './Visitor/article/article.component';
 import {TruncatePipe} from '../service/TruncatePipe'
-
 
 @NgModule({
   declarations: [	
@@ -46,7 +45,7 @@ import {TruncatePipe} from '../service/TruncatePipe'
       EditTableComponent,
       ModalUserComponent,
       ArticleFormComponent,
-      TruncatePipe
+      TruncatePipe    
    ],
   imports: [
     BrowserModule,
@@ -59,7 +58,7 @@ import {TruncatePipe} from '../service/TruncatePipe'
     NgbModule,
     NgbPaginationModule, NgbAlertModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
   entryComponents:[ModalUserComponent]
 })

@@ -45,5 +45,9 @@ namespace SportDatabase.Repository
                 .Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
 
+        public async Task<IEnumerable<WListArticle>> GetLastArticles()
+        {
+            return await _SportNewsContext.WListArticles.OrderByDescending(x => x.PublicationTime).Take(6).ToListAsync();
+        }
     }
 }

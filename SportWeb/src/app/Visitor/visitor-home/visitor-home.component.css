@@ -1,3 +1,8 @@
+:host{
+    min-width: 100%;
+    min-height: 60vh;
+}
+
 main{
     width: 100%;
 }
@@ -13,12 +18,17 @@ main{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-column-gap: 50px;
+    grid-auto-rows: 1fr;
     height: auto;
 }
 
 .olderArticle>figure>a{
     text-decoration: none;
     color: black;
+}
+
+figure>a>.card{
+    height: 100%;
 }
 
 figure {
@@ -61,6 +71,8 @@ figure:hover>a>header>h1{
 figure >a> img {
   z-index: 0;
   width: 100%;
+  min-height: 415px;
+  border: 1px solid black;
   height: auto;
   object-fit: cover;
 }

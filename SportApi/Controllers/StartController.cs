@@ -48,9 +48,25 @@ namespace SportApi.Controllers
             }
         }
 
+
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetAllArticles/{size}/{page}")]
+        [Route("GetLastArticles")]
+        public async Task<IEnumerable<WListArticle>> GetAllArticles()
+        {
+            try
+            {
+                return await _unitOfWork.IRepoArticle.GetLastArticles();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetAllArticles/{page}")]
         public async Task<IEnumerable<WListArticle>> GetAllArticles(int page=1)
         {
             try

@@ -8,6 +8,7 @@ namespace SportDatabase.Model
 {
     public partial class WFullArticle
     {
+        [Key]
         public int ArticleId { get; set; }
         [Required]
         [Column(TypeName = "text")]

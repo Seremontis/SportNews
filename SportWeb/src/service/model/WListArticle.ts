@@ -1,7 +1,8 @@
 export class WListArticle {
         articleId:number;
         title:string;
-        smallPicture: File; 
+        descriptionImage:string;
+        smallPicture: string; 
         shortArticle: string; 
         publicationTime:Date; 
         name:string; 

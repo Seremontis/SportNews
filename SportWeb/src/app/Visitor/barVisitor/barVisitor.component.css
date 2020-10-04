@@ -1,101 +1,117 @@
 .mainBar {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 320px;
+}
+
+.logAndMap {
+  /*height: 100%;*/
+  width: 100%;
+  font-size: 1.2em;
+  display: flex;
+}
+
+.LeftItem {
+  display: flex;
+  align-items: center;
+  margin-left: 1%;
+  flex: 1;
+}
+.RightItem {
+  flex: 1;
+  margin-left: auto;
+  padding-right: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+a {
+  color: white;
+}
+
+.changeColorAndSize {
+  margin-right: 10%;
+  height: 100%;
+  display: inline-flex;
+}
+
+.changeColorAndSize > * {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.fontAndtheme {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+.fontAndtheme:hover {
+  text-decoration: underline;
+}
+
+.normal {
+  font-size: 1em;
+}
+
+.large {
+  font-size: 1.3em;
+}
+.verylarge {
+  font-size: 1.6em;
+}
+
+.whiteTheme {
+  background: white;
+  color: black;
+  padding: 0;
+  margin: 0;
+}
+
+.darkTheme {
+  background: black;
+  color: yellow;
+  padding: 0;
+  margin: 0;
+}
+.mobileDisplayMenu {
+  display: none;
+}
+
+.fontAndtheme {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 850px) {
+  .mainBar {
     height: 100%;
     width: 100%;
-    display: grid;
-    grid-template-columns: auto 320px;
+    display: block;
   }
-  
-  .logAndMap {
-    height: 100%;
-    width: 100%;
-    font-size: 1.2em;
+
+  .logAndMap,
+  .changeColorAndSize {
+    padding: 5px;
+  }
+}
+.changeColorAndSize {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+  .menuToggle {
+    flex: 1;
     display: flex;
-  }
-  
-  .logAndMap > a {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-  
-  .LeftItem {
-    display: inline-flex;
+    justify-content: center;
     align-items: center;
-    margin-left: 1%;
-  }
-  .RightItem {
-    margin-left: auto;
-    padding-right: 1%;
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  a {
+    height: 25px;
     color: white;
   }
-  
-  .changeColorAndSize {
-    margin-right: 10%;
-    height: 100%;
-    display: inline-flex;
-  }
-  
-  .changeColorAndSize > * {
-    margin-top: auto;
-    margin-bottom: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  .fontAndtheme {
-    background: none;
-    border: none;
-    color: white;
-    font-weight: bold;
-  }
-  .fontAndtheme:hover {
-    text-decoration: underline;
-  }
-  
-  .normal {
-    font-size: 1em;
-  }
-  
-  .large {
-    font-size: 1.3em;
-  }
-  .verylarge {
-    font-size: 1.6em;
-  }
-  
-  .whiteTheme {
-    background: white;
-    color: black;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .darkTheme {
-    background: black;
-    color: yellow;
-    padding: 0;
-    margin: 0;
-  }
-  .mobileDisplayMenu {
-    display: none;
-  }
-  @media (max-width: 850px) {
-    .mainBar {
-      height: 100%;
-      width: 100%;
-      display: block;
-    }
-  }
-  .changeColorAndSize {
-    width: 100%;
-    height: 100%;
-      margin: 0;
-  }
-  
-  .fontAndtheme{
-      margin-left: auto;
-      margin-right: auto;
-  }
+}

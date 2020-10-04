@@ -79,9 +79,9 @@ namespace SportApi.Controllers
             }
         }
         [HttpGet]
-        [Route("GetAllArticlesSport/{categoryId}/{size}")]
+        [Route("GetArticlesByCategory/{categoryId}/{size}")]
         [AllowAnonymous]
-        public async Task<IEnumerable<WListArticle>> GetAllArticlesSport(int categoryId,int page = 1)
+        public async Task<IEnumerable<WListArticle>> GetArticlesByCategory(int categoryId,int page = 1)
         {
             try
             {

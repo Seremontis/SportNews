@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiVisitorService } from 'src/service/ApiVisitorService';
 
 @Component({
   selector: 'app-visitor-layout',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitorLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: ApiVisitorService) {
+    this.CheckIsOnlineServer();
+  }
 
   ngOnInit(): void {
+  }
+
+  CheckIsOnlineServer() {
+    this.service.CheckIsOnlineServer().subscribe(
+      (response) =>{},
+      (error) => {
+        //console.error('Request failed with error');
+        if(error.status==0 || error.status>499)
+          alert("Brak połaczenia z serwerem");
+      });
   }
 
 }

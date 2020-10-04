@@ -38,10 +38,7 @@ export class VisitorHomeComponent implements OnInit {
       },
       (error) => {                          //error() callback
         console.error('Request failed with error')
-      },
-      () => {
-        console.info('Request completed')      //This is actually not needed 
-      });
+      })
   }
 
   CheckImages(){

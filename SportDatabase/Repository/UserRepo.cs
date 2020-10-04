@@ -24,9 +24,9 @@ namespace SportDatabase.Repository
             return await _SportNewsContext.WUsers.FindAsync((object)id);
         }
 
-        public async Task<List<WUser>> GetWList(int idpage)
+        public async Task<List<WUser>> GetWList(int page)
         {
-            _Page *= (idpage-1);
+            SetupPageSize(page);
             return await _SportNewsContext.WUsers.Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
     }

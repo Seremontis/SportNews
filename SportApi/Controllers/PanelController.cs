@@ -24,7 +24,6 @@ namespace SportApi.Controllers
     [ApiController]
     //[EnableCors("AllowOrigin")]
 
-    /// TODO :co zrobić z użytkownika których nie można usunąć oraz obiektami
     ///  breadcrumbs to Angular
     public class PanelController : ControllerBase
     {

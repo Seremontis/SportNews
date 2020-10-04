@@ -31,7 +31,7 @@ namespace SportDatabase.Model
         public string Keywords { get; set; }
         [Column(TypeName = "date")]
         public DateTime PublicationTime { get; set; }
-        [JsonConverter(typeof(IntToStringConverter))]
+        //[JsonConverter(typeof(IntToStringConverter))]
         public int? CategoryId { get; set; }
         public int UserModified { get; set; }
         [Column(TypeName = "datetime")]

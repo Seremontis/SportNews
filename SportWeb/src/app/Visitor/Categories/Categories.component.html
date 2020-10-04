@@ -1,29 +1,31 @@
-<button *ngIf="isShow" (click)="gotoTop()"><i class="fas fa-caret-up fa-2x"></i></button>
+<button *ngIf="isShow" (click)="gotoTop()" class="scrollButton"><i class="fas fa-caret-up fa-2x"></i></button>
 <main>
-  <h1>{{name}}</h1>
+  <h1>{{GetNameCategory()}}</h1>
   <hr/>
   <div class="lastArticle">
-      <figure *ngFor="let element of arraytest | slice:0:2">
-          <a routerLink="/article" alt="">
-          <img src="{{element.name}}" />
-          <header><h1 class="h1MainArticle">{{element.id}}</h1></header>       
+      <figure *ngFor="let element of ArticleList | slice:0:2">
+          <a [routerLink] = "['/article', element.articleId]">
+          <img src="{{element.smallPicture}}" alt="" />
+          <header><h1 class="h1MainArticle">{{element.title}}</h1></header>       
           <div class="opacity"></div>
           </a>
       </figure>
   </div>
   <div class="olderArticle">
-      <figure *ngFor="let element of arraytest | slice:2:6">
-          <a routerLink="/article" alt="">
+      <figure *ngFor="let element of ArticleList | slice:2:6">
+          <a [routerLink] = "['/article', element.articleId]">
           <div class="card">
-              <img class="card-img-top" src="{{element.name}}" alt="Card image cap">
+              <img class="card-img-top" src="{{element.smallPicture}}" alt="Card image cap">
               <header class="card-body bgColor">
-                  <h5 class="card-title">{{element.id}}</h5>
+                  <h5 class="card-title">{{element.title}}</h5>
               </header>
               <div class="opacity"></div>
           </div>
           </a>    
       </figure>
   </div>
-  <span *ngIf="isEndList">Brak kolejnych artykułów<h2 style="color: red;">Zmienić na buttona</h2></span>
-
+  <div class="text-center mt-4">
+    <span *ngIf="isEndList">Brak kolejnych artykułów</span>
+    <button class="btn btn-primary" *ngIf="!isEndList" (click)="addContent()">Następne artykuły</button>
+  </div>
 </main>

@@ -1,15 +1,20 @@
-  <div class="mainBar">
-    <div class="logAndMap">
-      <a routerLink="/login" class="LeftItem">Zaloguj się</a>
-      <a href="#" class="RightItem">Mapa serwisu</a>
+<div class="mainBar">
+  <div class="logAndMap">
+    <a routerLink="/login" class="LeftItem">Zaloguj się</a>
+    <div class="menuToggle">
+      <button class="hamburger float-right" type="button" [(ngModel)] = "model" ngDefaultControl (click)="showHideMenu()">
+        <i class="fas fa-bars fa-2x"></i>
+      </button>
     </div>
-
-    <div class="changeColorAndSize">
-      <button class="fontAndtheme normal">A</button>
-      <button class="fontAndtheme large">A+</button>
-      <button class="fontAndtheme verylarge">A++</button>
-      <button class="whiteTheme fontAndtheme ">AA</button>
-      <button class="fontAndtheme darkTheme">AA</button>
-    </div>
-
+    <a href="#" class="RightItem">Mapa serwisu</a>
   </div>
+
+  <div class="changeColorAndSize">
+    <button class="fontAndtheme normal">A</button>
+    <button class="fontAndtheme large">A+</button>
+    <button class="fontAndtheme verylarge">A++</button>
+    <button class="whiteTheme fontAndtheme ">AA</button>
+    <button class="fontAndtheme darkTheme">AA</button>
+  </div>
+
+</div>

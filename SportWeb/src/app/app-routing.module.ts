@@ -25,7 +25,7 @@ const routes: Routes = [
         component: VisitorHomeComponent
       },
       {
-        path: 'categories',
+        path: 'categories/:id',
         component: CategoriesComponent
       },
 

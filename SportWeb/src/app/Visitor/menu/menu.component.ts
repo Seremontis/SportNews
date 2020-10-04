@@ -7,9 +7,6 @@ import { WCategory } from 'src/service/model/WCategory';
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
-  /*host: {
-    '(window:resize)': 'onResize($event)'
-  }*/
 })
 export class MenuComponent implements OnInit {
 
@@ -19,25 +16,34 @@ export class MenuComponent implements OnInit {
    }
 
   ngOnInit() {
+    window.dispatchEvent(new Event('resize'));
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
+    let container=document.querySelector('.container-fluid');
     let header=document.querySelector('header');
     let nav=document.querySelector('nav');
-    let footer=<HTMLElement>document.querySelector('.searcherAndSocialMedia')||<HTMLElement>document.querySelector('.searcherAndSocialMediaStandard');
-    let height=header.offsetHeight+nav.offsetHeight+footer.offsetHeight;
-    if(height>event.target.innerHeight){
-      header.parentElement.classList.remove("stickyItem");
-      header.parentElement.classList.add("standardItem");
-      footer.classList.remove('searcherAndSocialMedia');
-      footer.classList.add('searcherAndSocialMediaStandard');
+    let footer=document.querySelector('footer');
+    let communityElement=<HTMLElement>document.querySelector('.searcherAndSocialMedia');
+    if(event.target.innerWidth <= 768){
+      if(!document.querySelector('.divFooter')){
+        let createDiv=document.createElement("div");
+        createDiv.classList.add("row");
+        createDiv.classList.add("divFooter");
+        header.parentElement.classList.remove("stickyItem");
+        header.parentElement.classList.add("standardItem");
+        createDiv.appendChild(footer);
+        container.appendChild(createDiv);
+      }
     }
     else{
       header.parentElement.classList.add("stickyItem");
-      header.parentElement.classList.remove("standardItem");
-      footer.classList.add('searcherAndSocialMedia');
-      footer.classList.remove('searcherAndSocialMediaStandard');
+      header.parentElement.classList.remove("standardItem"); 
+      communityElement.appendChild(footer);   
+      let element= document.querySelector('.divFooter');
+      if(element)
+        container.removeChild(element);
     }
   }
 

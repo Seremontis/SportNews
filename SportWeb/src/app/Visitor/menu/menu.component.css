@@ -3,6 +3,7 @@
   top: 0;
   height: 100%;
   width: 100%;
+  overflow: auto;
 }
 
 .standardItem{
@@ -112,5 +113,10 @@ form{
     width: 95%;
     margin-bottom: 15px; 
     margin-top: 20px;
+  }
+  footer{
+    padding-top:25px;
+    background:#232121;
+    width: 100%;
   }
 }

@@ -5,11 +5,11 @@
       <img class="imgLogo" src="assets/logo.png" alt="Logo serwisu sportowego" />
     </a>
   </header>
-  <nav>
+  <nav class="visitor">
     <ul class="navOption nav flex-column">
       <li class="active" *ngFor="let element of CategoryList">
         <i class="fas fa-info-circle"></i>
-        <a routerLink="/categories" [queryParams]="{Name: element.categoryId}">{{element.name}}
+        <a [routerLink] = "['../categories', element.categoryId]">{{element.name}}
         </a>
       </li>
     </ul>

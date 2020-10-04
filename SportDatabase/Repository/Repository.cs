@@ -19,13 +19,14 @@ namespace SportDatabase.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
         public readonly SportNewsContext _SportNewsContext;
-        internal int _Page=10;
-        internal int _DefaultPageSize = 10;
+        internal int _Page;
+        internal int _DefaultPageSize;
 
         public Repository(SportNewsContext sportNews)
         {
             _SportNewsContext = sportNews;
         }
+
 
         public async Task Add(T model)
         {
@@ -63,5 +64,20 @@ namespace SportDatabase.Repository
             //_SportNewsContext.Set<T>().Attach(model);
             _SportNewsContext.Set<T>().Update(model);
         }
+
+        internal void SetupPageSize(int page)
+        {
+            if (page == 1)
+            {
+                _Page = 0;
+                _DefaultPageSize = 6;
+            }
+            else
+            {
+                _Page = (6 * (page - 1)) - 2;
+                _DefaultPageSize = 8;
+            }
+        }
+
     }
 }

@@ -10,13 +10,17 @@ import { WListArticle } from './model/WListArticle';
 })
 
 export class ApiVisitorService {
-    readonly rootURL = 'http://localhost:62939/Api/';
-    readonly httpOptions = {
+    private readonly rootURL = 'http://localhost:62939/Api/';
+    private readonly httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
         })
     };
     constructor(private http: HttpClient) { }
+
+    CheckIsOnlineServer(){
+        return this.http.get(this.rootURL);
+    }
 
     GetFullArticle(idArticle:number): Observable<WFullArticle>{
         return this.http.get<WFullArticle>(this.rootURL + 'GetArticle/'+idArticle);
@@ -26,5 +30,8 @@ export class ApiVisitorService {
     }
     GetLastArticles(): Observable<WListArticle[]>{
         return this.http.get<WListArticle[]>(this.rootURL + 'GetLastArticles');
+    }
+    GetArticlesByCategory(categoryId:number,page:number=1): Observable<WListArticle[]>{
+        return this.http.get<WListArticle[]>(this.rootURL + 'GetArticlesByCategory/'+categoryId+'/'+page);
     }
 }

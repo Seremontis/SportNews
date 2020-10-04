@@ -33,13 +33,13 @@ namespace SportDatabase.Repository
 
         public async Task<IEnumerable<WListArticle>> GetListArticles(int page)
         {
-            _Page *= (page - 1);
+            SetupPageSize(page);
             return await _SportNewsContext.WListArticles.Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
 
         public async Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId, int page)
         {
-            _Page *= (page - 1);
+            SetupPageSize(page);
             return await _SportNewsContext.WListArticles
                 .Where(x => x.CategoryId == categoryId)
                 .Skip(_Page).Take(_DefaultPageSize).ToListAsync();

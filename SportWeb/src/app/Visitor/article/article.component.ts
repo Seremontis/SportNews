@@ -14,44 +14,41 @@ import { VirtualTimeScheduler } from 'rxjs';
 })
 export class ArticleComponent implements OnInit {
 
-  articleId:number;
-  FullArticle:WFullArticle;
-  private readonly imageDefault: DefaultImage=new DefaultImage();
-  
-  constructor(private route: ActivatedRoute,private service:ApiVisitorService,private datePipe: DatePipe) {
-    this.route.params.subscribe( params => {
-      this.articleId=Number(params.id);
-      if(!Number.isNaN(this.articleId)){
+  articleId: number;
+  FullArticle: WFullArticle;
+  private readonly imageDefault: DefaultImage = new DefaultImage();
+
+  constructor(private route: ActivatedRoute, private service: ApiVisitorService, private datePipe: DatePipe) {
+    this.route.params.subscribe(params => {
+      this.articleId = Number(params.id);
+      if (!Number.isNaN(this.articleId)) {
         this.LoadArticle(this.articleId);
       }
     });
-   }
+  }
 
   ngOnInit() {
   }
 
-  LoadArticle(id:number){
+  LoadArticle(id: number) {
     this.service.GetFullArticle(id).subscribe(
-      (response) => {                           //next() callback
+      (response) => {
         console.log('response received');
-        this.FullArticle=response; 
-      this.CheckImageAndDescription()
-         },
-      (error) => {                        //error() callback
-        console.error('Request failed with error');
+        this.FullArticle = response;
+        this.CheckImageAndDescription()
       },
-      () => {
-        console.info('Request completed')      //This is actually not needed 
+      (error) => {
+        console.error('Request failed with error');
       });
   }
 
-  CheckImageAndDescription(){
-    if(!this.FullArticle.picture)
-      this.FullArticle.picture=this.imageDefault.image;
-    if(!this.FullArticle.pictureDescirption)
-      this.FullArticle.pictureDescirption=this.imageDefault.description;
+  CheckImageAndDescription() {
+    if (!this.FullArticle.picture)
+      this.FullArticle.picture = this.imageDefault.image;
+    if (!this.FullArticle.pictureDescirption)
+      this.FullArticle.pictureDescirption = this.imageDefault.description;
   }
-  GetEditorNameOrDate(){
-    return this.FullArticle?.firstName+' '+this.FullArticle?.lastName+', '+(this.datePipe.transform(this.FullArticle?.publicationTime,"dd-MM-yyyy"));
+  GetEditorNameOrDate() {
+    return this.FullArticle?.firstName + ' ' + this.FullArticle?.lastName + ', ' + (this.datePipe.transform(this.FullArticle?.publicationTime, "dd-MM-yyyy"));
   }
 }

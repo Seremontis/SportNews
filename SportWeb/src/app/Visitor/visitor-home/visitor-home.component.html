@@ -1,3 +1,4 @@
+
 <main>
     <div class="lastArticle">
         <figure *ngFor="let element of ArticleList | slice:0:2">
@@ -21,4 +22,8 @@
             </a>    
         </figure>
     </div>
+    <div class="text-center mt-4">
+        <span *ngIf="isEndList">Brak kolejnych artykułów</span>
+        <button class="btn btn-primary" *ngIf="!isEndList" (click)="addContent()">Następne artykuły</button>
+      </div>
 </main>

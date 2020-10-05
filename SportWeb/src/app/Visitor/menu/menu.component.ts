@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HostListener,ElementRef,ViewChild } from '@angular/core';
+import { Loading } from 'src/assets/Loading';
 import { ApiService} from 'src/service/ApiService'
 import { WCategory } from 'src/service/model/WCategory';
+import { AccessData } from 'src/service/AccessData';
 
 @Component({
   selector: 'app-menu',
@@ -11,12 +13,17 @@ import { WCategory } from 'src/service/model/WCategory';
 export class MenuComponent implements OnInit {
 
   CategoryList:WCategory[];
-  constructor(private apiSevice: ApiService) {
-    this.LoadCategory();
-   }
+  private readonly loading:Loading=new Loading();
+  constructor(private apiSevice: ApiService,private accessData: AccessData) {
+   this.LoadCategory()
+  }
 
   ngOnInit() {
     window.dispatchEvent(new Event('resize'));
+  }
+  ngAfterViewInit(){
+    if(!this.CategoryList)
+      this.loading.Loading(document.querySelector('.visitor'),'text-primary');   
   }
 
   @HostListener('window:resize', ['$event'])
@@ -49,15 +56,14 @@ export class MenuComponent implements OnInit {
 
   LoadCategory(){
     this.apiSevice.GetCategory().subscribe(
-      (response) => {                           //next() callback
+      (response) => {                          
         console.log('response received');
         this.CategoryList = response;
+        this.accessData.SetCategoryList(this.CategoryList);
+        this.loading.LoadingDelete(document.querySelector('.visitor')); 
       },
-      (error) => {                        //error() callback
+      (error) => {                      
         console.error('Request failed with error')
-      },
-      () => {
-        console.info('Request completed')      //This is actually not needed 
       });
   }
 }

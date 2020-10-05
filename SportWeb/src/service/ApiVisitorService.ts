@@ -28,8 +28,12 @@ export class ApiVisitorService {
     GetListArticle(page:number): Observable<WListArticle[]>{
         return this.http.get<WListArticle[]>(this.rootURL + 'GetListArticle/'+page);
     }
-    GetLastArticles(): Observable<WListArticle[]>{
-        return this.http.get<WListArticle[]>(this.rootURL + 'GetLastArticles');
+    GetLastArticles(page:number=1): Observable<WListArticle[]>{
+        if(page>1)
+            return this.http.get<WListArticle[]>(this.rootURL + 'GetListArticles/'+page);
+        else{
+            return this.http.get<WListArticle[]>(this.rootURL + 'GetListArticles');
+        }
     }
     GetArticlesByCategory(categoryId:number,page:number=1): Observable<WListArticle[]>{
         return this.http.get<WListArticle[]>(this.rootURL + 'GetArticlesByCategory/'+categoryId+'/'+page);

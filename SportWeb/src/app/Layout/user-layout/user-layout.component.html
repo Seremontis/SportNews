@@ -5,6 +5,7 @@
     <div class="resizeMenu row flex-grow-1 ">
         <app-menuUser class="col-md-3 NavSide p-0 "></app-menuUser>
         <div class="col-md-9 flex-column fullColor">
+            <button *ngIf="isShow" (click)="gotoTop()" class="scrollButton"><i class="fas fa-caret-up fa-2x"></i></button>
             <div class="row contentPage">
                 <router-outlet></router-outlet>
             </div>         

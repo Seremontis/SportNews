@@ -6,6 +6,7 @@
         <app-menu class="col-md-3 NavSide p-0 "></app-menu>
         <div class="col-md-9 flex-column fullColor" >
             <app-scheduleAndScore class="p-0 row score"></app-scheduleAndScore>
+            <button *ngIf="isShow" (click)="gotoTop()" class="scrollButton"><i class="fas fa-caret-up fa-2x"></i></button>
             <div class="row contentPage">
                 <router-outlet></router-outlet>
             </div>         

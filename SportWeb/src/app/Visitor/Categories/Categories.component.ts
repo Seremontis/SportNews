@@ -5,8 +5,9 @@ import { Route } from '@angular/compiler/src/core';
 import { WListArticle } from 'src/service/model/WListArticle';
 import { ApiVisitorService } from 'src/service/ApiVisitorService';
 import { DefaultImage } from 'src/assets/defaultImage';
+import { AccessData } from 'src/service/AccessData';
+import { Loading } from 'src/assets/Loading';
 
-declare var jquery: any;
 declare var $: any;
 
 @Component({
@@ -21,20 +22,23 @@ export class CategoriesComponent implements OnInit {
   isEndList: boolean = true; //no more article
   ArticleList: WListArticle[];
   private imageDef: DefaultImage = new DefaultImage();
-  startElement = 0;
+  private readonly loading: Loading = new Loading();
+  startElement = 6;
+  page = 1;
   //mySubscription: any;
 
-  constructor(private route: ActivatedRoute/*, private router: Router*/, private service: ApiVisitorService) {
+  constructor(private route: ActivatedRoute, private _router: Router, private service: ApiVisitorService, private accessData: AccessData) {
     this.route.params.subscribe(params => {
       this.id = Number(params.id);
+      this.ArticleList = null;
       if (!Number.isNaN(this.id)) {
         this.LoadArticle();
       }
     });
     //alert('jak rozwiązać kwestię taba');
-    /*this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };*/
+    //this._router.routeReuseStrategy.shouldReuseRoute = function () {
+    //return false;
+    //};
     /*this.mySubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Trick the Router into believing it's last link wasn't previously loaded
@@ -45,23 +49,36 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    if (!this.ArticleList) {
+      this.loading.Loading(document.querySelector('.contentPage'));
+    }
+  }
+
   ngOnDestroy() {
-    /*if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }*/
+
   }
   GetNameCategory() {
-    if (this.ArticleList)
-      return this.ArticleList[0].name;
+      let result = this.accessData.readCategoryList();
+      let name;
+      if (result)
+        name = result.find(x => x.categoryId == this.id).name;
+      return name;
   }
   LoadArticle() {
     this.service.GetArticlesByCategory(this.id).subscribe(
       (response) => {
-        this.ArticleList = response;                    //next() callback
+        this.addToList(response)
         console.log('response received');
         this.CheckList();
+        let checkLoadTag = document.querySelector('.contentPage');
+        if (checkLoadTag)
+          this.loading.LoadingDelete(<HTMLElement>checkLoadTag);
+        if (this.page > 1)
+          this.executeContent();
+        this.page += 1;
       },
-      (error) => {                          //error() callback
+      (error) => {
         console.error('Request failed with error')
       });
   }
@@ -102,7 +119,19 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  addToList(list: WListArticle[]) {
+    if (!this.ArticleList)
+      this.ArticleList = list;
+    else {
+      this.ArticleList = this.ArticleList.concat(list);
+    }
+  }
+
   addContent() {
+    this.LoadArticle()
+  }
+
+  executeContent() {
     if (this.startElement < this.ArticleList.length) {
       var old_height = $(document).height();
       var old_scroll = $(window).scrollTop();

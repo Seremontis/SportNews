@@ -45,7 +45,8 @@ import {TruncatePipe} from '../service/TruncatePipe'
       EditTableComponent,
       ModalUserComponent,
       ArticleFormComponent,
-      TruncatePipe    
+      TruncatePipe,
+      
    ],
   imports: [
     BrowserModule,

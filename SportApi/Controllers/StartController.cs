@@ -51,12 +51,12 @@ namespace SportApi.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetLastArticles")]
+        [Route("GetListArticles")]
         public async Task<IEnumerable<WListArticle>> GetAllArticles()
         {
             try
             {
-                return await _unitOfWork.IRepoArticle.GetLastArticles();
+                return await _unitOfWork.IRepoArticle.GetListArticles(1);
             }
             catch (Exception)
             {
@@ -66,8 +66,8 @@ namespace SportApi.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetAllArticles/{page}")]
-        public async Task<IEnumerable<WListArticle>> GetAllArticles(int page=1)
+        [Route("GetListArticles/{page}")]
+        public async Task<IEnumerable<WListArticle>> GetAllArticles(int page)
         {
             try
             {

@@ -34,7 +34,7 @@ namespace SportDatabase.Repository
         public async Task<IEnumerable<WListArticle>> GetListArticles(int page)
         {
             SetupPageSize(page);
-            return await _SportNewsContext.WListArticles.Skip(_Page).Take(_DefaultPageSize).ToListAsync();
+            return await _SportNewsContext.WListArticles.OrderByDescending(x=>x.PublicationTime).Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
 
         public async Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId, int page)
@@ -43,11 +43,6 @@ namespace SportDatabase.Repository
             return await _SportNewsContext.WListArticles
                 .Where(x => x.CategoryId == categoryId)
                 .Skip(_Page).Take(_DefaultPageSize).ToListAsync();
-        }
-
-        public async Task<IEnumerable<WListArticle>> GetLastArticles()
-        {
-            return await _SportNewsContext.WListArticles.OrderByDescending(x => x.PublicationTime).Take(6).ToListAsync();
         }
     }
 }

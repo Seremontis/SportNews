@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiVisitorService } from 'src/service/ApiVisitorService';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-visitor-layout',
@@ -7,6 +8,7 @@ import { ApiVisitorService } from 'src/service/ApiVisitorService';
   styleUrls: ['./visitor-layout.component.css']
 })
 export class VisitorLayoutComponent implements OnInit {
+  isShow: boolean; //button parameter
 
   constructor(private service: ApiVisitorService) {
     this.CheckIsOnlineServer();
@@ -24,5 +26,24 @@ export class VisitorLayoutComponent implements OnInit {
           alert("Brak połaczenia z serwerem");
       });
   }
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    let max = document.documentElement.scrollHeight;
 
+    if (scrollPosition >= 150) {
+      this.isShow = true;
+    } else {
+      this.isShow = false;
+    }
+  }
+
+  gotoTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
 }

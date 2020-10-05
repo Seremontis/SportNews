@@ -96,31 +96,7 @@ figure > a > img {
   padding: 20px 10px;
 }
 
-/*scrollUp*/
-.scrollButton {
-  display: inline-block;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  text-align: center;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  z-index: 1000;
-  background-color: #ff9800;
-  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
-}
 
-.scrollButton i {
-  color: wheat;
-}
-
-.scrollButton:hover {
-  background-color: chocolate;
-}
 
 @media (max-width: 1000px) {
   main {

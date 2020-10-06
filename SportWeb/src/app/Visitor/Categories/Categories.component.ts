@@ -25,7 +25,6 @@ export class CategoriesComponent implements OnInit {
   private readonly loading: Loading = new Loading();
   startElement = 6;
   page = 1;
-  //mySubscription: any;
 
   constructor(private route: ActivatedRoute, private _router: Router, private service: ApiVisitorService, private accessData: AccessData) {
     this.route.params.subscribe(params => {
@@ -33,18 +32,11 @@ export class CategoriesComponent implements OnInit {
       this.ArticleList = null;
       if (!Number.isNaN(this.id)) {
         this.LoadArticle();
-      }
-    });
-    //alert('jak rozwiązać kwestię taba');
-    //this._router.routeReuseStrategy.shouldReuseRoute = function () {
-    //return false;
-    //};
-    /*this.mySubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // Trick the Router into believing it's last link wasn't previously loaded
-        this.router.navigated = false;
-      }
+      };
+      /*_router.events.subscribe((val) => {
+        this.selectedATag();
     });*/
+    });
   }
   ngOnInit() {
   }
@@ -53,7 +45,25 @@ export class CategoriesComponent implements OnInit {
     if (!this.ArticleList) {
       this.loading.Loading(document.querySelector('.contentPage'));
     }
+
   }
+
+  /*selectedATag(){
+    if(this.id){
+      let searchName=this.accessData.readCategoryList().find(x=>x.categoryId==this.id).name;
+      let link=document.querySelector('nav');
+      link.childNodes.forEach(element=>{
+        
+        element.childNodes.forEach(subelement => {
+          let tmp=<HTMLElement>subelement;
+          if(tmp.textContent==searchName){
+            tmp.style.background='yellow';
+            tmp.style.color='black';
+          }
+        });
+      })
+    }
+  }*/
 
   ngOnDestroy() {
 

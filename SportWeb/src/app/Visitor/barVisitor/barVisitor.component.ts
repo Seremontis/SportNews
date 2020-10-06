@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DarkMode } from 'src/service/DarkMode';
 declare var $: any;
 
 @Component({
@@ -8,11 +9,30 @@ declare var $: any;
 })
 export class BarVisitorComponent implements OnInit {
 
+  elementToChangeModeWithBorder:string[]=['.contentPage','.mainBar','.contentSchedule','.NavSide'];
+  //customATageToChangeMdoe:string[]=['a','.mainBar'];
   model = true;
-  constructor() { }
+  constructor(private mode: DarkMode) {
+    
+   }
 
   ngOnInit() {
   }
+
+  ngAfterViewInit() {
+    if (localStorage.getItem('darkMode'))
+      this.mode.blackModeActivation();
+  }
+  blackModeActivation(){
+    this.mode.blackModeActivation();
+  }
+
+
+  standardThemeActive(){
+    this.mode.standardThemeActive();
+  }
+
+
   showHideMenu() {
     if (this.model) {
       document.querySelector('nav').style.visibility = 'visible';
@@ -27,27 +47,5 @@ export class BarVisitorComponent implements OnInit {
       navTop.style.position = 'relative';
     }
     this.model = !this.model;
-  }
-
-
-  blackModeActivation() {
-    let tag = <HTMLElement>document.querySelector('.contentPage');
-    this.prependClass(tag, "darkbackground");
-  }
-
-
-  standardThemeActive() {
-    let tag = <HTMLElement>document.querySelector('.contentPage');
-    tag.classList.remove('darkbackground');
-  }
-
-  prependClass(sel: HTMLElement, strClass: string) {
-    let clone = <HTMLElement>sel.cloneNode(true);
-    let list = clone.classList;
-    sel.className = '';
-    sel.classList.add(strClass);
-    for (let i = 0; i < list.length; i++) {
-      sel.classList.add(list[i]);
-    }
   }
 }

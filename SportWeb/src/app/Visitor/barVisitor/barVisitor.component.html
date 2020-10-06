@@ -1,20 +1,23 @@
 <div class="mainBar">
   <div class="logAndMap">
-    <a routerLink="/login" class="LeftItem">Zaloguj się</a>
+    <div class="LeftItem">
+      <a routerLink="/login">Zaloguj się</a>
+    </div>
     <div class="menuToggle">
-      <button class="hamburger float-right" type="button" [(ngModel)] = "model" ngDefaultControl (click)="showHideMenu()">
+      <button class="hamburger float-right" type="button" [(ngModel)]="model" ngDefaultControl (click)="showHideMenu()">
         <i class="fas fa-bars fa-2x"></i>
       </button>
     </div>
-    <a href="#" class="RightItem">Mapa serwisu</a>
+    <div class="RightItem">
+      <a href="#">Mapa serwisu</a>
+    </div>
   </div>
-
   <div class="changeColorAndSize">
-    <button class="fontAndtheme normal">A</button>
-    <button class="fontAndtheme large">A+</button>
-    <button class="fontAndtheme verylarge">A++</button>
-    <button class="whiteTheme fontAndtheme" (click) = "standardThemeActive()">AA</button>
-    <button class="fontAndtheme darkTheme" (click) = "blackModeActivation()">AA</button>
+    <a href="javascript:;" class="fontAndtheme normal">A</a>
+    <a href="javascript:;" class="fontAndtheme large">A+</a>
+    <a href="javascript:;" class="fontAndtheme verylarge">A++</a>
+    <a href="javascript:;" class="whiteTheme fontAndtheme" (click)="standardThemeActive()">AA</a>
+    <a href="javascript:;" class="fontAndtheme darkTheme" (click)="blackModeActivation()">AA</a>
   </div>
 
 </div>

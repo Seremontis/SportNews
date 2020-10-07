@@ -135,7 +135,7 @@ body {
 
 /*dark mode*/
 .darkbackground{
-  background-color: black!important;
+  background: black!important;
   border: 1px solid yellow!important;
   color: white;
 }
@@ -147,4 +147,24 @@ body {
 
 .DarkIconColor{
   color:yellow!important;
+}
+
+.darkbackground::placeholder{
+  color: white!important;
+}
+
+.DarkIconColorMedia{
+  color:yellow!important;
+  border:1px solid yellow!important;
+  background: black!important;
+}
+
+.headerDarkMode{
+  border-top: 1px solid yellow ;
+  color: yellow!important;
+  background:black!important;
+}
+
+.DarkBorderBottom{
+  border-bottom: 1px solid yellow!important;
 }

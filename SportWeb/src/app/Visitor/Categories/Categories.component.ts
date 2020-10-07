@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouteReuseStrategy } from '@angular/router';
 import { HostListener } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
@@ -7,6 +7,7 @@ import { ApiVisitorService } from 'src/service/ApiVisitorService';
 import { DefaultImage } from 'src/assets/defaultImage';
 import { AccessData } from 'src/service/AccessData';
 import { Loading } from 'src/assets/Loading';
+import { DarkMode } from 'src/service/DarkMode';
 
 declare var $: any;
 
@@ -16,6 +17,10 @@ declare var $: any;
   styleUrls: ['./Categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
+
+  
+  @ViewChildren('span') span: QueryList<any>;
+  @ViewChildren('figure') elements: QueryList<any>;
   queryParam;
   id = null;
   isShow: boolean; //button parameter
@@ -26,7 +31,7 @@ export class CategoriesComponent implements OnInit {
   startElement = 6;
   page = 1;
 
-  constructor(private route: ActivatedRoute, private _router: Router, private service: ApiVisitorService, private accessData: AccessData) {
+  constructor(private route: ActivatedRoute, private _router: Router, private service: ApiVisitorService, private accessData: AccessData,private mode:DarkMode) {
     this.route.params.subscribe(params => {
       this.id = Number(params.id);
       this.ArticleList = null;
@@ -45,7 +50,14 @@ export class CategoriesComponent implements OnInit {
     if (!this.ArticleList) {
       this.loading.Loading(document.querySelector('.contentPage'));
     }
-
+    if (localStorage.getItem('darkMode')){
+      this.elements.changes.subscribe(figure => {
+        figure.forEach(elm => this.mode.DarkModeFigure())
+      }) 
+      this.span.changes.subscribe(span => {
+        this.mode.SpanNullArticle(); 
+      }) 
+    }    
   }
 
   /*selectedATag(){
@@ -84,9 +96,10 @@ export class CategoriesComponent implements OnInit {
         let checkLoadTag = document.querySelector('.contentPage');
         if (checkLoadTag)
           this.loading.LoadingDelete(<HTMLElement>checkLoadTag);
-        if (this.page > 1)
+        if (this.page > 1){         
           this.executeContent();
-        this.page += 1;
+        }
+        this.page += 1;       
       },
       (error) => {
         console.error('Request failed with error')

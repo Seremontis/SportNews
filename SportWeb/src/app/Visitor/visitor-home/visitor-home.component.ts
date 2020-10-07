@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ApiVisitorService} from 'src/service/ApiVisitorService'
 import { WListArticle } from 'src/service/model/WListArticle';
 import { DefaultImage } from 'src/assets/defaultImage';
 import { Loading } from 'src/assets/Loading';
 import { HostListener } from '@angular/core';
 import { WCategory } from 'src/service/model/WCategory';
+import { DarkMode } from 'src/service/DarkMode';
 
 
 declare var $: any;
@@ -15,7 +16,8 @@ declare var $: any;
   styleUrls: ['./visitor-home.component.css']
 })
 export class VisitorHomeComponent implements OnInit {
-
+  @ViewChildren('span') span: QueryList<any>;
+  @ViewChildren('figure') elements: QueryList<any>;
   ArticleList:WListArticle[];
   private readonly imageDef:DefaultImage=new DefaultImage();
   private readonly loading:Loading=new Loading();
@@ -23,7 +25,7 @@ export class VisitorHomeComponent implements OnInit {
   page=1;
   isEndList: boolean = false; //no more article
 
-  constructor(private service: ApiVisitorService) { 
+  constructor(private service: ApiVisitorService,private mode:DarkMode) { 
     this.LoadArticle();
     
   }
@@ -35,6 +37,14 @@ export class VisitorHomeComponent implements OnInit {
     if(!this.ArticleList){
       this.loading.Loading(document.querySelector('.contentPage')); 
     }
+    if (localStorage.getItem('darkMode')){
+      this.elements.changes.subscribe(figure => {
+        figure.forEach(elm => this.mode.DarkModeFigure());      
+      }) 
+      this.span.changes.subscribe(span => {
+        this.mode.SpanNullArticle(); 
+      }) 
+    }    
   }
 
   LoadArticle(){
@@ -86,6 +96,8 @@ export class VisitorHomeComponent implements OnInit {
     }
     else {
       this.isEndList = true;
+      if(localStorage.getItem('darkMode')){   
+      }
     }
   }
 

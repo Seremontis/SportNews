@@ -1,4 +1,11 @@
-<div class="container-fluid">
+<div class="container-fluid position-relative">
+    <nav>
+        <ul class="specialMenu">
+            <li><a class="linkTab" href="#menuPage" >Przejdź do nawigacji</a></li>
+            <li><a class="linkTab" href="#search" >Przejdź do wyszukiwarki</a></li>
+            <li><a class="linkTab" href="#content" >Przejdź do treści</a></li>
+        </ul>
+    </nav>
     <div class="row mobileSticky">
         <app-barVisitor class="NavTop col  p-0"></app-barVisitor>
     </div>
@@ -7,7 +14,7 @@
         <div class="col-md-9 flex-column fullColor" >
             <app-scheduleAndScore class="p-0 row score"></app-scheduleAndScore>
             <button *ngIf="isShow" (click)="gotoTop()" class="scrollButton"><i class="fas fa-caret-up fa-2x"></i></button>
-            <div class="row contentPage">
+            <div class="row contentPage" id="content">
                 <router-outlet></router-outlet>
             </div>         
         </div>

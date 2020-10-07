@@ -2,7 +2,7 @@
   <h1>{{GetNameCategory()}}</h1>
   <hr/>
   <div class="lastArticle">
-      <figure *ngFor="let element of ArticleList | slice:0:2">
+      <figure #figure *ngFor="let element of ArticleList | slice:0:2">
           <a [routerLink] = "['/article', element.articleId]">
           <img src="{{element.smallPicture}}" alt="" />
           <header><h1 class="h1MainArticle">{{element.title}}</h1></header>       
@@ -11,7 +11,7 @@
       </figure>
   </div>
   <div class="olderArticle">
-      <figure *ngFor="let element of ArticleList | slice:2:6">
+      <figure #figure *ngFor="let element of ArticleList | slice:2:6">
           <a [routerLink] = "['/article', element.articleId]">
           <div class="card">
               <img class="card-img-top" src="{{element.smallPicture}}" alt="Card image cap">
@@ -24,7 +24,7 @@
       </figure>
   </div>
   <div class="text-center mt-4">
-    <span *ngIf="isEndList">Brak kolejnych artykułów</span>
-    <button class="btn btn-primary" *ngIf="!isEndList" (click)="addContent()">Następne artykuły</button>
+    <span #span class="nullArticle" *ngIf="isEndList">Brak kolejnych artykułów</span>
+    <button class="btn btn-primary addArticle" *ngIf="!isEndList" (click)="addContent()">Następne artykuły</button>
   </div>
 </main>

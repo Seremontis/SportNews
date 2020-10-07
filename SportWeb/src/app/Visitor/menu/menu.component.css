@@ -50,6 +50,13 @@ form{
   width: 95%;
   margin: auto;
 }
+
+.hideLab{
+  width: 100%;
+  height: 100%;
+  color: transparent;
+  position: absolute;
+}
 .searcherAndSocialMedia{
   display: block;
   /*position: absolute;

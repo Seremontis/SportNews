@@ -6,6 +6,25 @@
     max-height: 70px;
     z-index: 10;
   }
+
+.specialMenu{
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  list-style: none;
+}
+
+.linkTab{
+  display: inline;
+  left: -9000em;
+  padding: 5px 10px;
+  font-size: 1.27em;
+  position: absolute;
+  text-decoration: none;
+  z-index: 20;
+  text-align: center;
+}
   
 @media (max-width: 850px) {
     .NavTop {
@@ -19,3 +38,4 @@
       z-index: 11;
     }
   }
+

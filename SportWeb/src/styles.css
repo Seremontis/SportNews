@@ -168,3 +168,32 @@ body {
 .DarkBorderBottom{
   border-bottom: 1px solid yellow!important;
 }
+
+/*Size text*/
+
+.largetext{
+  font-size: 1.3rem;
+}
+
+.largeh1{
+ font-size: 3rem;
+}
+
+
+.largeh5{
+  font-size: 1.6rem;
+}
+
+
+.veryLargetext{
+  font-size: 1.6rem;
+}
+
+.verylargeh1{
+  font-size: 4rem;
+ }
+ 
+ 
+ .verylargeh5{
+   font-size: 1.8em;
+ }

@@ -4,8 +4,9 @@ import { Injectable } from '@angular/core';
         providedIn: "root"
     })
 export class DarkMode {
-    elementToChangeModeWithBorder: string[] = ['.contentPage', '.mainBar', '.contentSchedule', '.NavSide', '.input-group-append>span', '.menuSchedule>button','.result','.schedule'];
-    //customATageToChangeMdoe:string[]=['a','.mainBar'];
+    elementToChangeModeWithBorder: string[] = ['.contentPage', '.mainBar', 
+    '.contentSchedule', '.NavSide', '.input-group-append>span', '.menuSchedule>button',
+    '.result','.schedule','.breakLine'];
     public blackModeActivation() {
         this.elementToChangeModeWithBorder.forEach(element => {
             let tags = document.querySelectorAll(element);
@@ -32,7 +33,7 @@ export class DarkMode {
             element.classList.add('DarkBorderBottom');
         })
 
-        let results = document.querySelectorAll('.result>.line,.schedule');
+        let results = document.querySelectorAll('.result>.line,.schedule,figcaption');
         results.forEach(element => {
             element.classList.add('DarkIconColor');
         })
@@ -54,7 +55,7 @@ export class DarkMode {
         localStorage.setItem('darkMode', 'true');
 
         this.prependClass(document.querySelector('.iconSearch'), 'DarkIconColor')
-        let footer = document.querySelectorAll('.fab');
+        let footer = document.querySelectorAll('.fab,app-article');
         footer.forEach(element => {
             let tmp = <HTMLElement>element;
             this.prependClass(tmp, 'DarkIconColorMedia');

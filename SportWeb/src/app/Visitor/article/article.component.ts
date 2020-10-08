@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiVisitorService } from 'src/service/ApiVisitorService';
 import { WFullArticle } from 'src/service/model/WFullArticle';
 import { DatePipe } from '@angular/common';
 import { DefaultImage } from 'src/assets/defaultImage';
 import { VirtualTimeScheduler } from 'rxjs';
+import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
 
 
 @Component({
@@ -14,11 +15,12 @@ import { VirtualTimeScheduler } from 'rxjs';
 })
 export class ArticleComponent implements OnInit {
 
+  @ViewChildren('figure') elements: QueryList<any>;
   articleId: number;
   FullArticle: WFullArticle;
   private readonly imageDefault: DefaultImage = new DefaultImage();
 
-  constructor(private route: ActivatedRoute, private service: ApiVisitorService, private datePipe: DatePipe) {
+  constructor(private route: ActivatedRoute, private service: ApiVisitorService, private datePipe: DatePipe,private font:FontSizeManipulation) {
     this.route.params.subscribe(params => {
       this.articleId = Number(params.id);
       if (!Number.isNaN(this.articleId)) {
@@ -28,6 +30,28 @@ export class ArticleComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit(){
+    if (localStorage.getItem('darkMode')) {
+      this.elements.changes.subscribe(figure => {
+        figure.forEach(elm => {
+          document.querySelector('article').classList.add('darkbackground');
+          document.querySelector('figcaption').classList.add('DarkIconColor');
+        })})
+    }
+    if (localStorage.getItem('FontMode')) {
+      if (localStorage.getItem('FontMode') == '1') {
+        this.elements.changes.subscribe(figure => {
+          figure.forEach(elm => this.font.largeFontchangeAferLoad())
+        })
+      }
+      else if (localStorage.getItem('FontMode') == '2') {
+        this.elements.changes.subscribe(figure => {
+          figure.forEach(elm => this.font.verylargeFontchangeAferLoad())
+        })
+      }
+    }
   }
 
   LoadArticle(id: number) {

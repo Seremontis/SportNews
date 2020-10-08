@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiVisitorService } from 'src/service/ApiVisitorService';
 import { HostListener } from '@angular/core';
+import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
 
 @Component({
   selector: 'app-visitor-layout',
@@ -10,8 +11,14 @@ import { HostListener } from '@angular/core';
 export class VisitorLayoutComponent implements OnInit {
   isShow: boolean; //button parameter
 
-  constructor(private service: ApiVisitorService) {
+  constructor(private service: ApiVisitorService, private fontMode:FontSizeManipulation) {
     this.CheckIsOnlineServer();
+    if(localStorage.getItem('FontMode')){
+      if(localStorage.getItem("FontMode")=='1')
+        this.fontMode.largeFontchange();
+      if(localStorage.getItem("FontMode")=='2')
+        this.fontMode.veryLargeFontchange();
+    }
   }
 
   ngOnInit(): void {

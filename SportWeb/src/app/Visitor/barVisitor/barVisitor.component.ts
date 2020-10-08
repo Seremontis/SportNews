@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DarkMode } from 'src/service/DarkMode';
+import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
 declare var $: any;
 
 @Component({
@@ -9,12 +10,12 @@ declare var $: any;
 })
 export class BarVisitorComponent implements OnInit {
 
-  elementToChangeModeWithBorder:string[]=['.contentPage','.mainBar','.contentSchedule','.NavSide'];
+  elementToChangeModeWithBorder: string[] = ['.contentPage', '.mainBar', '.contentSchedule', '.NavSide'];
   //customATageToChangeMdoe:string[]=['a','.mainBar'];
   model = true;
-  constructor(private mode: DarkMode) {
-    
-   }
+  constructor(private mode: DarkMode, private fontChange: FontSizeManipulation) {
+
+  }
 
   ngOnInit() {
   }
@@ -23,12 +24,12 @@ export class BarVisitorComponent implements OnInit {
     if (localStorage.getItem('darkMode'))
       this.mode.blackModeActivation();
   }
-  blackModeActivation(){
+  blackModeActivation() {
     this.mode.blackModeActivation();
   }
 
 
-  standardThemeActive(){
+  standardThemeActive() {
     this.mode.standardThemeActive();
   }
 
@@ -47,5 +48,17 @@ export class BarVisitorComponent implements OnInit {
       navTop.style.position = 'relative';
     }
     this.model = !this.model;
+  }
+
+  fontNormalChange() {
+    this.fontChange.normalFontchange();
+  }
+
+  fontLargeChange() {
+    this.fontChange.largeFontchange();
+  }
+
+  veryLargeChange() {
+    this.fontChange.veryLargeFontchange()
   }
 }

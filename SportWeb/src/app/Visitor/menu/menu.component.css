@@ -80,7 +80,7 @@ form{
 }
 .socialMedia>i{
   border: 1px solid gray;
-  width: 60px;
+  min-width: 70%;
   display: block;
   margin: auto;
   padding: 10px;

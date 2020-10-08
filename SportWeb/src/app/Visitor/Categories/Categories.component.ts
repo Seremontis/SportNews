@@ -8,6 +8,7 @@ import { DefaultImage } from 'src/assets/defaultImage';
 import { AccessData } from 'src/service/AccessData';
 import { Loading } from 'src/assets/Loading';
 import { DarkMode } from 'src/service/DarkMode';
+import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
 
 declare var $: any;
 
@@ -18,7 +19,7 @@ declare var $: any;
 })
 export class CategoriesComponent implements OnInit {
 
-  
+
   @ViewChildren('span') span: QueryList<any>;
   @ViewChildren('figure') elements: QueryList<any>;
   queryParam;
@@ -31,7 +32,7 @@ export class CategoriesComponent implements OnInit {
   startElement = 6;
   page = 1;
 
-  constructor(private route: ActivatedRoute, private _router: Router, private service: ApiVisitorService, private accessData: AccessData,private mode:DarkMode) {
+  constructor(private route: ActivatedRoute, private _router: Router, private service: ApiVisitorService, private accessData: AccessData, private mode: DarkMode, private font: FontSizeManipulation) {
     this.route.params.subscribe(params => {
       this.id = Number(params.id);
       this.ArticleList = null;
@@ -50,42 +51,37 @@ export class CategoriesComponent implements OnInit {
     if (!this.ArticleList) {
       this.loading.Loading(document.querySelector('.contentPage'));
     }
-    if (localStorage.getItem('darkMode')){
+    if (localStorage.getItem('darkMode')) {
       this.elements.changes.subscribe(figure => {
         figure.forEach(elm => this.mode.DarkModeFigure())
-      }) 
+      })
       this.span.changes.subscribe(span => {
-        this.mode.SpanNullArticle(); 
-      }) 
-    }    
-  }
-
-  /*selectedATag(){
-    if(this.id){
-      let searchName=this.accessData.readCategoryList().find(x=>x.categoryId==this.id).name;
-      let link=document.querySelector('nav');
-      link.childNodes.forEach(element=>{
-        
-        element.childNodes.forEach(subelement => {
-          let tmp=<HTMLElement>subelement;
-          if(tmp.textContent==searchName){
-            tmp.style.background='yellow';
-            tmp.style.color='black';
-          }
-        });
+        this.mode.SpanNullArticle();
       })
     }
-  }*/
+    if (localStorage.getItem('FontMode')) {
+      if (localStorage.getItem('FontMode') == '1') {
+        this.elements.changes.subscribe(figure => {
+          figure.forEach(elm => this.font.largeFontchangeAferLoad())
+        })
+      }
+      else if (localStorage.getItem('FontMode') == '2') {
+        this.elements.changes.subscribe(figure => {
+          figure.forEach(elm => this.font.verylargeFontchangeAferLoad())
+        })
+      }
+    }
+  }
 
   ngOnDestroy() {
 
   }
   GetNameCategory() {
-      let result = this.accessData.readCategoryList();
-      let name;
-      if (result)
-        name = result.find(x => x.categoryId == this.id).name;
-      return name;
+    let result = this.accessData.readCategoryList();
+    let name;
+    if (result)
+      name = result.find(x => x.categoryId == this.id).name;
+    return name;
   }
   LoadArticle() {
     this.service.GetArticlesByCategory(this.id).subscribe(
@@ -96,15 +92,16 @@ export class CategoriesComponent implements OnInit {
         let checkLoadTag = document.querySelector('.contentPage');
         if (checkLoadTag)
           this.loading.LoadingDelete(<HTMLElement>checkLoadTag);
-        if (this.page > 1){         
+        if (this.page > 1) {
           this.executeContent();
         }
-        this.page += 1;       
+        this.page += 1;
       },
       (error) => {
         console.error('Request failed with error')
       });
   }
+
   CheckList() {
     this.ArticleList.forEach(article => {
       if (!article.smallPicture)
@@ -129,9 +126,6 @@ export class CategoriesComponent implements OnInit {
       this.isShow = false;
     }
 
-    /*if (pos > max - 50) {
-      this.addContent();
-    }*/
   }
 
   gotoTop() {

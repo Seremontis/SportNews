@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ChildrenOutletContexts, RouterModule, Routes } from '@angular/router';
 import { VisitorLayoutComponent } from './Layout/visitor-layout/visitor-layout.component';
 import { UserLayoutComponent } from './Layout/user-layout/user-layout.component';
 import { VisitorHomeComponent } from './Visitor/visitor-home/visitor-home.component';
@@ -17,21 +17,33 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '',
+    path: 'home',
     component: VisitorLayoutComponent,
     children: [
       {
-        path: 'home',
-        component: VisitorHomeComponent
+        path: '',
+        component: VisitorHomeComponent,
+        data: { breadCrumb: "Strona główna"},
       },
       {
-        path: 'categories/:id',
-        component: CategoriesComponent
+        path: './categories/:id',
+        component: CategoriesComponent,
+        data: { breadCrumb: "Kategoria"},
+        children:[
+          {
+            path:'./categories/:id',
+            component:CategoriesComponent
+          },
+          {
+            path: './article/:id',
+            component: ArticleComponent
+          }
+        ]
       },
-
       {
-        path: 'article/:id',
-        component: ArticleComponent
+        path: './article/:id',
+        component: ArticleComponent,
+        data: { breadCrumb: "Artykuł"},
       }
     ]
   },

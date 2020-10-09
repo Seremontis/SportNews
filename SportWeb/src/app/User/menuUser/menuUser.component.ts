@@ -29,14 +29,11 @@ export class MenuUserComponent implements OnInit {
     let footer = <HTMLElement>document.querySelector('.searcherAndSocialMedia') || <HTMLElement>document.querySelector('.searcherAndSocialMediaStandard');
     let height = header.offsetHeight + nav.offsetHeight + footer.offsetHeight;
     if (height > event.target.innerHeight || event.target.innerWidth <= 768) {
-      header.parentElement.classList.remove("stickyItem");
-      header.parentElement.classList.add("standardItem");
+
       footer.classList.remove('searcherAndSocialMedia');
       footer.classList.add('searcherAndSocialMediaStandard');
     }
     else {
-      header.parentElement.classList.add("stickyItem");
-      header.parentElement.classList.remove("standardItem");
       footer.classList.add('searcherAndSocialMedia');
       footer.classList.remove('searcherAndSocialMediaStandard');
     }

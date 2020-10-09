@@ -67,7 +67,7 @@ export class DarkMode {
     DarkModeMenuLink() {
         let list = document.querySelectorAll('nav.visitor>ul>li');
 
-        list.forEach(element => {
+        list?.forEach(element => {
             element.classList.add('DarkBorderBottom');
             let tmp = <HTMLElement>element.childNodes[0];
             tmp.classList.add('DarkIconColor');

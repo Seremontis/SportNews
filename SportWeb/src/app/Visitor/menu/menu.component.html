@@ -1,5 +1,4 @@
-<div class="stickyMenu" (window:resize)="onResize($event)">
-  <div class="stickyItem flex-column">
+  <div class="flex-column" (window:resize)="onResize($event)" #event>
   <header>
     <a routerLink="/home">
       <img class="imgLogo" src="assets/logo.png" alt="Logo serwisu sportowego" />
@@ -9,7 +8,7 @@
     <ul class="navOption nav flex-column">
       <li #li class="active" *ngFor="let element of CategoryList">
         <i class="fas fa-info-circle"></i>
-        <a [routerLink] = "['../categories', element.categoryId]">{{element.name}}
+        <a [routerLink] = "['./categories', element.categoryId]">{{element.name}}
         </a>
       </li>
     </ul>
@@ -36,5 +35,4 @@
       </div>
     </footer>
   </div>
-</div>
 </div>

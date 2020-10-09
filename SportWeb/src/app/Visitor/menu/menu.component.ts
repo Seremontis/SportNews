@@ -40,27 +40,33 @@ export class MenuComponent implements OnInit {
   onResize(event) {
     let container=document.querySelector('.container-fluid');
     let header=document.querySelector('header');
-    let nav=document.querySelector('nav');
+    let nav=<HTMLElement>document.querySelector('nav.visitor');
     let footer=document.querySelector('footer');
     let communityElement=<HTMLElement>document.querySelector('.searcherAndSocialMedia');
+    let appMenu=<HTMLElement>document.querySelector('app-menu>.flex-column');
     if(event.target.innerWidth <= 768){
       if(!document.querySelector('.divFooter')){
         let createDiv=document.createElement("div");
         createDiv.classList.add("row");
         createDiv.classList.add("divFooter");
-        header.parentElement.classList.remove("stickyItem");
         header.parentElement.classList.add("standardItem");
         createDiv.appendChild(footer);
-        container.appendChild(createDiv);
+        container.appendChild(createDiv);      
+        document.querySelector('.mainBar').appendChild(nav);
+        nav.style.height='0';
+        nav.style.minHeight='auto'
+        //appMenu.removeChild(nav);
       }
     }
     else{
-      header.parentElement.classList.add("stickyItem");
       header.parentElement.classList.remove("standardItem"); 
       communityElement.appendChild(footer);   
-      let element= document.querySelector('.divFooter');
+      let element= document.querySelector('.divFooter');    
       if(element)
         container.removeChild(element);
+      appMenu.insertBefore(nav,communityElement);
+      nav.style.height='auto';
+      nav.style.minHeight='auto';
     }
   }
 

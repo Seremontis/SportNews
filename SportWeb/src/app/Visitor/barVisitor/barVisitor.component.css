@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: auto minmax(320px,400px);
+  grid-template-columns: auto 320px;
 }
 
 .logAndMap {
@@ -88,6 +88,12 @@ a {
 
 @media (max-width: 850px) {
   .mainBar {
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
+
+  .mainBarLarge {
     height: 100%;
     width: 100%;
     display: block;

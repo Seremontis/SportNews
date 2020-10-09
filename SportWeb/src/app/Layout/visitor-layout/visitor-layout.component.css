@@ -1,9 +1,7 @@
 .NavTop {
     background: #232121;
     box-shadow: 0px -3px 20px 20px rgba(0, 0, 0, 0.5);
-    min-height: 40px;
-    height: 10vh;
-    max-height: 70px;
+    height: auto;
     z-index: 10;
   }
 
@@ -25,12 +23,20 @@
   z-index: 20;
   text-align: center;
 }
+.linkTab:hover,
+.linkTab:focus,
+.linkTab:active {
+    background: #000000;
+    border: 2px solid #FFFFFF;
+    color: yellow;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
   
 @media (max-width: 850px) {
     .NavTop {
-      height: 100%;
-      min-height: 70px;
-      max-height: 100px;
+      height: auto;
     }
     .mobileSticky {
       position: sticky;

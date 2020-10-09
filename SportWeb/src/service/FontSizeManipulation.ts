@@ -13,11 +13,14 @@ export class FontSizeManipulation {
             })
         });
         localStorage.removeItem('FontMode');
+        document.querySelector('.mainBarLarge')?.classList.add('mainBar');
+        document.querySelector('.mainBarLarge')?.classList.remove('mainBarLarge');
     }
 
     largeFontchange() {
         if (!document.querySelector('.largetext'))
             this.normalFontchange();
+        this.mainbarResize();
         this.prependClass(document.querySelector('body'), 'largetext');
         document.querySelectorAll('h1').forEach(element => {
             this.prependClass(element, 'largeh1');
@@ -29,11 +32,11 @@ export class FontSizeManipulation {
     }
 
     largeFontchangeAferLoad() {
-        let main=document.querySelector('main');
-        main.querySelectorAll('h1').forEach(element =>{
+        let main = document.querySelector('main');
+        main.querySelectorAll('h1').forEach(element => {
             element.classList.add('largeh1');
         })
-        main.querySelectorAll('h5').forEach(element =>{
+        main.querySelectorAll('h5').forEach(element => {
             element.classList.add('largeh5');
         })
     }
@@ -41,6 +44,7 @@ export class FontSizeManipulation {
     veryLargeFontchange() {
         if (!document.querySelector('.veryLargetext'))
             this.normalFontchange();
+        this.mainbarResize();
         this.prependClass(document.querySelector('body'), 'veryLargetext');
         document.querySelectorAll('h1').forEach(element => {
             this.prependClass(element, 'verylargeh1');
@@ -51,13 +55,18 @@ export class FontSizeManipulation {
         localStorage.setItem('FontMode', '2');
     }
     verylargeFontchangeAferLoad() {
-        let main=document.querySelector('main');
-        main.querySelectorAll('h1').forEach(element =>{
+        let main = document.querySelector('main');
+        main.querySelectorAll('h1').forEach(element => {
             element.classList.add('verulargeh1');
         })
-        main.querySelectorAll('h5').forEach(element =>{
+        main.querySelectorAll('h5').forEach(element => {
             element.classList.add('verylargeh5');
         })
+    }
+
+    mainbarResize(){
+        document.querySelector('.mainBar')?.classList.add('mainBarLarge');
+        document.querySelector('.mainBar')?.classList.remove('mainBar');
     }
     prependClass(sel: HTMLElement, strClass: string) {
         let clone = <HTMLElement>sel.cloneNode(true);

@@ -8,6 +8,7 @@ namespace SportDatabase.Model
 {
     public partial class WUser
     {
+        [Key]
         public int UserId { get; set; }
         [StringLength(50)]
         public string FirstName { get; set; }

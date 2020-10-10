@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { HttpHeaders } from '@angular/common/http';
 import { WFullArticle } from './model/WFullArticle';
 import { WListArticle } from './model/WListArticle';
+import { IModelKeyword } from './model/IModelKeyword';
 
 @Injectable({
     providedIn: 'root'
@@ -37,5 +38,9 @@ export class ApiVisitorService {
     }
     GetArticlesByCategory(categoryId:number,page:number=1): Observable<WListArticle[]>{
         return this.http.get<WListArticle[]>(this.rootURL + 'GetArticlesByCategory/'+categoryId+'/'+page);
+    }
+
+    GetSearch(keywords:IModelKeyword): Observable<WListArticle[]>{        
+        return this.http.post<WListArticle[]>(this.rootURL + 'GetSearcher', JSON.stringify(keywords), this.httpOptions);
     }
 }

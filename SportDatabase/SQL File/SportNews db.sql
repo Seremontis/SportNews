@@ -36,7 +36,8 @@ Create table Categories(
 [Name] varchar(50),
 [SortField] int,
 [UserModified] int not null,
-[LastModified] datetime not null
+[LastModified] datetime not null,
+[AboveCategory] int default(null)
 )
 go
 

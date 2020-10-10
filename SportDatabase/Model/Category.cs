@@ -16,5 +16,6 @@ namespace SportDatabase.Model
         public int UserModified { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime LastModified { get; set; }
+        public int? AboveCategory { get; set; }
     }
 }

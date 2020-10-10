@@ -15,10 +15,11 @@ namespace SportDatabase.Context
 
             entity.ToView("WListArticles");
 
+            entity.Property(e => e.Keywords).IsFixedLength();
+
             entity.Property(e => e.Name).IsUnicode(false);
 
             entity.Property(e => e.SmallPicture).IsFixedLength();
-
         }
     }
 }

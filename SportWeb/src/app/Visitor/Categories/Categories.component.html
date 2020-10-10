@@ -25,6 +25,6 @@
   </div>
   <div class="text-center mt-4">
     <span #span class="nullArticle" *ngIf="isEndList">Brak kolejnych artykułów</span>
-    <button class="btn btn-primary addArticle" *ngIf="!isEndList" (click)="addContent()">Następne artykuły</button>
+    <button class="btn btn-primary addArticle" *ngIf="!isEndList" (click)="LoadArticle()">Następne artykuły</button>
   </div>
 </main>

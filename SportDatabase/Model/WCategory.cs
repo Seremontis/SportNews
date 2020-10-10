@@ -8,6 +8,7 @@ namespace SportDatabase.Model
 {
     public partial class WCategory
     {
+        [Key]
         public int CategoryId { get; set; }
         [StringLength(50)]
         public string Name { get; set; }

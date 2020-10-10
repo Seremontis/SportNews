@@ -1,6 +1,6 @@
-  <div class="flex-column" (window:resize)="onResize($event)" #event>
+<div class="flex-column" (window:resize)="onResize($event)" #event>
   <header>
-    <a routerLink="/home">
+    <a routerLink="/">
       <img class="imgLogo" src="assets/logo.png" alt="Logo serwisu sportowego" />
     </a>
   </header>
@@ -8,19 +8,22 @@
     <ul class="navOption nav flex-column">
       <li #li class="active" *ngFor="let element of CategoryList">
         <i class="fas fa-info-circle"></i>
-        <a [routerLink] = "['./categories', element.categoryId]">{{element.name}}
+        <a [routerLink]="['./categories', element.categoryId]">{{element.name}}
         </a>
       </li>
     </ul>
   </nav>
   <div class="searcherAndSocialMedia flex-grow">
-    <form class="input-group md-form form-sm form-2 pl-0" id="search">
+    <form #searchtext="ngForm" (ngSubmit)="SearchArticle(searchtext)"
+     class="input-group md-form form-sm form-2 pl-0" id="search">
       <label class="hideLab" for="search">Wyszukiwarka strony</label>
-      <input id="search" class="search form-control my-0 py-1 amber-border" type="text" aria-label="Wyszukiwarka strony" placeholder="Search">
-      <div class="input-group-append">
-        <span class="input-group-text amber lighten-3" id="basic-text1"><i class="fas fa-search text-grey iconSearch"
-            aria-hidden="true"></i></span>
-      </div>
+      <input [ngModel] id="search" name="keywords" class="search form-control my-0 py-1 amber-border" type="text"
+        aria-label="Wyszukiwarka strony" placeholder="Wyszukaj">
+      <button type="submit" class="input-group-append">
+        <span  class="input-group-text amber lighten-3" id="basic-text1">
+          <i class="fas fa-search text-grey iconSearch" aria-hidden="true"></i>
+        </span>
+      </button>
     </form>
     <footer>
       <div class="socialMedia">

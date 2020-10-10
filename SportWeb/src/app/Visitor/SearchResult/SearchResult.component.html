@@ -1,0 +1,21 @@
+<main>
+  <h1>Wyniki wyszukiwania</h1> 
+  <hr/>
+  <div class="olderArticle">
+    <figure #figure *ngFor="let element of ArticleList">
+        <a [routerLink] = "['/article', element.articleId]">
+        <div class="card">
+            <img class="card-img-top" src="{{element.smallPicture}}" alt="Card image cap">
+            <header class="card-body bgColor">
+                <h5 class="card-title">{{element.title}}</h5>
+            </header>
+            <div class="opacity"></div>
+        </div>
+        </a>    
+    </figure>
+</div>
+<div class="text-center mt-4">
+  <span #span class="nullArticle" *ngIf="isEndList">Brak artykułów</span>
+  <button class="btn btn-primary addArticle" *ngIf="!isEndList" (click)="LoadArticle()">Następne artykuły</button>
+</div>
+</main>

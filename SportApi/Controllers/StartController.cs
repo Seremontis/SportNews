@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
+using SportApi.Model;
 using SportDatabase;
 using SportDatabase.Context;
 using SportDatabase.Interface;
@@ -79,7 +80,7 @@ namespace SportApi.Controllers
             }
         }
         [HttpGet]
-        [Route("GetArticlesByCategory/{categoryId}/{size}")]
+        [Route("GetArticlesByCategory/{categoryId}/{page}")]
         [AllowAnonymous]
         public async Task<IEnumerable<WListArticle>> GetArticlesByCategory(int categoryId,int page = 1)
         {
@@ -102,6 +103,21 @@ namespace SportApi.Controllers
                 return await _unitOfWork.IRepoCategory.Get();
             }
             catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Route("GetSearcher")]
+        [AllowAnonymous]
+        public IEnumerable<WListArticle> GetSearcher([Microsoft.AspNetCore.Mvc.FromBody] ModelKeyword keyword)
+        {
+            try
+            {
+                return _unitOfWork.IRepoArticle.GetSearcher(keyword.keywords,keyword.page);
+            }
+            catch (Exception e)
             {
                 throw;
             }

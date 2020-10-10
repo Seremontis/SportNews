@@ -6,6 +6,7 @@ import { WCategory } from 'src/service/model/WCategory';
 import { AccessData } from 'src/service/AccessData';
 import { BarVisitorComponent } from '../barVisitor/barVisitor.component';
 import { DarkMode } from 'src/service/DarkMode';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +18,8 @@ export class MenuComponent implements OnInit {
   @ViewChildren('li') elements: QueryList<any>;
   CategoryList:WCategory[];
   private readonly loading:Loading=new Loading();
-  constructor(private apiSevice: ApiService,private accessData: AccessData, private mode:DarkMode) {
+  constructor(private apiSevice: ApiService,private accessData: AccessData, 
+    private route:Router,private mode:DarkMode) {
    this.LoadCategory();
  
   }
@@ -81,5 +83,15 @@ export class MenuComponent implements OnInit {
       (error) => {                      
         console.error('Request failed with error')
       });
+  }
+
+  SearchArticle(data){
+    if(data.value.keywords){
+      localStorage.setItem('searchtext',data.value.keywords);
+      this.route.navigate(['search']);
+    }
+    else
+      alert('Puste pole wyszukiwarki');
+   
   }
 }

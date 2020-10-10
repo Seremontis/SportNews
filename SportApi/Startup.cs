@@ -88,7 +88,7 @@ namespace SportApi
             //}); ;
             services.AddControllers().AddJsonOptions(options =>
                 options.JsonSerializerOptions.Converters.Add(new IntToStringConverter())); ;
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,20 +119,23 @@ namespace SportApi
                 endpoints.MapControllers();
             });
             //app.UseMiddleware<ErrorHandler>();
-            app.UseStatusCodePages(); 
-           
+            app.UseStatusCodePages();
+
 
             //depency injection
-            /*var container = new Container();
-            container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+            //var container = new Container();
+            /*container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
             container.Register(typeof(IRepository<>), typeof(Repository<>));
-            container.Register<IUnitOfWork, UnitOfWork>();
-            container.Verify();
-
-            GlobalConfiguration.Configuration.DependencyResolver =
+            container.Register<IUnitOfWork, UnitOfWork>();*/
+            /*container.Verify(); 
+             * GlobalConfiguration.Configuration.DependencyResolver =
         new SimpleInjectorWebApiDependencyResolver(container);
-            */
+           
+ */
             //
+     
+            
+
             var forwardingOptions = new ForwardedHeadersOptions() { ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.All }; app.UseForwardedHeaders(forwardingOptions);
         }
     }

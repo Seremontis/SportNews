@@ -8,27 +8,26 @@ import { ArticleComponent } from './Visitor/article/article.component'
 import { LoginComponent } from './Login/Login.component';
 import { UserHomeComponent } from './User/user-home/user-home.component';
 import {ArticleFormComponent } from './User/articleForm/articleForm.component'
-import {EditTableComponent} from './User/editTable/editTable.component'
+import {EditTableComponent} from './User/editTable/editTable.component';
+import {SearchResultComponent} from './Visitor/SearchResult/SearchResult.component';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
+    path: '*',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: '',
     component: VisitorLayoutComponent,
     children: [
       {
         path: '',
         component: VisitorHomeComponent,
-        data: { breadCrumb: "Strona główna"},
-      },
+      },   
       {
-        path: './categories/:id',
+        path: 'categories/:id',
         component: CategoriesComponent,
-        data: { breadCrumb: "Kategoria"},
         children:[
           {
             path:'./categories/:id',
@@ -39,7 +38,11 @@ const routes: Routes = [
             component: ArticleComponent
           }
         ]
-      },
+      },  
+      {
+        path: 'search',
+        component: SearchResultComponent
+      } ,
       {
         path: './article/:id',
         component: ArticleComponent,

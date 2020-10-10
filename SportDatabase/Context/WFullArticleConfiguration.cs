@@ -11,7 +11,7 @@ namespace SportDatabase.Context
     {
         public void Configure(EntityTypeBuilder<WFullArticle> entity)
         {
-            entity.HasKey(x=>x.ArticleId);
+            entity.HasNoKey();
 
             entity.ToView("WFullArticle");
 

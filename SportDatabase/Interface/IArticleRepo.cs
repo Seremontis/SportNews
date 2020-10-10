@@ -13,5 +13,6 @@ namespace SportDatabase.Interface
         Task<WFullArticle> GetFullArticle(int id);
         Task<IEnumerable<WListArticle>> GetListArticles(int page);
         Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId, int page);
+        IEnumerable<WListArticle> GetSearcher(string keywords, int page);
     }
 }

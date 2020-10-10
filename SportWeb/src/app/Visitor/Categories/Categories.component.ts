@@ -9,6 +9,7 @@ import { AccessData } from 'src/service/AccessData';
 import { Loading } from 'src/assets/Loading';
 import { DarkMode } from 'src/service/DarkMode';
 import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
+import {Location} from '@angular/common';
 
 declare var $: any;
 
@@ -32,16 +33,15 @@ export class CategoriesComponent implements OnInit {
   startElement = 6;
   page = 1;
 
-  constructor(private route: ActivatedRoute, private _router: Router, private service: ApiVisitorService, private accessData: AccessData, private mode: DarkMode, private font: FontSizeManipulation) {
+  constructor(private route: ActivatedRoute, private _router: Router, 
+    private service: ApiVisitorService,private accessData: AccessData,
+     private mode: DarkMode, private font: FontSizeManipulation, private _location:Location) {
     this.route.params.subscribe(params => {
       this.id = Number(params.id);
       this.ArticleList = null;
       if (!Number.isNaN(this.id)) {
         this.LoadArticle();
       };
-      /*_router.events.subscribe((val) => {
-        this.selectedATag();
-    });*/
     });
   }
   ngOnInit() {
@@ -76,6 +76,7 @@ export class CategoriesComponent implements OnInit {
   ngOnDestroy() {
 
   }
+
   GetNameCategory() {
     let result = this.accessData.readCategoryList();
     let name;
@@ -114,7 +115,7 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  @HostListener('window:scroll')
+  /*@HostListener('window:scroll')
   checkScroll() {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
@@ -126,15 +127,15 @@ export class CategoriesComponent implements OnInit {
       this.isShow = false;
     }
 
-  }
+  }*/
 
-  gotoTop() {
+  /*gotoTop() {
     window.scroll({
       top: 0,
       left: 0,
       behavior: 'smooth'
     });
-  }
+  }*/
 
   addToList(list: WListArticle[]) {
     if (!this.ArticleList)
@@ -144,9 +145,6 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  addContent() {
-    this.LoadArticle()
-  }
 
   executeContent() {
     if (this.startElement < this.ArticleList.length) {

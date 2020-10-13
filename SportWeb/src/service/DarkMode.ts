@@ -4,18 +4,22 @@ import { Injectable } from '@angular/core';
         providedIn: "root"
     })
 export class DarkMode {
-    elementToChangeModeWithBorder: string[] = ['.contentPage', '.mainBar', 
+    elementToChangeModeWithBorder: string[] = [, '.mainBar', 
     '.contentSchedule', '.NavSide', '.input-group-append>span', '.menuSchedule>button',
-    '.result','.schedule','.breakLine'];
+    '.result','.schedule','.breakLine','.fullColor'];
     public blackModeActivation() {
         this.elementToChangeModeWithBorder.forEach(element => {
             let tags = document.querySelectorAll(element);
             tags.forEach(tag => {
-                if (!tag.classList.contains("darkbackground"))
+                if (!tag.classList.contains("darkbackground")){
                     this.prependClass(<HTMLElement>tag, "darkbackground");
+                    if(tag.classList.contains('contentPage'))
+                        (<HTMLElement>tag).style.borderBottom='none';
+                }
             })
         })
         let list = document.querySelectorAll('a');
+        this.prependClass(document.querySelector('.contentPage'),'BgAndFont')
 
         list.forEach(element => {
             if (!element.classList.contains("colorLinkDarkMode")) {
@@ -37,7 +41,6 @@ export class DarkMode {
         results.forEach(element => {
             element.classList.add('DarkIconColor');
         })
-
 
         document.querySelector('.search').classList.add('darkbackground');
         document.querySelector('.rulesAndAuthor').classList.add('DarkIconColor');
@@ -110,6 +113,11 @@ export class DarkMode {
         document.querySelectorAll('.DarkIconColorMedia').forEach(element => {
             element.classList.remove('DarkIconColorMedia');
         })
+
+        document.querySelectorAll('.BgAndFont').forEach(element => {
+            element.classList.remove('BgAndFont');
+        })
+        
         if (localStorage.getItem('darkMode'))
             localStorage.removeItem('darkMode');
     }

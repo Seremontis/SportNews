@@ -1,30 +1,46 @@
 <main>
-  <h1>{{GetNameCategory()}}</h1>
-  <hr/>
-  <div class="lastArticle">
-      <figure #figure *ngFor="let element of ArticleList | slice:0:2">
-          <a [routerLink] = "['/article', element.articleId]">
-          <img src="{{element.smallPicture}}" alt="" />
-          <header><h1 class="h1MainArticle">{{element.title}}</h1></header>       
-          <div class="opacity"></div>
-          </a>
-      </figure>
-  </div>
-  <div class="olderArticle">
-      <figure #figure *ngFor="let element of ArticleList | slice:2:6">
-          <a [routerLink] = "['/article', element.articleId]">
-          <div class="card">
-              <img class="card-img-top" src="{{element.smallPicture}}" alt="Card image cap">
-              <header class="card-body bgColor">
-                  <h5 class="card-title">{{element.title}}</h5>
-              </header>
-              <div class="opacity"></div>
-          </div>
-          </a>    
-      </figure>
-  </div>
-  <div class="text-center mt-4">
-    <span #span class="nullArticle" *ngIf="isEndList">Brak kolejnych artykułów</span>
-    <button class="btn btn-primary addArticle" *ngIf="!isEndList" (click)="LoadArticle()">Następne artykuły</button>
-  </div>
+    <div #div *ngIf="CheckBeforeId()">
+        <div *ngIf="CheckColor()"></div>
+        <!--<a [routerLink]="['/categories', GetBeforeId()]">Powrót</a>-->
+        <a class="link" style="text-decoration: underline;" role="button" (click)="this.GoToPage()">Powrót</a>
+    </div>
+    <nav class="navMain" *ngIf="LoadSubCategory()">
+        <ul class="list-inline">
+            <li #li class="list-inline-item active" *ngFor="let element of this.GetSubCategory()">
+                <i class="fas fa-dot-circle white"></i>
+                <a class="linkA" [routerLink]="['/categories', element.categoryId]">{{element.name}}
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <h1>{{this.GetNameCategory()}}</h1>
+    <hr />
+    <div class="lastArticle">
+        <figure #figure *ngFor="let element of ArticleList | slice:0:2">
+            <a [routerLink]="['/article', element.articleId]">
+                <img src="{{element.smallPicture}}" alt="" />
+                <header>
+                    <h1 class="h1MainArticle">{{element.title}}</h1>
+                </header>
+                <div class="opacity"></div>
+            </a>
+        </figure>
+    </div>
+    <div class="olderArticle">
+        <figure #figure *ngFor="let element of ArticleList | slice:2:6">
+            <a [routerLink]="['/article', element.articleId]">
+                <div class="card">
+                    <img class="card-img-top" src="{{element.smallPicture}}" alt="Card image cap">
+                    <header class="card-body bgColor">
+                        <h5 class="card-title">{{element.title}}</h5>
+                    </header>
+                    <div class="opacity"></div>
+                </div>
+            </a>
+        </figure>
+    </div>
+    <div class="text-center mt-4">
+        <span #span class="nullArticle" *ngIf="isEndList">Brak kolejnych artykułów</span>
+        <button class="btn btn-primary addArticle" *ngIf="!isEndList" (click)="LoadArticle()">Następne artykuły</button>
+    </div>
 </main>

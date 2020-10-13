@@ -9,7 +9,9 @@ import { AccessData } from 'src/service/AccessData';
 import { Loading } from 'src/assets/Loading';
 import { DarkMode } from 'src/service/DarkMode';
 import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
+import { WCategory } from 'src/service/model/WCategory';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare var $: any;
 
@@ -20,7 +22,8 @@ declare var $: any;
 })
 export class CategoriesComponent implements OnInit {
 
-
+  @ViewChildren('div') elementDiv: QueryList<any>;
+  @ViewChildren('li') elementLi: QueryList<any>;
   @ViewChildren('span') span: QueryList<any>;
   @ViewChildren('figure') elements: QueryList<any>;
   queryParam;
@@ -32,10 +35,14 @@ export class CategoriesComponent implements OnInit {
   private readonly loading: Loading = new Loading();
   startElement = 6;
   page = 1;
+  SubCategoryList: WCategory[];
+  flagSubCat = false;
+  beforeId: number;
 
-  constructor(private route: ActivatedRoute, private _router: Router, 
-    private service: ApiVisitorService,private accessData: AccessData,
-     private mode: DarkMode, private font: FontSizeManipulation, private _location:Location) {
+  constructor(private route: ActivatedRoute, private _router: Router,
+    private service: ApiVisitorService, private accessData: AccessData,
+    private mode: DarkMode, private font: FontSizeManipulation,
+    private _location: Location) {
     this.route.params.subscribe(params => {
       this.id = Number(params.id);
       this.ArticleList = null;
@@ -55,9 +62,22 @@ export class CategoriesComponent implements OnInit {
       this.elements.changes.subscribe(figure => {
         figure.forEach(elm => this.mode.DarkModeFigure())
       })
+      document.querySelector('.navMain>ul>li')?.classList.add('darkbg');
       this.span.changes.subscribe(span => {
         this.mode.SpanNullArticle();
       })
+      this.elementLi.changes.subscribe(li => {
+        document.querySelectorAll('.navMain>ul>li')?.forEach(elem => {
+          let link = elem.querySelector('a');
+          if (link)
+            this.mode.prependClass(link, 'colorLinkDarkMode')
+        })
+      })
+      this.elementDiv.changes.subscribe(el => {
+        let ele = <HTMLElement>el._results[0].nativeElement
+        ele.querySelector('a').classList.add('colorLinkDarkMode')
+      })
+
     }
     if (localStorage.getItem('FontMode')) {
       if (localStorage.getItem('FontMode') == '1') {
@@ -77,6 +97,49 @@ export class CategoriesComponent implements OnInit {
 
   }
 
+  GoToPage() {
+    this.flagSubCat = false;
+    //this.beforeId=null;
+    this._router.navigate(['/categories/' + this.beforeId]);
+  }
+
+  CheckBeforeId() {
+    let res = this.accessData.readCategoryList();
+    if (res) {
+      this.beforeId = res.find(x => x.categoryId == this.id)?.aboveCategory
+      if (this.beforeId)
+        return true;
+    }
+    return false
+  }
+
+  CheckColor() {
+    if(localStorage.getItem('darkMode')){
+      let ele = document.querySelector('main>div>a')
+      ele.classList.add('colorLinkDarkMode')
+    }
+  }
+
+  GetBeforeId() {
+    return this.beforeId;
+  }
+
+  GetSubCategory() {
+    return this.SubCategoryList;
+  }
+  LoadSubCategory() {
+    let res = this.accessData.readCategoryList();
+    if (res) {
+      this.SubCategoryList = []
+      res.forEach(element => {
+        if (element.aboveCategory == this.id)
+          this.SubCategoryList.push(element)
+      })
+      if (this.SubCategoryList)
+        this.flagSubCat = true
+      return this.flagSubCat;
+    }
+  }
   GetNameCategory() {
     let result = this.accessData.readCategoryList();
     let name;

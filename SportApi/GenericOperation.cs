@@ -31,9 +31,9 @@ namespace SportApi
             }
             catch (Exception exception) //dopisac message i innerexcepetion do pol w celu lepszej ilustracji bledow
             {
-                unitOfWork.Rollback();
-                unitOfWork.IRepoLogException.Add(GetLogException(exception));
-                unitOfWork.Commit();
+                await unitOfWork.Rollback();
+                await unitOfWork.IRepoLogException.Add(GetLogException(exception));
+                await unitOfWork.Commit();
                 throw;
             }
         }

@@ -43,7 +43,8 @@ namespace SportDatabase.Repository
 
         public async Task<IEnumerable<WCategory>> GetView()
         {
-            return await _SportNewsContext.WCategories.OrderBy(x=>x.SortField).ToListAsync();
+            return await _SportNewsContext.WCategories
+                .OrderBy(x=>x.SortField).ToListAsync();
         }
 
         public async Task Add(Category category)
@@ -64,5 +65,11 @@ namespace SportDatabase.Repository
                 item.SortField -= 1;
             }
         }
+
+        async Task<IEnumerable<WCategory>> ICategoryRepo<Category>.Get(int idCategory)
+        {
+            return await _SportNewsContext.WCategories.Where(x => x.AboveCategory == idCategory).ToListAsync();
+        }
+
     }
 }

@@ -47,8 +47,7 @@ import { SearchResultComponent } from './Visitor/SearchResult/SearchResult.compo
       ModalUserComponent,
       ArticleFormComponent,
       SearchResultComponent,
-      TruncatePipe,
-      
+      TruncatePipe,      
    ],
   imports: [
     BrowserModule,

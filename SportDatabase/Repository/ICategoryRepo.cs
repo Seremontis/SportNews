@@ -13,6 +13,7 @@ namespace SportDatabase.Repository
         Task MoveUp(int id);
         Task MoveDown(int id);
 
+        Task<IEnumerable<WCategory>> Get(int idCategory);
         Task<IEnumerable<WCategory>> GetView();
         //Task AddCategory(Category category);
     }

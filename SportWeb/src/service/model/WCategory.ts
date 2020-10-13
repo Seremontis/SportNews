@@ -4,4 +4,5 @@ export interface WCategory {
     sortField: number;
     userModified: string;
     lastModified: Date;
+    aboveCategory: number;
 }

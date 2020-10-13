@@ -7,6 +7,7 @@ import { AccessData } from 'src/service/AccessData';
 import { BarVisitorComponent } from '../barVisitor/barVisitor.component';
 import { DarkMode } from 'src/service/DarkMode';
 import { Router } from '@angular/router';
+import { ApiVisitorService } from 'src/service/ApiVisitorService';
 
 @Component({
   selector: 'app-menu',
@@ -18,7 +19,7 @@ export class MenuComponent implements OnInit {
   @ViewChildren('li') elements: QueryList<any>;
   CategoryList:WCategory[];
   private readonly loading:Loading=new Loading();
-  constructor(private apiSevice: ApiService,private accessData: AccessData, 
+  constructor(private apiSevice: ApiVisitorService,private accessData: AccessData, 
     private route:Router,private mode:DarkMode) {
    this.LoadCategory();
  

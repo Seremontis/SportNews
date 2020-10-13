@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { WFullArticle } from './model/WFullArticle';
 import { WListArticle } from './model/WListArticle';
 import { IModelKeyword } from './model/IModelKeyword';
+import { WCategory } from './model/WCategory';
 
 @Injectable({
     providedIn: 'root'
@@ -42,5 +43,9 @@ export class ApiVisitorService {
 
     GetSearch(keywords:IModelKeyword): Observable<WListArticle[]>{        
         return this.http.post<WListArticle[]>(this.rootURL + 'GetSearcher', JSON.stringify(keywords), this.httpOptions);
+    }
+
+    GetCategory(categoryId=null): Observable<WCategory[]>{
+            return this.http.get<WCategory[]>(this.rootURL + 'GetCategories');
     }
 }

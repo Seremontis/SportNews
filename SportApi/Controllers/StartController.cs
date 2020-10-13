@@ -94,13 +94,16 @@ namespace SportApi.Controllers
             }
         }      
         [HttpGet]
-        [Route("GetCategories")]
+        [Route("GetCategories/{id?}")]
         [AllowAnonymous]
-        public async Task<List<Category>> GetCategories()
+        public async Task<IEnumerable<WCategory>> GetCategories(int? idCategory=null)
         {
             try
             {
-                return await _unitOfWork.IRepoCategory.Get();
+                if (idCategory == null || idCategory == 0)
+                    return await _unitOfWork.IRepoCategory.GetView();
+                else
+                    return await _unitOfWork.IRepoCategory.Get((int)idCategory);
             }
             catch (Exception)
             {

@@ -27,17 +27,7 @@ const routes: Routes = [
       },   
       {
         path: 'categories/:id',
-        component: CategoriesComponent,
-        children:[
-          {
-            path:'./categories/:id',
-            component:CategoriesComponent
-          },
-          {
-            path: './article/:id',
-            component: ArticleComponent
-          }
-        ]
+        component: CategoriesComponent,      
       },  
       {
         path: 'search',

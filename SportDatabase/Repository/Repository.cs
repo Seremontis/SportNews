@@ -32,6 +32,10 @@ namespace SportDatabase.Repository
         {
             await _SportNewsContext.Set<T>().AddAsync(model);
         }
+        public async Task<T> Get(int id)
+        {
+            return await _SportNewsContext.Set<T>().FindAsync((object)id);
+        }
 
         public async Task Delete(int id)
         {
@@ -51,11 +55,6 @@ namespace SportDatabase.Repository
         public async Task<List<T>> Get()
         {
             return await _SportNewsContext.Set<T>().ToListAsync();
-        }
-
-        public async Task<T> Get(int id)
-        {
-            return await _SportNewsContext.Set<T>().FindAsync((object)id);
         }
 
         public void Update(T model)

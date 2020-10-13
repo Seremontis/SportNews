@@ -10,6 +10,11 @@ body {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
 }
 
 .FullContainer {
@@ -106,7 +111,7 @@ body {
   }
   nav.visitor {
     height: 100vh;
-    width: 100vw;
+    /*width: 100vw;*/
     background: #232121;
     visibility: hidden;
     z-index: 1000;
@@ -124,6 +129,7 @@ body {
 }
 
 /*dark mode*/
+
 .darkbackground {
   background: black !important;
   border: 1px solid yellow !important;
@@ -159,6 +165,10 @@ body {
   border-bottom: 1px solid yellow !important;
 }
 
+.BgAndFont{
+  background: black !important;
+  color: white;
+}
 /*Size text*/
 
 .largetext {

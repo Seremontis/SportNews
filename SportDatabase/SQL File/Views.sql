@@ -26,7 +26,7 @@ GO
 
 CREATE OR ALTER VIEW WCategory
 AS
-SELECT C.CategoryId,C.Name,C.SortField,(U.FirstName+' '+U.LastName) as UserModified,C.LastModified
+SELECT C.CategoryId,C.Name,C.SortField,(U.FirstName+' '+U.LastName) as UserModified,C.LastModified,AboveCategory
 FROM Categories C
 LEFT JOIN Users U ON C.UserModified=U.UserId
 GO

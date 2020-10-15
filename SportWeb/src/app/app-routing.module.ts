@@ -10,6 +10,7 @@ import { UserHomeComponent } from './User/user-home/user-home.component';
 import {ArticleFormComponent } from './User/articleForm/articleForm.component'
 import {EditTableComponent} from './User/editTable/editTable.component';
 import {SearchResultComponent} from './Visitor/SearchResult/SearchResult.component';
+import {MapSiteComponent} from 'src/app/Visitor/MapSite/MapSite.component'
 
 const routes: Routes = [
   {
@@ -34,9 +35,12 @@ const routes: Routes = [
         component: SearchResultComponent
       } ,
       {
-        path: './article/:id',
-        component: ArticleComponent,
-        data: { breadCrumb: "Artykuł"},
+        path: 'article/:id',
+        component: ArticleComponent,      
+      },
+      {
+        path: 'mapsite',
+        component: MapSiteComponent,
       }
     ]
   },

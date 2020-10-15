@@ -58,6 +58,7 @@ export class MenuComponent implements OnInit {
         document.querySelector('.mainBar').appendChild(nav);
         nav.style.height='0';
         nav.style.minHeight='auto'
+        nav.style.visibility='hidden';
         //appMenu.removeChild(nav);
       }
     }
@@ -70,6 +71,7 @@ export class MenuComponent implements OnInit {
       appMenu.insertBefore(nav,communityElement);
       nav.style.height='auto';
       nav.style.minHeight='auto';
+      nav.style.visibility='visible';
     }
   }
 

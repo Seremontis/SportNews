@@ -44,15 +44,15 @@ export class BarVisitorComponent implements OnInit {
     let visitorNav=<HTMLElement>document.querySelector('.visitor');
     if (this.model) {
       visitorNav.style.visibility = 'visible';
-      visitorNav.style.overflow='auto';
-      document.body.style.overflow='hidden';
+      //visitorNav.style.overflow='auto';
+      //document.body.style.overflow='hidden';
       bar.style.minHeight='100vh';
       visitorNav.style.minHeight='100%';
       visitorNav.style.height='auto';
     }
     else {
       (<HTMLElement>document.querySelector('.visitor')).style.visibility = 'hidden';
-      document.body.style.overflow='auto';
+      //document.body.style.overflow='auto';
       visitorNav.style.height='0';
       visitorNav.style.minHeight='auto';
       bar.style.minHeight='auto';

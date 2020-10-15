@@ -11,7 +11,6 @@ import { DarkMode } from 'src/service/DarkMode';
 import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
 import { Location } from '@angular/common';
 import { WCategory } from 'src/service/model/WCategory';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare var $: any;
 

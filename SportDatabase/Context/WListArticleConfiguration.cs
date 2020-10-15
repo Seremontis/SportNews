@@ -11,7 +11,6 @@ namespace SportDatabase.Context
     {
         public void Configure(EntityTypeBuilder<WListArticle> entity)
         {
-            entity.HasNoKey();
 
             entity.ToView("WListArticles");
 

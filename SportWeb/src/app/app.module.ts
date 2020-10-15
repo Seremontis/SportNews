@@ -26,6 +26,7 @@ import {ModalUserComponent} from 'src/app/User/ModalUser/ModalUser.component';
 import { ArticleComponent } from './Visitor/article/article.component';
 import {TruncatePipe} from '../service/TruncatePipe'
 import { SearchResultComponent } from './Visitor/SearchResult/SearchResult.component';
+import { MapSiteComponent } from './Visitor/MapSite/MapSite.component';
 
 @NgModule({
   declarations: [	
@@ -48,6 +49,7 @@ import { SearchResultComponent } from './Visitor/SearchResult/SearchResult.compo
       ArticleFormComponent,
       SearchResultComponent,
       TruncatePipe,      
+      MapSiteComponent,
    ],
   imports: [
     BrowserModule,

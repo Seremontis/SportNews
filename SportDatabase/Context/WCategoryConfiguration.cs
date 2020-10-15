@@ -11,8 +11,6 @@ namespace SportDatabase.Context
     {
         public void Configure(EntityTypeBuilder<WCategory> entity)
         {
-            entity.HasNoKey();
-
             entity.ToView("WCategory");
 
             entity.Property(e => e.Name).IsUnicode(false);

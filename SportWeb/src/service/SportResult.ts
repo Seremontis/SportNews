@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { RootObject as FootballApiModel } from 'src/service/model/ResultPageApiFootball'
 import { RootObject as BasketballApiModel } from 'src/service/model/AllSportApiModel'
 import { RootObject as TennisApi } from 'src/service/model/RapidTennisModelApi'
-import { IModelKeyword } from './model/IModelKeyword';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -46,6 +46,7 @@ export class SportResult {
 
     async GetBasketballResult() {
         let endDate = new Date();
+        endDate.setDate(endDate.getDate()-1)
         let startDate=new Date();
         startDate.setDate(endDate.getDate()-14)
         let url = 'https://allsportsapi.com/api/basketball/?met=Fixtures&APIkey='+this.basketballApi+'&from='+this.formatDate(startDate)+'&to='+this.formatDate(endDate);

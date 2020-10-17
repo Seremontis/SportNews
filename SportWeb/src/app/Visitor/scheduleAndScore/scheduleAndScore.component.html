@@ -2,8 +2,7 @@
   <div class="menuSchedule">
     <button (click)="SelectedResultFootbal()">Piłka nożna</button>
     <button (click)="SelectedResultBasketball()">Koszykówka</button>
-    <button>Tenis</button>
-    <button>Siatkówka</button>
+    <button (click)="SelectedResultTennis()">Tenis</button>
   </div>
   <div class="scheduleAndResult" *ngIf='CheckListFill()'>
     <div class="result" *ngFor="let item of returnPastlList() | slice:0:5">

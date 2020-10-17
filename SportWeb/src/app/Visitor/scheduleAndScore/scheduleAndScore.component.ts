@@ -26,6 +26,7 @@ export class ScheduleAndScoreComponent implements OnInit {
           this.SelectedResultBasketball();
           break;
         case '3':
+          this.SelectedResultTennis();
           break;
         case '4':
           break;
@@ -51,7 +52,7 @@ export class ScheduleAndScoreComponent implements OnInit {
   }
 
   SelectedResultBasketball() {
-    /*
+    
     if (localStorage.getItem('SportChoose')) {
       if (localStorage.getItem('SportChoose') != '2' || (!this.pastlist)) {
         this.pastlist = [];
@@ -62,9 +63,21 @@ export class ScheduleAndScoreComponent implements OnInit {
         localStorage.setItem('SportChoose', '2')
 
       }
-    }*/
+    }
   }
+  SelectedResultTennis(){
+    if (localStorage.getItem('SportChoose')) {
+      if (localStorage.getItem('SportChoose') != '3' || (!this.pastlist)) {
+        this.pastlist = [];
+        this.nextlist = []
+        this.sportApi.GetBasketballResult().then(resp => {
+          this.pastlist = resp;
+        });
+        localStorage.setItem('SportChoose', '3')
 
+      }
+    }
+  }
 
   CheckListFill() {
     if (this.pastlist.length > 0)

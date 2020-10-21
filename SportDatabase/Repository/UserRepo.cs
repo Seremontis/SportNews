@@ -19,6 +19,14 @@ namespace SportDatabase.Repository
         {
 
         }
+
+        public async Task<User> CheckUser(User user)
+        {
+            return await _SportNewsContext.Users
+                .Where(x=> x.Login==user.Login 
+                    && x.Password==user.Password 
+                    && (x.PasswordExpired>DateTime.Now || x.PasswordExpired==null)).FirstOrDefaultAsync();
+        }
         public async Task<WUser> Get(int id)
         {
             return await _SportNewsContext.WUsers.FindAsync((object)id);

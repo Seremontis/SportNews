@@ -23,13 +23,14 @@ Create table Users(
 [FirstName] varchar(50),
 [LastName] varchar(80),
 [Login] varchar(50),
-[Password] binary(64),
+[Password] nvarchar(max),
 [PasswordExpired] datetime,
 [RoleId] int,
 [UserModified] int ,
 [LastModified] datetime
 )
 go
+
 
 Create table Categories(
 [CategoryId] int identity(1,1) primary key,

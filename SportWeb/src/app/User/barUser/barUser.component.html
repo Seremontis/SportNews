@@ -2,7 +2,7 @@
   <div class="logAndMap">
     <span>{{userName}}</span>
     <div class="line"></div>
-    <a routerLink="../home">Wyloguj się</a>
+    <a (click)="LogOut()" class="colorA">Wyloguj się</a>
   </div>
   <div class="menuToggle">
     <button class="hamburger float-right" type="button" [(ngModel)] = "model" ngDefaultControl (click)="showHideMenu()">

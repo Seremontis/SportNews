@@ -10,7 +10,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic;
 using SportApi.Model;
+using SportDatabase.Context;
+using SportDatabase.Interface;
+using SportDatabase.Repository;
 
 namespace SportApi.Controllers
 {
@@ -19,51 +23,64 @@ namespace SportApi.Controllers
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _config;
+        private readonly IUnitOfWork unitOfWork;
+        private GenericOperation genericOperation;
+
         private List<User> users = new List<User>()
         {
             new User()
         {
-            UserName = "test",
+            Login = "test",
             //Password = Encoding.UTF8.GetBytes("test"),
-            Password="test",
+            //Password="test",
             Role = "SuperAdmin",
             UserType = string.Empty
         },
         new User()
         {
-            UserName = "test2",
+            Login = "test2",
             //Password = Encoding.UTF8.GetBytes("test"),
-            Password = "test",
+            //Password = "test",
             Role = "CustomJournalist",
             UserType = string.Empty
         }
     };
 
-        public LoginController(IConfiguration config)
+        public LoginController(IConfiguration config, SportNewsContext sportNewsContext)
         {
             _config = config;
+            this.unitOfWork = new UnitOfWork(sportNewsContext);
+            this.genericOperation = new GenericOperation((UnitOfWork)unitOfWork);
         }
 
 
         [HttpPost]
         [AllowAnonymous]
         [Route("")]
-        public IActionResult Login([FromBody]User login)
+        public async Task<IActionResult> Login([FromBody]User login)
         {
             IActionResult response = Unauthorized();
-            User user = users.Where(x=>x.UserName==login.UserName && x.Password==login.Password).FirstOrDefault();//tutaj sporawdzanie z bazy
-            if (user!=null){
-
+            SportDatabase.Model.User userCheck = new SportDatabase.Model.User()
+            {
+                Login = login.Login,
+                Password = login.Password
+            };
+            userCheck = await unitOfWork.IRepoUser.CheckUser(userCheck);
+            if (userCheck != null){
+                login.Password = null;
+                login.Login = userCheck.UserId.ToString();
+                login.Role = userCheck.RoleId.ToString();
+                //login.UserType=userCheck.
                 try
                 {
-                    var token = GenerateJWT(user);
+                    var token = GenerateJWT(login);
                     response = Ok(new
                     {
                         token = token,
-                        userDetail = user
+                        userDetail = login
                     });
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     throw;
                 }
@@ -79,10 +96,10 @@ namespace SportApi.Controllers
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userInfo.UserName),
-                new Claim("firstName", userInfo.UserName.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, userInfo.Login),
+                new Claim("firstName", userInfo.Login.ToString()),
                 new Claim("role",userInfo.Role),
-                new Claim("usertype",userInfo.UserType),
+                new Claim("usertype",userInfo.UserType??string.Empty),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 

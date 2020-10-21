@@ -21,8 +21,7 @@ namespace SportDatabase.Model
         public string LastName { get; set; }
         [StringLength(50)]
         public string Login { get; set; }
-        [MaxLength(64)]
-        public byte[] Password { get; set; }
+        public string Password { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? PasswordExpired { get; set; }
         public int? RoleId { get; set; }

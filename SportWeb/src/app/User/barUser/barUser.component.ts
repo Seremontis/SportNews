@@ -28,4 +28,8 @@ export class BarUserComponent implements OnInit {
     }
     this.model=!this.model;
   }
+  LogOut(){
+    localStorage.removeItem('tokenLogin');
+    window.location.href='/';
+  }
 }

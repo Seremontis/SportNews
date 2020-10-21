@@ -7,6 +7,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { Article } from './model/Article';
 import { WUser } from './model/WUser';
 import { WListArticle } from './model/WListArticle';
+import { IUser } from './model/Iuser';
+import {IModelAuth} from './model/ImodelAuth'
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +26,10 @@ export class ApiService {
 
 
     constructor(private http: HttpClient) { }
+
+    CheckLoggin(user:IUser){
+        return this.http.post<IModelAuth>('http://localhost:62939/Login', user, this.httpOptions);
+    }
 
     GetCategory(number:number=0): Observable<WCategory[]> {
         if(number==0)

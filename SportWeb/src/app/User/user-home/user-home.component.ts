@@ -174,5 +174,6 @@ export class UserHomeComponent implements OnInit {
 			return event;
 		}
   }
+  
 
 }

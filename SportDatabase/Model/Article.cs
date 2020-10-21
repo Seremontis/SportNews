@@ -24,8 +24,8 @@ namespace SportDatabase.Model
         public string SourcePicture { get; set; }
         [Column(TypeName = "text")]
         public string ShortArticle { get; set; }
-        [Column("Article", TypeName = "text")]
-        public string Article1 { get; set; }
+        [Column("FullArticle", TypeName = "text")]
+        public string FullArticle { get; set; }
         [StringLength(100)]
         public string Keywords { get; set; }
         [Column(TypeName = "date")]

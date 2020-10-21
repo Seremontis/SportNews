@@ -208,3 +208,15 @@ body {
     display: block;
   }
 }
+
+/*ModalArticle*/
+@media (min-width: 576px){
+  .modal-modalCustom{
+    widows: 60%!important;
+    max-width:60%!important;
+  }
+}
+.modal-modalCustom{
+  width:60%!important;
+  max-width:60%!important;
+}

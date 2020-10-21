@@ -60,7 +60,7 @@ Create table Articles(
 [DescritpionPicture] nvarchar(300),
 [SourcePicture] nvarchar(100),
 [ShortArticle] text,
-[Article] text,
+[FullArticle] text,
 [Keywords] nchar(100),
 [PublicationTime] date not null,
 [CategoryId] int,
@@ -68,7 +68,6 @@ Create table Articles(
 [LastModified] datetime not null
 )
 go
-
 
 Create table LogExceptions(
 [LogExceptionId] int identity(1,1) primary key,

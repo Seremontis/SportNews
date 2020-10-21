@@ -2,7 +2,7 @@
   <div class="form-group row ">
     <div class="col-md-12 text-right">
       <button type="submit" class="btn btn-success btn-lg">Zatwiedź</button>
-      <button (click) = "LoadArticle(articleModel)" class="btn btn-primary btn-lg">Podgląd</button>
+      <a (click) = "openFormModal(articleModel)" class="btn btn-primary btn-lg">Podgląd</a>
     </div>
   </div>
   <div class="form-group row">
@@ -45,13 +45,13 @@
     <div class="col-md-10"></div>
   </div>
   <div class="form-group bgAreaColor">
-   <angular-editor [(ngModel)] = "article.fullArticle" name="article" [config]="config"></angular-editor>
+   <angular-editor [(ngModel)] = "article.fullArticle" name="fullArticle" [config]="config"></angular-editor>
   </div>
   <hr/>
   <div class="form-group row">
     <div class="col-md-12 text-center">
       <button type="submit" class="btn btn-success btn-lg">Zatwiedź</button>
-      <button (click) = "LoadArticle(articleModel)" class="btn btn-primary btn-lg">Podgląd</button>
+      <a (click) = "openFormModal(articleModel)" class="btn btn-primary btn-lg">Podgląd</a>
     </div>
   </div>
 </form>

@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<article>
+  <header>
+    <h1>{{article?.title}}</h1>
+    <hr />
+    <h6>Nie zatwierdzono redaktora i daty</h6>
+  </header>
+  <section class="shortArticle">{{article?.shortArticle}} </section>
+  <figure>
+    <img src = "{{article?.picture}}" alt = "{{article?.descritpionPicture}}"/>
+    <figcaption>Źródło obrazka</figcaption>
+  </figure>
+  <section class="fullArticle">{{article?.fullArticle}}</section>
+</article>

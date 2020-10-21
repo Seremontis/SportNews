@@ -7,7 +7,6 @@
   <nav class="visitor" id="menuPage">
     <ul class="navOption nav flex-column">
       <li #li class="active" *ngFor="let element of CategoryList">
-        <i class="fas fa-info-circle"></i>
         <a [routerLink]="['./categories', element.categoryId]">{{element.name}}
         </a>
       </li>

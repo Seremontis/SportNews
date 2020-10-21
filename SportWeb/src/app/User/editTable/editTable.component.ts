@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/service/ApiService'
 import { WCategory } from 'src/service/model/WCategory';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalUserComponent } from 'src/app/User/ModalUser/ModalUser.component';
+import { ModalCategoryEditComponent } from 'src/app/User/ModalCategoryEdit/ModalCategoryEdit.component';
 import { UserHomeComponent } from '../user-home/user-home.component';
 import { Category } from 'src/service/model/Category';
 import { WUser } from 'src/service/model/WUser';
@@ -53,16 +53,14 @@ export class EditTableComponent implements OnInit {
   }
 
   openFormModal(data) {
-    const modalRef = this.modalService.open(ModalUserComponent);
+    const modalRef = this.modalService.open(ModalCategoryEditComponent);
     modalRef.componentInstance.id = 10; // should be the id
     modalRef.componentInstance.category = data;
+    modalRef.componentInstance.CategoryList = this.CategoryList;
     modalRef.result.then((result: Category) => {
       console.log(result);
       result.userModified = 0;       ///replace after
       this.UpdateCategory(result)
-
-
-
     }).catch((error) => {
       console.log(error);
     });
@@ -84,6 +82,14 @@ export class EditTableComponent implements OnInit {
       () => {
         console.info('Request completed')      //This is actually not needed 
       });
+  }
+
+  FillTrueAndFalse(numb){
+    if(numb){
+      if(numb>0)
+        return "Tak";
+    }
+    return "Nie";
   }
 
   AddCategoryForm(data) {

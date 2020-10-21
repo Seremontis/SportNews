@@ -1,13 +1,12 @@
 <div class="stickyMenu" (window:resize)="onResize($event)">
   <header>
-    <a routerLink="/home">
+    <a routerLink="/user">
       <img class="imgLogo" src="assets/logo.png" alt="Logo serwisu sportowego" />
     </a>
   </header>
   <nav class="user">
     <ul class="navOption nav flex-column">
       <li class="active" *ngFor="let element of AdminArray">
-        <i class="fas fa-info-circle"></i>
         <a [routerLink] = "[element.url, element.queryParams]">{{element.text}}         
         </a>
       </li>

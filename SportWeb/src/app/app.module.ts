@@ -22,11 +22,12 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
-import {ModalUserComponent} from 'src/app/User/ModalUser/ModalUser.component';
+import {ModalCategoryEditComponent} from 'src/app/User/ModalCategoryEdit/ModalCategoryEdit.component';
 import { ArticleComponent } from './Visitor/article/article.component';
 import {TruncatePipe} from '../service/TruncatePipe'
 import { SearchResultComponent } from './Visitor/SearchResult/SearchResult.component';
 import { MapSiteComponent } from './Visitor/MapSite/MapSite.component';
+import {ModalViewComponent} from './User/ModalView/ModalView.component'
 
 @NgModule({
   declarations: [	
@@ -45,11 +46,12 @@ import { MapSiteComponent } from './Visitor/MapSite/MapSite.component';
       MenuUserComponent,
       ArticleComponent,
       EditTableComponent,
-      ModalUserComponent,
+      ModalCategoryEditComponent,
       ArticleFormComponent,
       SearchResultComponent,
       TruncatePipe,      
       MapSiteComponent,
+      ModalViewComponent
    ],
   imports: [
     BrowserModule,
@@ -64,6 +66,6 @@ import { MapSiteComponent } from './Visitor/MapSite/MapSite.component';
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
-  entryComponents:[ModalUserComponent]
+  entryComponents:[ModalCategoryEditComponent]
 })
 export class AppModule { }

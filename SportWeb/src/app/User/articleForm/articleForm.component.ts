@@ -5,7 +5,8 @@ import { ApiService } from 'src/service/ApiService';
 import { Article} from 'src/service/model/Article';
 import { WCategory } from 'src/service/model/WCategory';
 import { ActivatedRoute } from '@angular/router';
-import { flatten } from '@angular/compiler';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalViewComponent } from '../ModalView/ModalView.component';
 
 @Component({
   selector: 'app-articleForm',
@@ -19,11 +20,10 @@ export class ArticleFormComponent implements OnInit {
   categoryList:WCategory[];
   selectedOption:number;
   article:  Article=new  Article();
-  model:Article;
   articleid:number=0;
   addOrUpdateFlag:boolean=true;
 
-  constructor( public service: ApiService,private route: ActivatedRoute) { 
+  constructor( public service: ApiService,private route: ActivatedRoute,private modalService: NgbModal) { 
     this.LoadCategory(0)
     this.route.params.subscribe( params => {
       this.articleid=Number(params.id);
@@ -37,7 +37,32 @@ export class ArticleFormComponent implements OnInit {
 
   ngOnInit() {
   }
+ 
 
+  openFormModal(data) {
+    const modalRef = this.modalService.open(ModalViewComponent, {size: 'modalCustom',});
+
+    modalRef.componentInstance.article = this.checkModel(data.value);
+    //modalRef.componentInstance.categoryName=this.categoryList.filter(x=>x.categoryId==this.article.categoryId);
+    modalRef.result.then((result: Article) => {
+      console.log(result);
+
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+
+  checkModel(value){
+    this.article.title=value.title;
+    this.article.categoryId=value.categoryId;
+    this.article.keywords=value.keywords;
+    this.article.shortArticle=value.shortArticle;
+    this.article.picture=value.picture;
+    this.article.fullArticle=value.fullArticle;
+
+    return this.article;
+  }
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,

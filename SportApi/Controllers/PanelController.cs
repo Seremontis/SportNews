@@ -93,7 +93,7 @@ namespace SportApi.Controllers
 
         [Route("GetWUser/{pageid}")]
         [HttpGet]
-        //[Authorize(Roles = Policies.AllAdmin)]
+        [Authorize(Roles = Policies.AllAdmin)]
         public async Task<List<WUser>> GetWUser(int pageid)
         {
             try
@@ -109,7 +109,7 @@ namespace SportApi.Controllers
         [Route("AddUser")]
         //[ValidateModel]
         [HttpPost]
-        //[Authorize(Roles = Policies.AllAdmin)]
+        [Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> AddUser([FromBody] SportDatabase.Model.User user)
         {
 
@@ -120,7 +120,7 @@ namespace SportApi.Controllers
         [Route("AddArticle")]
         //[ValidateModel]
         [HttpPost]
-        //[Authorize(Roles = Policies.AllAdmin)]
+        [Authorize(Roles = Policies.AllWithoutAdmin)]
         public async Task<HttpResponseMessage> AddArticle([FromBody] SportDatabase.Model.Article article)
         {
             article.LastModified = DateTime.Now;
@@ -132,7 +132,7 @@ namespace SportApi.Controllers
         [Route("UpdateArticle")]
         //[ValidateModel]
         [HttpPut]
-        //[Authorize(Roles = Policies.AllAdmin)]
+        [Authorize(Roles = Policies.AllWithoutAdmin)]
         public async Task<HttpResponseMessage> UpdateUser([FromBody] SportDatabase.Model.Article article)
         {
             article.LastModified = DateTime.Now;
@@ -163,7 +163,7 @@ namespace SportApi.Controllers
         [Route("AddCategory")]
         //[ValidateModel]
         [HttpPost]
-        //[Authorize(Roles = Policies.AllAdmin)]
+        [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> AddCategory([FromBody] Category category)
         {
             sendOperation = async()=>
@@ -176,7 +176,7 @@ namespace SportApi.Controllers
         [Route("UpdateCategory")]
         //[ValidateModel]
         [HttpPut]
-        //[Authorize(Roles = Policies.AllAdmin)]
+        [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> UpdateCategory([FromBody] Category categories)
         {
             sendOperation = async() =>
@@ -189,7 +189,7 @@ namespace SportApi.Controllers
 
         [Route("DeleteCategory/{id}")]
         [HttpDelete]
-        //[Authorize(Roles = Policies.AllAdmin)]
+        [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> DeleteCategory(int id)
         {
             sendOperation = async () => { await unitOfWork.IRepoCategory.Delete(id); };
@@ -198,7 +198,7 @@ namespace SportApi.Controllers
 
         [Route("GetCategory")]
         [HttpGet]
-        //[Authorize(Roles = Policies.All)]
+        [Authorize(Roles = Policies.All)]
         public async Task<IEnumerable<WCategory>> GetCategory()     //parameter id and return category from Table permission
         {
             try
@@ -214,7 +214,7 @@ namespace SportApi.Controllers
 
         [Route("MoveUpCategory")]
         [HttpPut]
-        //[Authorize(Roles = Policies.All)]
+        [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> MoveUpCategory([FromBody]int id)
         {
             sendOperation = async () =>
@@ -225,7 +225,7 @@ namespace SportApi.Controllers
         }
         [Route("MoveDownCategory")]
         [HttpPut]
-        //[Authorize(Roles = Policies.All)]
+        [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> MoveDowCategory(int id)
         {
             sendOperation = async () =>

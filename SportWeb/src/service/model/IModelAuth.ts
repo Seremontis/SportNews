@@ -1,5 +1,5 @@
-import {IUser} from './IUser'
+import {ITokenData} from './ITokenData'
 export interface IModelAuth {
     token:string;
-    model: IUser;
+    userDetail: ITokenData;
 }

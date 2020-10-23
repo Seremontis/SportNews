@@ -33,16 +33,16 @@ namespace SportApi.Controllers
             Login = "test",
             //Password = Encoding.UTF8.GetBytes("test"),
             //Password="test",
-            Role = "SuperAdmin",
-            UserType = string.Empty
+            Role = 1,//"SuperAdmin",
+            UserType = 0
         },
         new User()
         {
             Login = "test2",
             //Password = Encoding.UTF8.GetBytes("test"),
             //Password = "test",
-            Role = "CustomJournalist",
-            UserType = string.Empty
+            Role = 3,//"CustomJournalist",
+            UserType = 0
         }
     };
 
@@ -67,17 +67,19 @@ namespace SportApi.Controllers
             };
             userCheck = await unitOfWork.IRepoUser.CheckUser(userCheck);
             if (userCheck != null){
-                login.Password = null;
-                login.Login = userCheck.UserId.ToString();
-                login.Role = userCheck.RoleId.ToString();
-                //login.UserType=userCheck.
+                TokenData data = new TokenData()
+                {
+                    IdUser = userCheck.UserId,
+                    Role = userCheck.RoleId ?? 0,
+                };
+
                 try
                 {
-                    var token = GenerateJWT(login);
+                    var token = GenerateJWT(data);
                     response = Ok(new
                     {
                         token = token,
-                        userDetail = login
+                        userDetail = data
                     });
                 }
                 catch (Exception ex)
@@ -89,17 +91,18 @@ namespace SportApi.Controllers
             return response;
         }
 
-        private string GenerateJWT(User userInfo)
+        public string GenerateJWT(TokenData data)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+            
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userInfo.Login),
-                new Claim("firstName", userInfo.Login.ToString()),
-                new Claim("role",userInfo.Role),
-                new Claim("usertype",userInfo.UserType??string.Empty),
+                new Claim(JwtRegisteredClaimNames.Sub, data.IdUser.ToString()),
+                new Claim("loginId", data.IdUser.ToString()),
+                new Claim("role",((EnumPolicy)data.Role).ToString()),
+                new Claim("usertype",data.UserType??string.Empty),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
@@ -107,7 +110,7 @@ namespace SportApi.Controllers
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(60),
+                expires: DateTime.Now.AddMinutes(20),
                 signingCredentials: credentials
             );
             return new JwtSecurityTokenHandler().WriteToken(token);

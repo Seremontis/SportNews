@@ -18,27 +18,31 @@ import {IModelAuth} from './model/ImodelAuth'
 //refreshing add, regular check to api if change table - optional
 export class ApiService {
     readonly rootURL = 'http://localhost:62939/panel/';
-    readonly httpOptions = {
-        headers: new HttpHeaders({
+
+
+    constructor(private http: HttpClient) {
+     }
+
+    GetHeader(){
+        let headers = new HttpHeaders({
             'Content-Type': 'application/json',
-        })
-    };
-
-
-    constructor(private http: HttpClient) { }
-
+            'Authorization': 'Bearer '+localStorage.getItem('tokenLogin')??'' });
+        let options = { headers: headers };
+        return options
+    }
     CheckLoggin(user:IUser){
-        return this.http.post<IModelAuth>('http://localhost:62939/Login', user, this.httpOptions);
+        return this.http.post<any>('http://localhost:62939/Login', user);
     }
 
+   
     GetCategory(number:number=0): Observable<WCategory[]> {
         if(number==0)
-            return this.http.get<WCategory[]>(this.rootURL + 'GetCategory/');
+            return this.http.get<WCategory[]>(this.rootURL + 'GetCategory/',this.GetHeader());
         else
-            return this.http.get<WCategory[]>(this.rootURL + 'GetCategory/'+number);
+            return this.http.get<WCategory[]>(this.rootURL + 'GetCategory/'+number,this.GetHeader());
     }
 
-    AddCategory(nameCategory: string,userId:number): Observable<any> {
+    AddCategory(nameCategory: string,userId:number): Observable<any> {    
         let model: Category = {
             categoryId: 0,
             name: nameCategory,
@@ -48,48 +52,48 @@ export class ApiService {
         };
         let data = JSON.stringify(model);
 
-        return this.http.post(this.rootURL + 'AddCategory', data, this.httpOptions);
+        return this.http.post(this.rootURL + 'AddCategory', data, this.GetHeader());
     }
 
-    MoveUpCategory(id:number):Observable<any>{
-        return this.http.put(this.rootURL + 'MoveUpCategory', JSON.stringify(id), this.httpOptions);
+    MoveUpCategory(id:number):Observable<any>{   
+        return this.http.put(this.rootURL + 'MoveUpCategory', JSON.stringify(id), this.GetHeader());
     }
 
     MoveDownCategory(id:number):Observable<any>{
-        return this.http.put(this.rootURL + 'MoveDownCategory', JSON.stringify(id), this.httpOptions);
+        return this.http.put(this.rootURL + 'MoveDownCategory', JSON.stringify(id), this.GetHeader());
     }
 
     DeleteCategory(id:number): Observable<any>{
-        return this.http.delete(this.rootURL + 'DeleteCategory/'+id);
+        return this.http.delete(this.rootURL + 'DeleteCategory/'+id,this.GetHeader());
     }
 
     UpdateCategory(category:Category):Observable<Category>{
-        return this.http.put<Category>(this.rootURL + 'UpdateCategory', JSON.stringify(category),this.httpOptions)
+        return this.http.put<Category>(this.rootURL + 'UpdateCategory', JSON.stringify(category),this.GetHeader())
     }
 
     GetArticle(id:number):Observable<Article>{
-        return this.http.get<Article>(this.rootURL + 'GetArticle/'+id);
+        return this.http.get<Article>(this.rootURL + 'GetArticle/'+id,this.GetHeader());
     }
 
     AddArticle(model: Article,userId:number): Observable<any> {
         let data = JSON.stringify(model);
-        return this.http.post(this.rootURL + 'AddArticle', data, this.httpOptions);
+        return this.http.post(this.rootURL + 'AddArticle', data, this.GetHeader());
     }
 
     DeleteArticle(id:number): Observable<any>{
-        return this.http.delete(this.rootURL + 'DeleteArticle/'+id);
+        return this.http.delete(this.rootURL + 'DeleteArticle/'+id,this.GetHeader());
     }
 
     UpdateArticle(category:Category):Observable<Category>{
-        return this.http.put<Category>(this.rootURL + 'UpdateArticle', JSON.stringify(category),this.httpOptions)
+        return this.http.put<Category>(this.rootURL + 'UpdateArticle', JSON.stringify(category),this.GetHeader())
     }
 
     GetUsers(page:number): Observable<WUser[]>{
-        return this.http.get<WUser[]>(this.rootURL + 'GetWUser/'+page);
+        return this.http.get<WUser[]>(this.rootURL + 'GetWUser/'+page,this.GetHeader());
     }
 
     GetListArticle(page:number): Observable<WListArticle[]>{
-        return this.http.get<WListArticle[]>(this.rootURL + 'GetListArticle/'+page);
+        return this.http.get<WListArticle[]>(this.rootURL + 'GetListArticle/'+page,this.GetHeader());
     }
 
 

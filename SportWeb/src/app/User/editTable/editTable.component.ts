@@ -77,7 +77,11 @@ export class EditTableComponent implements OnInit {
       (error) => {
         this.isLoading = false;
         this.isError = true;                           //error() callback
-        console.error('Request failed with error')
+        console.log('Request failed with error')
+        if(error.status == 401){
+          alert('Brak uprawnień')
+          window.location.href='/login'
+        }
       },
       () => {
         console.info('Request completed')      //This is actually not needed 

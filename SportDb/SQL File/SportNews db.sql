@@ -56,8 +56,7 @@ Create table Articles(
 [ArticleId] int identity(1,1) primary key,
 [AuthorId] int ,
 [Title] text not null,
-[SmallPicture] binary,
-[Picture] nchar(300), 
+[Picture] varchar(max), 
 [DescritpionPicture] nvarchar(300),
 [SourcePicture] nvarchar(100),
 [ShortArticle] text,
@@ -69,6 +68,7 @@ Create table Articles(
 [LastModified] datetime not null
 )
 go
+
 
 Create table LogExceptions(
 [LogExceptionId] int identity(1,1) primary key,

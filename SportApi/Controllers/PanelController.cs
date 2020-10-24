@@ -16,6 +16,8 @@ using SportDatabase.Context;
 using SportDatabase.Interface;
 using SportDatabase.Model;
 using SportDatabase.Repository;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Primitives;
 
 namespace SportApi.Controllers
 {
@@ -39,7 +41,7 @@ namespace SportApi.Controllers
 
         [Route("")]
         [HttpGet]
-        [Authorize(Roles = Policies.All)] 
+        [Authorize(Roles = Policies.All)]
         public string Start()
         {
             return "Witaj w panelu użytkownika";
@@ -47,7 +49,7 @@ namespace SportApi.Controllers
 
         [Route("GetArticle/{id}")]
         [HttpGet]
-        //[Authorize(Roles = Policies.AllAdmin)]
+        [Authorize(Roles = Policies.AllWithoutAdmin)]
         public async Task<Article> GetArticle(int id)
         {
             try
@@ -62,27 +64,29 @@ namespace SportApi.Controllers
 
         [Route("GetListArticle/{pageId}")]
         [HttpGet]
-        //[Authorize(Roles = Policies.AllAdmin)]
+        [Authorize(Roles = Policies.AllWithoutAdmin)]
         public async Task<IEnumerable<WListArticle>> GetListArticle(int pageId)
         {
             try
             {
-                return await unitOfWork.IRepoArticle.GetListArticles(pageId);               
+                return await unitOfWork.IRepoArticle.GetListArticles(pageId);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
         }
 
-        [Route("GetUser/{id}")]
+        [Route("GetUser")]
         [HttpGet]
-        [Authorize(Roles=Policies.AllAdmin)]
-        public async Task<WUser> GetUser(int id)
+        [Authorize(Roles = Policies.All)]
+        public async Task<WUser> GetUser()
         {
             try
             {
-                return await unitOfWork.IRepoUser.Get(id);
+                StringValues stream;
+                HttpContext.Request.Headers.TryGetValue("Authorization", out stream);          
+                return await unitOfWork.IRepoUser.Get(GetUserId(stream));
             }
             catch (Exception)
             {
@@ -107,47 +111,67 @@ namespace SportApi.Controllers
         }
 
         [Route("AddUser")]
-        //[ValidateModel]
+        [ValidateModel]
         [HttpPost]
         [Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> AddUser([FromBody] SportDatabase.Model.User user)
         {
-
-            sendOperation = async()=> { await unitOfWork.IRepoUser.Add(user); };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+            sendOperation = async () => { await unitOfWork.IRepoUser.Add(user); };
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            user.UserModified = GetUserId(stream);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData, (int)user.UserModified);
         }
 
         [Route("AddArticle")]
-        //[ValidateModel]
+        [ValidateModel]
         [HttpPost]
         [Authorize(Roles = Policies.AllWithoutAdmin)]
-        public async Task<HttpResponseMessage> AddArticle([FromBody] SportDatabase.Model.Article article)
+        public async Task<HttpResponseMessage> AddArticle([FromBody] Article article)
         {
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            article.UserModified = GetUserId(stream);
             article.LastModified = DateTime.Now;
             sendOperation = async () => { await unitOfWork.IRepoArticle.Add(article); };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData, article.UserModified);
         }
 
 
         [Route("UpdateArticle")]
-        //[ValidateModel]
+        [ValidateModel]
         [HttpPut]
         [Authorize(Roles = Policies.AllWithoutAdmin)]
-        public async Task<HttpResponseMessage> UpdateUser([FromBody] SportDatabase.Model.Article article)
+        public async Task<HttpResponseMessage> UpdateArticle([FromBody] Article article)
         {
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            article.UserModified = GetUserId(stream);
             article.LastModified = DateTime.Now;
-            //article.UserModified =;
             sendOperation = async () => { unitOfWork.IRepoArticle.Update(article); };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData,article.UserModified);
+        }
+
+        [Route("DeleteArticle/{id}")]
+        [HttpDelete]
+        [Authorize(Roles = Policies.AllWithoutAdmin)]
+        public async Task<HttpResponseMessage> DeleteArticle(int id)
+        {
+            sendOperation = async () => { await unitOfWork.IRepoArticle.Delete(id); };
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData, GetUserId(stream));
         }
 
         [Route("DeleteUser/{id}")]
         [HttpDelete]
-        [Authorize(Roles =Policies.AllAdmin)]
+        [Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> DeleteUser(int id)
-        {            
-            sendOperation = async() => {await unitOfWork.IRepoUser.Delete(id); };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
+        {
+            sendOperation = async () => { await unitOfWork.IRepoUser.Delete(id); };
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData, GetUserId(stream));
         }
 
         [Route("UpdateUser")]
@@ -155,36 +179,42 @@ namespace SportApi.Controllers
         [HttpPut]
         [Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> UpdateUser([FromBody] SportDatabase.Model.User user)
-        {
-            sendOperation = async() => { unitOfWork.IRepoUser.Update(user); };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
+        {          
+            sendOperation = async () => { unitOfWork.IRepoUser.Update(user); };
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            user.UserModified = GetUserId(stream);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData,(int)user.UserModified);
         }
 
         [Route("AddCategory")]
-        //[ValidateModel]
+        [ValidateModel]
         [HttpPost]
         [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> AddCategory([FromBody] Category category)
         {
-            sendOperation = async()=>
-            {
-                   await unitOfWork.IRepoCategory.Add(category);
-            };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData);
+            sendOperation = async () => { await unitOfWork.IRepoCategory.Add(category); };
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            category.UserModified = GetUserId(stream);
+            category.LastModified = DateTime.Now;
+            return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData,category.UserModified);
         }
 
         [Route("UpdateCategory")]
-        //[ValidateModel]
+        [ValidateModel]
         [HttpPut]
         [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> UpdateCategory([FromBody] Category categories)
         {
-            sendOperation = async() =>
+            sendOperation = async () =>
             {
-                    categories.LastModified = DateTime.Now;
-                    unitOfWork.IRepoCategory.Update(categories);
+                categories.LastModified = DateTime.Now;
+                unitOfWork.IRepoCategory.Update(categories);
             };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData, GetUserId(stream));
         }
 
         [Route("DeleteCategory/{id}")]
@@ -193,13 +223,15 @@ namespace SportApi.Controllers
         public async Task<HttpResponseMessage> DeleteCategory(int id)
         {
             sendOperation = async () => { await unitOfWork.IRepoCategory.Delete(id); };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData);
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Delete, this.ControllerContext.RouteData,GetUserId(stream));
         }
 
         [Route("GetCategory")]
         [HttpGet]
         [Authorize(Roles = Policies.All)]
-        public async Task<IEnumerable<WCategory>> GetCategory()     //parameter id and return category from Table permission
+        public async Task<IEnumerable<WCategory>> GetCategory()
         {
             try
             {
@@ -208,31 +240,50 @@ namespace SportApi.Controllers
             catch (Exception)
             {
                 throw;
-                //return Ok((object)"Wystąpił nieoczekiwany błąd");
             }
         }
 
         [Route("MoveUpCategory")]
         [HttpPut]
         [Authorize(Roles = Policies.All)]
-        public async Task<HttpResponseMessage> MoveUpCategory([FromBody]int id)
+        public async Task<HttpResponseMessage> MoveUpCategory([FromBody] int id)
         {
-            sendOperation = async () =>
-            {
-                await unitOfWork.IRepoCategory.MoveUp(id);
-            };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
+            sendOperation = async () =>{await unitOfWork.IRepoCategory.MoveUp(id);};
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData,GetUserId(stream));
         }
         [Route("MoveDownCategory")]
         [HttpPut]
         [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> MoveDowCategory(int id)
         {
-            sendOperation = async () =>
-            {
-                await unitOfWork.IRepoCategory.MoveDown(id);
-            };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData);
+            sendOperation = async () =>{await unitOfWork.IRepoCategory.MoveDown(id);};
+            StringValues stream;
+            HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+            return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData,GetUserId(stream));
         }
+
+
+        #region metody pomocniczne
+        private int GetUserId(StringValues stream)
+        {
+            try
+            {
+                string str = stream[0].Replace("Bearer ", string.Empty);
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadToken(str);
+                var tokenS = handler.ReadToken(str) as JwtSecurityToken;
+                var jti = tokenS.Claims.First(claim => claim.Type == "loginId").Value;
+                return int.Parse(jti);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        #endregion
     }
 }

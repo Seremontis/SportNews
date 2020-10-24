@@ -11,6 +11,8 @@ export class LoginComponent implements OnInit {
 
 
   constructor(public session:Session) {
+    if(session.CheckSession())
+      window.location.href='/user';
    }
 
   ngOnInit() {

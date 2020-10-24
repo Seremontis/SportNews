@@ -7,9 +7,11 @@
   </header>
   <nav class="user">
     <ul class="navOption nav flex-column">
-      <li class="active" *ngFor="let element of AdminArray">
-        <a [routerLink] = "[element.url, element.queryParams]">{{element.text}}         
-        </a>
+      <li class="active">
+        <a [routerLink] = "['/user']">Strona główna</a>
+      </li>
+      <li class="active" *ngFor="let element of GetListMenu()">
+        <a [routerLink] = "[element.url, element.queryParams]">{{element.text}}</a>
       </li>
     </ul>
   </nav>

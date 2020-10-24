@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
+﻿using Microsoft.AspNetCore.Routing;
 using SportDatabase;
 using SportDatabase.Interface;
 using SportDatabase.Model;
 using SportDatabase.Repository;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -20,25 +17,25 @@ namespace SportApi
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task<HttpResponseMessage> Execute(Func<Task> action, EnumOperation enumOperation, RouteData routeData)
+        public async Task<HttpResponseMessage> Execute(Func<Task> action, EnumOperation enumOperation, RouteData routeData,int userId)
         {
             try
             {
                 await action();
-                await unitOfWork.IRepoLogOperation.Add(GetLogOperation(enumOperation,routeData));
+                await unitOfWork.IRepoLogOperation.Add(GetLogOperation(enumOperation,routeData,userId));
                 await unitOfWork.Commit();
                 return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
             catch (Exception exception) //dopisac message i innerexcepetion do pol w celu lepszej ilustracji bledow
             {
                 await unitOfWork.Rollback();
-                await unitOfWork.IRepoLogException.Add(GetLogException(exception));
+                await unitOfWork.IRepoLogException.Add(GetLogException(exception,userId));
                 await unitOfWork.Commit();
                 throw;
             }
         }
 
-        protected LogOperation GetLogOperation(EnumOperation operation, RouteData routeData)
+        protected LogOperation GetLogOperation(EnumOperation operation, RouteData routeData,int userId)
         {
             LogOperation logOperation = new LogOperation()
             {
@@ -46,12 +43,12 @@ namespace SportApi
                 Controller = routeData.Values["controller"].ToString(),
                 Description = routeData.Values["action"].ToString(),
                 Operation = operation.ToString(),
-                UserId=1
+                UserId= userId
             };
             return logOperation;
         }
 
-        protected LogException GetLogException(Exception exception)
+        protected LogException GetLogException(Exception exception, int userId)
         {
             var info = new StackTrace(exception, true);
             var frame = info.GetFrame(0);
@@ -63,7 +60,7 @@ namespace SportApi
                 Date = DateTime.Now,
                 Message = exception.Message,
                 Path = string.Format($"Name file: {0}, Line number {1}", file, numberRow),
-                UserId = 1
+                UserId = userId
             };
             return logException;
         }

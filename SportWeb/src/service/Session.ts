@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as crypto from '../../node_modules/crypto-js';
 import { IUser } from './model/Iuser';
 import { ApiService } from './ApiService';
@@ -7,7 +7,7 @@ import { ApiService } from './ApiService';
     providedIn: 'root'
 })
 export class Session {
-    constructor(private  service:ApiService){
+    constructor(private service: ApiService) {
 
     }
     LogIn(data) {
@@ -20,26 +20,46 @@ export class Session {
                 localStorage.setItem('tokenLogin', response.token)
                 localStorage.setItem('user', response.userDetail.idUser.toString())
                 localStorage.setItem('role', response.userDetail.role.toString())
+                localStorage.setItem('endTime', response.time.toString())
                 window.location.href = '/user';
             },
             (error) => {
-
-                console.error('Request failed with error')
+                if (error.status == 401)
+                    alert('Nieprawidłowy login lub hasło')
+                else
+                    console.error('Request failed with error')
             },
             () => {
                 console.info('Request completed')      //This is actually not needed 
             });
     }
 
-    CheckSession(){
-        if(localStorage.getItem('tokenLogin'))
+    CheckSession() {
+        this.checkExpired();
+        if (localStorage.getItem('tokenLogin') && localStorage.getItem('user') && localStorage.getItem('user'))
             return true;
-        else 
+        else
             return false;
     }
 
-    LogOut(){
+    LogOut() {
         localStorage.removeItem('tokenLogin');
+        localStorage.removeItem('user');
+        localStorage.removeItem('role');
+        localStorage.removeItem('endTime');
         window.location.href = '/';
+    }
+
+    checkExpired() {
+        if (localStorage.getItem('endTime')) {
+            let date = Date.parse(localStorage.getItem('endTime'));
+            let now = Date.now();
+            if (date < now) {
+                localStorage.removeItem('tokenLogin');
+                localStorage.removeItem('user');
+                localStorage.removeItem('role');
+                localStorage.removeItem('endTime');
+            }
+        }
     }
 }

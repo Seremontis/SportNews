@@ -69,14 +69,14 @@ export class EditTableComponent implements OnInit {
   GetCategory() {
     this.isLoading = true;
     this.service.GetCategory().subscribe(
-      (response) => {                           //next() callback
+      (response) => {                          
         console.log('response received');
         this.isLoading = this.isError = false;
         this.CategoryList = response;
       },
       (error) => {
         this.isLoading = false;
-        this.isError = true;                           //error() callback
+        this.isError = true;                           
         console.log('Request failed with error')
         if(error.status == 401){
           alert('Brak uprawnień')
@@ -84,7 +84,7 @@ export class EditTableComponent implements OnInit {
         }
       },
       () => {
-        console.info('Request completed')      //This is actually not needed 
+        console.info('Request completed')     
       });
   }
 
@@ -135,15 +135,15 @@ export class EditTableComponent implements OnInit {
 
   UpdateCategory(category: Category) {
     this.service.UpdateCategory(category).subscribe(
-      (response) => {                           //next() callback
+      (response) => {                          
         console.log('response received');
         this.GetCategory();
       },
-      (error) => {                          //error() callback
+      (error) => {                          
         console.error('Request failed with error')
       },
       () => {
-        console.info('Request completed')      //This is actually not needed 
+        console.info('Request completed')     
       });
   }
 
@@ -151,32 +151,42 @@ export class EditTableComponent implements OnInit {
   GetListUser(page: number) {
     this.service.GetUsers(page).subscribe(
       (response) => {
-        this.UserList = response;                    //next() callback
+        this.UserList = response;                   
         console.log('response received');
       },
-      (error) => {                          //error() callback
+      (error) => {                          
         console.error('Request failed with error')
       },
       () => {
-        console.info('Request completed')      //This is actually not needed 
+        console.info('Request completed')     
       });
   }
   GetListArticle(page: number) {
     this.service.GetListArticle(page).subscribe(
       (response) => {
-        this.ArticleList = response;                    //next() callback
+        this.ArticleList = response;                   
         console.log('response received');
       },
-      (error) => {                          //error() callback
+      (error) => {                          
         console.error('Request failed with error')
       },
       () => {
-        console.info('Request completed')      //This is actually not needed 
+        console.info('Request completed')     
       });
   }
 
-  ModalDelete(id: number) {
-
+  DeleteArticle(id: number) {
+    this.service.DeleteArticle(id).subscribe(
+      (response) => {
+        this.GetListArticle(1)                  
+        console.log('response received');
+      },
+      (error) => {                          
+        console.error('Request failed with error')
+      },
+      () => {
+        console.info('Request completed')     
+      });
   }
 
   ngOnDestroy() {

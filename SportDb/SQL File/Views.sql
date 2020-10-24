@@ -3,14 +3,14 @@ go
 
 CREATE OR ALTER VIEW WListArticles
 AS
-SELECT ArticleId,Title,SmallPicture,ShortArticle,PublicationTime,Keywords,C.Name,A.CategoryId
+SELECT ArticleId,Title,ShortArticle,PublicationTime,Keywords,C.Name,A.CategoryId
 FROM Articles A
 LEFT JOIN Categories C ON A.CategoryId=C.CategoryId
 go
 
 CREATE OR ALTER VIEW WFullArticle
 AS
-SELECT ArticleId,Title,Picture,ShortArticle,Article,PublicationTime,A.LastModified,C.Name,A.CategoryId,U.FirstName,U.LastName
+SELECT ArticleId,Title,Picture,ShortArticle,FullArticle,PublicationTime,A.LastModified,C.Name,A.CategoryId,U.FirstName,U.LastName
 FROM Articles A
 LEFT JOIN Categories C ON A.CategoryId=C.CategoryId
 LEFT JOIN Users U on A.AuthorId=U.UserId

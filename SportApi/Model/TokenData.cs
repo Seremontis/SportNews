@@ -9,6 +9,5 @@ namespace SportApi.Model
     {
         public int IdUser { get; set; }
         public int Role { get; set; }
-        public string UserType { get; set; }
     }
 }

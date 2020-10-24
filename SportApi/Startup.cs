@@ -71,7 +71,7 @@ namespace SportApi
             {
                 configure.AddPolicy(Policies.SuperAdmin, Policies.FullAdminPolicy());
                 configure.AddPolicy(Policies.Admin, Policies.AdminPolicy());
-                configure.AddPolicy(Policies.FullJournalist, Policies.FullJournalistPolicy());
+                configure.AddPolicy(Policies.Dziennikarz, Policies.FullJournalistPolicy());
                 configure.AddPolicy(Policies.CustomJournalist, Policies.CustomJournalistPolicy());
             });
 
@@ -91,7 +91,6 @@ namespace SportApi
             
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 

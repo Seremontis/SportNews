@@ -11,7 +11,6 @@ namespace SportDatabase.Context
     {
         public void Configure(EntityTypeBuilder<WUser> entity)
         {
-            entity.HasNoKey();
 
             entity.ToView("WUser");
 

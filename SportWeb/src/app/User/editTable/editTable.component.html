@@ -30,7 +30,6 @@
     <!--<th scope="col" style="width: 10%">L.p.</th>-->
     <th scope="col">Tytuł</th>
     <th scope="col">Krótki artykuł</th>
-    <th scope="col">słowa kluczowe</th>
     <th scope="col">Kategoria</th>
     <th scope="col">Data publikacji</th>
     <th scope="col"></th>
@@ -40,12 +39,11 @@
     <!--  <td scope="row" style="width: 10%">{{number}}</td>-->
       <td>{{row.title}}</td>
       <td>{{row.shortArticle | truncate:[100, '...']}}</td>
-      <td>brak rekordu w modelu</td>
       <td>{{row.name}}</td>
       <td>{{row.publicationTime}}</td>
       <td>
         <button [routerLink] = "['../articleForm', row.articleId]" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-        <button (click) = "ModalDelete(row.articleId)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+        <button (click) = "DeleteArticle(row.articleId)" class="btn btn-danger"><i class="fas fa-times"></i></button>
       </td>
     </tr>
   </tbody>

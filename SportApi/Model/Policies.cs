@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SportApi.Model
 {
@@ -10,11 +6,11 @@ namespace SportApi.Model
     {
         public const string SuperAdmin = "SuperAdmin";
         public const string Admin = "Admin";
-        public const string FullJournalist = "Dziennikarz";
+        public const string Dziennikarz = "Dziennikarz";
         public const string CustomJournalist = "Dziennikarz ograniczone uprawnienia";
-        public const string All = SuperAdmin +","+ Admin + "," + FullJournalist + "," + CustomJournalist;
+        public const string All = SuperAdmin +","+ Admin + "," + Dziennikarz + "," + CustomJournalist;
         public const string AllAdmin = SuperAdmin + "," + Admin;
-        public const string AllWithoutAdmin = SuperAdmin + "," + FullJournalist + "," + CustomJournalist;
+        public const string AllWithoutAdmin = SuperAdmin + "," + Dziennikarz + "," + CustomJournalist;
 
         public static AuthorizationPolicy FullAdminPolicy()
         {
@@ -26,7 +22,7 @@ namespace SportApi.Model
         }
         public static AuthorizationPolicy FullJournalistPolicy()
         {
-            return new AuthorizationPolicyBuilder().RequireAuthenticatedUser().RequireRole(FullJournalist).Build();
+            return new AuthorizationPolicyBuilder().RequireAuthenticatedUser().RequireRole(Dziennikarz).Build();
         }
         public static AuthorizationPolicy CustomJournalistPolicy()
         {

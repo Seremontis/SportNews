@@ -9,14 +9,20 @@ import { HostListener, ElementRef, ViewChild } from '@angular/core';
 export class MenuUserComponent implements OnInit {
 
   readonly AdminArray: readonly { text: string, url: string, type: number ,queryParams:string}[] = [
-    { "text": "Strona główna", "url": "../user/home", "type": 0 ,"queryParams":""},
-    { "text": "Nowy artykuł", "url": "./articleForm", "type": 1,"queryParams":"" },
-    { "text": "Artykuły", "url": "./editTable", "type": 1 ,"queryParams":"2"},
-    { "text": "Media", "url": "/", "type": 1 ,"queryParams":null},
-    { "text": "Użytkownicy", "url": "./editTable", "type": 2 ,"queryParams":"1"},
-    { "text": "Kategoria", "url": "./editTable", "type": 2 ,"queryParams": "3"}
+    { "text": "Nowy artykuł", "url": "./articleForm", "type": 3,"queryParams":"" },
+    { "text": "Artykuły", "url": "./editTable", "type": 3 ,"queryParams":"2"},
+    { "text": "Użytkownicy", "url": "./editTable", "type": 1 ,"queryParams":"1"},
+    { "text": "Kategoria", "url": "./editTable", "type": 1 ,"queryParams": "3"},
+    { "text": "Media", "url": "/user", "type": 0 ,"queryParams":""},
   ];
   constructor() {
+
+   }
+
+   GetListMenu(){
+     let permission=<number>(localStorage.getItem('role')??0);
+     let array=this.AdminArray.filter(x=>x.type==0 || x.type==permission || Math.abs(x.type-permission)==1)
+     return array;
    }
 
   ngOnInit() {

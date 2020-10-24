@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from 'src/service/ApiService';
 
 @Component({
   selector: 'app-barUser',
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./barUser.component.css']
 })
 export class BarUserComponent implements OnInit {
-  userName='test';
+  userName='';
   model=true;
-  constructor() {}
+  constructor(private service:ApiService) {
+    this.GetUserName()
+  }
 
   ngOnInit() {
   }
@@ -31,5 +34,19 @@ export class BarUserComponent implements OnInit {
   LogOut(){
     localStorage.removeItem('tokenLogin');
     window.location.href='/';
+  }
+
+  GetUserName(){
+    this.service.GetUser().subscribe(
+      (response) => {           
+        console.log('response received');
+        this.userName= response.firstName+' '+response.lastName
+      },
+      (error) => {                          
+        console.error('Request failed with error')
+      },
+      () => {
+        console.info('Request completed')     
+      });
   }
 }

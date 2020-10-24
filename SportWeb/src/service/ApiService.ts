@@ -31,7 +31,7 @@ export class ApiService {
         return options
     }
     CheckLoggin(user:IUser){
-        return this.http.post<any>('http://localhost:62939/Login', user);
+        return this.http.post<IModelAuth>('http://localhost:62939/Login', user);
     }
 
    
@@ -90,6 +90,10 @@ export class ApiService {
 
     GetUsers(page:number): Observable<WUser[]>{
         return this.http.get<WUser[]>(this.rootURL + 'GetWUser/'+page,this.GetHeader());
+    }
+
+    GetUser(): Observable<WUser>{
+        return this.http.get<WUser>(this.rootURL + 'GetUser',this.GetHeader());
     }
 
     GetListArticle(page:number): Observable<WListArticle[]>{

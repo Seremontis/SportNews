@@ -26,26 +26,6 @@ namespace SportApi.Controllers
         private readonly IUnitOfWork unitOfWork;
         private GenericOperation genericOperation;
 
-        private List<User> users = new List<User>()
-        {
-            new User()
-        {
-            Login = "test",
-            //Password = Encoding.UTF8.GetBytes("test"),
-            //Password="test",
-            Role = 1,//"SuperAdmin",
-            UserType = 0
-        },
-        new User()
-        {
-            Login = "test2",
-            //Password = Encoding.UTF8.GetBytes("test"),
-            //Password = "test",
-            Role = 3,//"CustomJournalist",
-            UserType = 0
-        }
-    };
-
         public LoginController(IConfiguration config, SportNewsContext sportNewsContext)
         {
             _config = config;
@@ -57,7 +37,7 @@ namespace SportApi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("")]
-        public async Task<IActionResult> Login([FromBody]User login)
+        public async Task<IActionResult> Login([FromBody] User login)
         {
             IActionResult response = Unauthorized();
             SportDatabase.Model.User userCheck = new SportDatabase.Model.User()
@@ -66,19 +46,20 @@ namespace SportApi.Controllers
                 Password = login.Password
             };
             userCheck = await unitOfWork.IRepoUser.CheckUser(userCheck);
-            if (userCheck != null){
+            if (userCheck != null)
+            {
                 TokenData data = new TokenData()
                 {
                     IdUser = userCheck.UserId,
                     Role = userCheck.RoleId ?? 0,
                 };
-
                 try
                 {
                     var token = GenerateJWT(data);
                     response = Ok(new
                     {
                         token = token,
+                        time = DateTime.Now.AddHours(12),
                         userDetail = data
                     });
                 }
@@ -86,7 +67,6 @@ namespace SportApi.Controllers
                 {
                     throw;
                 }
-                
             }
             return response;
         }
@@ -96,13 +76,11 @@ namespace SportApi.Controllers
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, data.IdUser.ToString()),
                 new Claim("loginId", data.IdUser.ToString()),
                 new Claim("role",((EnumPolicy)data.Role).ToString()),
-                new Claim("usertype",data.UserType??string.Empty),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
@@ -110,7 +88,7 @@ namespace SportApi.Controllers
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(20),
+                expires: DateTime.Now.AddHours(12),
                 signingCredentials: credentials
             );
             return new JwtSecurityTokenHandler().WriteToken(token);

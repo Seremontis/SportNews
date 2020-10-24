@@ -2,7 +2,7 @@ import { mapToMapExpression } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ApiService } from 'src/service/ApiService';
-import { Article} from 'src/service/model/Article';
+import { Article } from 'src/service/model/Article';
 import { WCategory } from 'src/service/model/WCategory';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,20 +16,21 @@ import { ModalViewComponent } from '../ModalView/ModalView.component';
 
 
 export class ArticleFormComponent implements OnInit {
-  
-  categoryList:WCategory[];
-  selectedOption:number;
-  article:  Article=new  Article();
-  articleid:number=0;
-  addOrUpdateFlag:boolean=true;
 
-  constructor( public service: ApiService,private route: ActivatedRoute,private modalService: NgbModal) { 
+  categoryList: WCategory[];
+  selectedOption: number;
+  article: Article = new Article();
+  articleid: number = 0;
+  addOrUpdateFlag: boolean = true;
+  fileToUpload: File = null;
+
+  constructor(public service: ApiService, private route: ActivatedRoute, private modalService: NgbModal) {
     this.LoadCategory(0)
-    this.route.params.subscribe( params => {
-      this.articleid=Number(params.id);
-      if(!Number.isNaN(this.articleid)){
+    this.route.params.subscribe(params => {
+      this.articleid = Number(params.id);
+      if (!Number.isNaN(this.articleid)) {
         this.LoadArticle(this.articleid);
-        this.addOrUpdateFlag=false;
+        this.addOrUpdateFlag = false;
       }
     });
   }
@@ -37,11 +38,20 @@ export class ArticleFormComponent implements OnInit {
 
   ngOnInit() {
   }
- 
+
+  handleUpload(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if(reader.result)
+        this.article.picture = reader.result.toString();
+    };
+  }
 
   openFormModal(data) {
-    const modalRef = this.modalService.open(ModalViewComponent, {size: 'modalCustom',});
-
+    const modalRef = this.modalService.open(ModalViewComponent, { size: 'modalCustom', });
+    data.value.picture = this.article.picture;
     modalRef.componentInstance.article = this.checkModel(data.value);
     //modalRef.componentInstance.categoryName=this.categoryList.filter(x=>x.categoryId==this.article.categoryId);
     modalRef.result.then((result: Article) => {
@@ -53,13 +63,13 @@ export class ArticleFormComponent implements OnInit {
   }
 
 
-  checkModel(value){
-    this.article.title=value.title;
-    this.article.categoryId=value.categoryId;
-    this.article.keywords=value.keywords;
-    this.article.shortArticle=value.shortArticle;
-    this.article.picture=value.picture;
-    this.article.fullArticle=value.fullArticle;
+  checkModel(value) {
+    this.article.title = value.title;
+    this.article.categoryId = value.categoryId;
+    this.article.keywords = value.keywords;
+    this.article.shortArticle = value.shortArticle;
+    this.article.picture = value.picture;
+    this.article.fullArticle = value.fullArticle;
 
     return this.article;
   }
@@ -73,16 +83,17 @@ export class ArticleFormComponent implements OnInit {
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
-      ['textColor','backgroundColor','customClasses','link',
-    'unlink','insertImage','insertVideo']],
+      ['textColor', 'backgroundColor', 'customClasses', 'link',
+        'unlink', 'insertImage', 'insertVideo']],
     customClasses: []
   };
 
-  LoadCategory(userId){
+  LoadCategory(userId) {
     this.service.GetCategory(userId).subscribe(
       (response) => {                           //next() callback
         console.log('response received');
-        this.categoryList=response;      },
+        this.categoryList = response;
+      },
       (error) => {                        //error() callback
         console.error('Request failed with error');
         this.LoadOrErrorOption(false);
@@ -93,18 +104,19 @@ export class ArticleFormComponent implements OnInit {
       });
   }
 
-  RunArticle(data){
-    if(this.addOrUpdateFlag)
-      this.CreateArticle(data.value);    
+  RunArticle(data) {
+    if (this.addOrUpdateFlag)
+      this.CreateArticle(data.value);
     else
       this.UpdateArticle(data.value);
   }
 
 
-  CreateArticle(data){
-    this.service.AddArticle(data,1).subscribe(
+  CreateArticle(data) {
+    this.service.AddArticle(data, 1).subscribe(
       (response) => {                           //next() callback
-        console.log('response received');     },
+        console.log('response received');
+      },
       (error) => {                        //error() callback
         console.error('Request failed with error');
       },
@@ -112,10 +124,11 @@ export class ArticleFormComponent implements OnInit {
         console.info('Request completed')      //This is actually not needed 
       });
   }
-  UpdateArticle(data){
+  UpdateArticle(data) {
     this.service.UpdateArticle(data).subscribe(
       (response) => {                           //next() callback
-        console.log('response received');     },
+        console.log('response received');
+      },
       (error) => {                        //error() callback
         console.error('Request failed with error');
       },
@@ -124,22 +137,23 @@ export class ArticleFormComponent implements OnInit {
       });
   }
 
-  LoadArticle(id:number){
+  LoadArticle(id: number) {
     this.service.GetArticle(id).subscribe(
       (response) => {                           //next() callback
-        this.article=response;        },
+        this.article = response;
+      },
       (error) => {                        //error() callback
         console.error('Request failed with error');
       })
   }
 
-  LoadOrErrorOption(flag){
-    let select=document.querySelector('select');
-    if(flag==true){
-      select.childNodes[0].textContent='...';
+  LoadOrErrorOption(flag) {
+    let select = document.querySelector('select');
+    if (flag == true) {
+      select.childNodes[0].textContent = '...';
     }
-    else if(flag==false){
-      select.childNodes[0].textContent='Wystąpił błąd';
-    }    
+    else if (flag == false) {
+      select.childNodes[0].textContent = 'Wystąpił błąd';
+    }
   }
 }

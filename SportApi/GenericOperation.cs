@@ -21,7 +21,8 @@ namespace SportApi
         {
             try
             {
-                await action();
+                if(action!=null)
+                    await action();
                 await unitOfWork.IRepoLogOperation.Add(GetLogOperation(enumOperation,routeData,userId));
                 await unitOfWork.Commit();
                 return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
@@ -45,6 +46,8 @@ namespace SportApi
                 Operation = operation.ToString(),
                 UserId= userId
             };
+            if (userId == 0)
+                logOperation.Description += " Login: "+routeData.Values["Login"].ToString();
             return logOperation;
         }
 

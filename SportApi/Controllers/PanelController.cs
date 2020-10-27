@@ -26,7 +26,6 @@ namespace SportApi.Controllers
     [ApiController]
     //[EnableCors("AllowOrigin")]
 
-    ///  breadcrumbs to Angular
     public class PanelController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;

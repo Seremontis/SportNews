@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
 using SportApi.Model;
+using SportDatabase;
 using SportDatabase.Context;
 using SportDatabase.Interface;
 using SportDatabase.Repository;
@@ -46,6 +47,7 @@ namespace SportApi.Controllers
                 Password = login.Password
             };
             userCheck = await unitOfWork.IRepoUser.CheckUser(userCheck);
+           
             if (userCheck != null)
             {
                 TokenData data = new TokenData()
@@ -62,12 +64,20 @@ namespace SportApi.Controllers
                         time = DateTime.Now.AddHours(12),
                         userDetail = data
                     });
+                    await genericOperation.Execute(null, EnumOperation.PassLogin, this.ControllerContext.RouteData, (int)userCheck.UserId);
+
                 }
                 catch (Exception ex)
                 {
                     throw;
                 }
             }
+            else
+            {
+                this.ControllerContext.RouteData.Values.Add("Login", login.Login);
+                await genericOperation.Execute(null, EnumOperation.FailLogin, this.ControllerContext.RouteData, 0);
+            }
+
             return response;
         }
 

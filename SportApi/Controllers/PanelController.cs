@@ -18,6 +18,7 @@ using SportDatabase.Model;
 using SportDatabase.Repository;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Primitives;
+using ValidateAntiForgeryTokenAttribute = SportApi.Attribute.ValidateAntiForgeryTokenAttribute;
 
 namespace SportApi.Controllers
 {
@@ -112,6 +113,7 @@ namespace SportApi.Controllers
         [Route("AddUser")]
         [ValidateModel]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> AddUser([FromBody] SportDatabase.Model.User user)
         {
@@ -125,6 +127,7 @@ namespace SportApi.Controllers
         [Route("AddArticle")]
         [ValidateModel]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllWithoutAdmin)]
         public async Task<HttpResponseMessage> AddArticle([FromBody] Article article)
         {
@@ -140,6 +143,7 @@ namespace SportApi.Controllers
         [Route("UpdateArticle")]
         [ValidateModel]
         [HttpPut]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllWithoutAdmin)]
         public async Task<HttpResponseMessage> UpdateArticle([FromBody] Article article)
         {
@@ -153,6 +157,7 @@ namespace SportApi.Controllers
 
         [Route("DeleteArticle/{id}")]
         [HttpDelete]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllWithoutAdmin)]
         public async Task<HttpResponseMessage> DeleteArticle(int id)
         {
@@ -164,6 +169,7 @@ namespace SportApi.Controllers
 
         [Route("DeleteUser/{id}")]
         [HttpDelete]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> DeleteUser(int id)
         {
@@ -176,6 +182,7 @@ namespace SportApi.Controllers
         [Route("UpdateUser")]
         [ValidateModel]
         [HttpPut]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> UpdateUser([FromBody] SportDatabase.Model.User user)
         {          
@@ -189,6 +196,7 @@ namespace SportApi.Controllers
         [Route("AddCategory")]
         [ValidateModel]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> AddCategory([FromBody] Category category)
         {
@@ -203,6 +211,7 @@ namespace SportApi.Controllers
         [Route("UpdateCategory")]
         [ValidateModel]
         [HttpPut]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> UpdateCategory([FromBody] Category categories)
         {
@@ -218,6 +227,7 @@ namespace SportApi.Controllers
 
         [Route("DeleteCategory/{id}")]
         [HttpDelete]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> DeleteCategory(int id)
         {
@@ -244,6 +254,7 @@ namespace SportApi.Controllers
 
         [Route("MoveUpCategory")]
         [HttpPut]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> MoveUpCategory([FromBody] int id)
         {
@@ -254,6 +265,7 @@ namespace SportApi.Controllers
         }
         [Route("MoveDownCategory")]
         [HttpPut]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> MoveDowCategory(int id)
         {

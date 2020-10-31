@@ -10,7 +10,8 @@ import { UserHomeComponent } from './User/user-home/user-home.component';
 import {ArticleFormComponent } from './User/articleForm/articleForm.component'
 import {EditTableComponent} from './User/editTable/editTable.component';
 import {SearchResultComponent} from './Visitor/SearchResult/SearchResult.component';
-import {MapSiteComponent} from 'src/app/Visitor/MapSite/MapSite.component'
+import {MapSiteComponent} from 'src/app/Visitor/MapSite/MapSite.component';
+import {UserEditFormComponent} from './User/userEditForm/userEditForm.component'
 
 const routes: Routes = [
   {
@@ -81,6 +82,18 @@ const routes: Routes = [
         path:'editTable/:id',
         component:EditTableComponent
       },
+      {
+        path:'editTable/userForm',
+        component:UserEditFormComponent
+      },
+      {
+        path:'editTable/userForm/:id',
+        component:UserEditFormComponent
+      },
+      {
+        path:'test',
+        component:UserEditFormComponent
+      }
     ]
   }
 ];

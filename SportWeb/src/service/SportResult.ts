@@ -31,7 +31,7 @@ export class SportResult {
 
         let test = await this.http.get<FootballApiModel>(url).toPromise();
         let list: IModelResult[] = []
-        console.log(test);
+
         test.events.forEach(elem => {
             let record: IModelResult = <IModelResult>{};
             record.dateMatach = new Date(elem.dateEvent);
@@ -51,10 +51,9 @@ export class SportResult {
         startDate.setDate(endDate.getDate()-14)
         let url = 'https://allsportsapi.com/api/basketball/?met=Fixtures&APIkey='+this.basketballApi+'&from='+this.formatDate(startDate)+'&to='+this.formatDate(endDate);
 
-        let test = await this.http.get<BasketballApiModel>(url).toPromise();
+        let res = await this.http.get<BasketballApiModel>(url).toPromise();
         let list: IModelResult[] = []
-        console.log(test);
-        test.result.forEach(elem => {
+        res.result.forEach(elem => {
             let record: IModelResult = <IModelResult>{};
             record.dateMatach = new Date(elem.event_date);
             record.homeName = elem.event_home_team;
@@ -70,10 +69,9 @@ export class SportResult {
         let date = new Date();
         let url = 'https://tennis-live-data.p.rapidapi.com/matches-by-date/'+this.formatDate(date);
 
-        let test = await this.http.get<TennisApi>(url,this.httpOptions).toPromise();
+        let res = await this.http.get<TennisApi>(url,this.httpOptions).toPromise();
         let list: IModelResult[] = []
-        console.log(test);
-        test.results.forEach(elem => {
+        res.results.forEach(elem => {
             elem.matches.forEach(game=>{
                 let record: IModelResult = <IModelResult>{};
                 record.dateMatach = new Date(game.date);

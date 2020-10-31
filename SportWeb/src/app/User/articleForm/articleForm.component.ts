@@ -2,7 +2,7 @@ import { mapToMapExpression } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ApiService } from 'src/service/ApiService';
-import { Article } from 'src/service/model/Article';
+import { IArticle } from 'src/service/model/Article';
 import { WCategory } from 'src/service/model/WCategory';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,7 +19,7 @@ export class ArticleFormComponent implements OnInit {
 
   categoryList: WCategory[];
   selectedOption: number;
-  article: Article = new Article();
+  article: IArticle;
   articleid: number = 0;
   addOrUpdateFlag: boolean = true;
   fileToUpload: File = null;
@@ -54,7 +54,7 @@ export class ArticleFormComponent implements OnInit {
     data.value.picture = this.article.picture;
     modalRef.componentInstance.article = this.checkModel(data.value);
     //modalRef.componentInstance.categoryName=this.categoryList.filter(x=>x.categoryId==this.article.categoryId);
-    modalRef.result.then((result: Article) => {
+    modalRef.result.then((result: IArticle) => {
       console.log(result);
 
     }).catch((error) => {
@@ -113,7 +113,7 @@ export class ArticleFormComponent implements OnInit {
 
 
   CreateArticle(data) {
-    this.service.AddArticle(data, 1).subscribe(
+    this.service.AddArticle(data).subscribe(
       (response) => {                           //next() callback
         console.log('response received');
       },

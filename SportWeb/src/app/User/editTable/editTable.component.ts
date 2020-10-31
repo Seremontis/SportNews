@@ -9,7 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalCategoryEditComponent } from 'src/app/User/ModalCategoryEdit/ModalCategoryEdit.component';
 import { UserHomeComponent } from '../user-home/user-home.component';
 import { Category } from 'src/service/model/Category';
-import { WUser } from 'src/service/model/WUser';
+import { IWUser } from 'src/service/model/WUser';
 import { WListArticle } from 'src/service/model/WListArticle';
 
 @Component({
@@ -25,7 +25,7 @@ export class EditTableComponent implements OnInit {
   id: number;
   mySubscription: any;
   CategoryList: WCategory[];
-  UserList: WUser[];
+  UserList: IWUser[];
   ArticleList: WListArticle[];
 
 

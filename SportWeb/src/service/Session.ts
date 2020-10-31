@@ -12,6 +12,13 @@ export class Session {
     }
     LogIn(data) {
         let user: IUser = {
+            firstName:null,
+            lastName:null,
+            roleId:null,
+            passwordExpired:null,
+            userId:0,
+            userModified:null,
+            lastModified:null,
             login: data.value.login,
             password: crypto.SHA1(data.value.password).toString(),
         };
@@ -44,6 +51,7 @@ export class Session {
 
     LogOut() {
         localStorage.removeItem('tokenLogin');
+        console.log(localStorage.getItem('user'))
         localStorage.removeItem('user');
         localStorage.removeItem('role');
         localStorage.removeItem('endTime');

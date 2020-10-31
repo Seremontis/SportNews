@@ -1,5 +1,5 @@
 import { Component,OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Article } from 'src/service/model/Article';
+import { IArticle } from 'src/service/model/Article';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DefaultImage } from 'src/assets/defaultImage';
 
@@ -9,7 +9,7 @@ import { DefaultImage } from 'src/assets/defaultImage';
   styleUrls: ['./ModalView.component.css']
 })
 export class ModalViewComponent implements OnInit {
-  @Input() article: Article;
+  @Input() article: IArticle;
   private readonly imageDefault: DefaultImage = new DefaultImage();
 
   constructor(public activeModal: NgbActiveModal) {  

@@ -142,8 +142,10 @@ export class CategoriesComponent implements OnInit {
   GetNameCategory() {
     let result = this.accessData.readCategoryList();
     let name;
-    if (result)
+    if (result && this.id>0)
       name = result.find(x => x.categoryId == this.id).name;
+    else if(this.id==0)
+      name="Bez kategorii";
     return name;
   }
   LoadArticle() {

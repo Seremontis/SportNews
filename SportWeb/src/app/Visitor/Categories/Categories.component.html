@@ -1,7 +1,6 @@
 <main>
     <div #div *ngIf="CheckBeforeId()">
         <div *ngIf="CheckColor()"></div>
-        <!--<a [routerLink]="['/categories', GetBeforeId()]">Powrót</a>-->
         <a class="link" style="text-decoration: underline;" role="button" (click)="this.GoToPage()">Powrót</a>
     </div>
     <nav class="navMain" *ngIf="LoadSubCategory()">

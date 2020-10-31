@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './ApiService';
+import { ApiVisitorService } from './ApiVisitorService';
 import { WCategory } from './model/WCategory';
 
 @Injectable(
@@ -9,7 +10,7 @@ import { WCategory } from './model/WCategory';
     })
 export class AccessData {
     categoryList: WCategory[];
-    constructor(private apiSevice: ApiService) { }
+    constructor(private apiVisitor: ApiVisitorService) { }
 
     SetCategoryList(list: WCategory[]) {
         this.categoryList = null;
@@ -18,7 +19,7 @@ export class AccessData {
 
     readCategoryList() {
         if (!this.categoryList) {
-            this.apiSevice.GetCategory().subscribe(
+            this.apiVisitor.GetCategory().subscribe(
                 (response) => {
                     console.log('response received');
                     this.categoryList = response;

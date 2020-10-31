@@ -28,6 +28,7 @@ import {TruncatePipe} from '../service/TruncatePipe'
 import { SearchResultComponent } from './Visitor/SearchResult/SearchResult.component';
 import { MapSiteComponent } from './Visitor/MapSite/MapSite.component';
 import {ModalViewComponent} from './User/ModalView/ModalView.component'
+import { UserEditFormComponent } from './User/userEditForm/userEditForm.component';
 
 @NgModule({
   declarations: [	
@@ -51,7 +52,8 @@ import {ModalViewComponent} from './User/ModalView/ModalView.component'
       SearchResultComponent,
       TruncatePipe,      
       MapSiteComponent,
-      ModalViewComponent
+      ModalViewComponent,
+      UserEditFormComponent
    ],
   imports: [
     BrowserModule,

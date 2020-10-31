@@ -1,4 +1,4 @@
-export class WUser {
+export interface  IWUser {
     userId:number;
     firstName: string;
     lastName:string;

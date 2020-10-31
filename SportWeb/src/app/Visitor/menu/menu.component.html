@@ -10,6 +10,10 @@
         <a [routerLink]="['./categories', element.categoryId]">{{element.name}}
         </a>
       </li>
+      <li #li class="active">
+        <a [routerLink]="['./categories', 0]">Bez kategorii
+        </a>
+      </li>
     </ul>
   </nav>
   <div class="searcherAndSocialMedia flex-grow">

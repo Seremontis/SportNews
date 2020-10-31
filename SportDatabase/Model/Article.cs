@@ -13,9 +13,8 @@ namespace SportDatabase.Model
         public int? AuthorId { get; set; }
         [Required]
         [Column(TypeName = "text")]
+        [MaxLength]
         public string Title { get; set; }
-        [MaxLength(1)]
-        public byte[] SmallPicture { get; set; }
         [StringLength(300)]
         public string Picture { get; set; }
         [StringLength(300)]

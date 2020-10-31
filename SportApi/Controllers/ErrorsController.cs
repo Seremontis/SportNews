@@ -22,9 +22,9 @@ namespace SportApi.Controllers
     public class ErrorsController : ControllerBase
     {
         private IUnitOfWork _unitOfWork;
-        public ErrorsController(SportNewsContext sportNewsContext)
+        public ErrorsController(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = new UnitOfWork(sportNewsContext);
+            this._unitOfWork = unitOfWork;
         }
 
         [Microsoft.AspNetCore.Mvc.Route("Error")]

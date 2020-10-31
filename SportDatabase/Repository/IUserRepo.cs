@@ -9,6 +9,7 @@ namespace SportDatabase.Repository
     {
         Task<User> CheckUser(User user);
         Task<WUser> Get(int id);
+        Task<User> GetEdit(int id);
         Task<List<WUser>> GetWList(int idpage);
     }
 }

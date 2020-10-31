@@ -21,10 +21,10 @@ namespace SportApi.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        //change on DI
-        public StartController(SportNewsContext sportNewsContext)
+
+        public StartController(IUnitOfWork unitOfwork)
         {
-            this._unitOfWork = new UnitOfWork(sportNewsContext);
+            this._unitOfWork = unitOfwork;
         }
 
         [HttpGet]  
@@ -82,10 +82,11 @@ namespace SportApi.Controllers
         [HttpGet]
         [Route("GetArticlesByCategory/{categoryId}/{page}")]
         [AllowAnonymous]
-        public async Task<IEnumerable<WListArticle>> GetArticlesByCategory(int categoryId,int page = 1)
+        public async Task<IEnumerable<WListArticle>> GetArticlesByCategory(int? categoryId,int page = 1)
         {
             try
             {
+                categoryId = categoryId == 0 ? null : categoryId;
                 return await _unitOfWork.IRepoArticle.GetListArticlesByCategory(categoryId,page);
             }
             catch (Exception)

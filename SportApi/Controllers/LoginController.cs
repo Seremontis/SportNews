@@ -15,7 +15,9 @@ using SportApi.Model;
 using SportDatabase;
 using SportDatabase.Context;
 using SportDatabase.Interface;
+using SportDatabase.Model;
 using SportDatabase.Repository;
+using User = SportDatabase.Model.User;
 
 namespace SportApi.Controllers
 {
@@ -41,12 +43,7 @@ namespace SportApi.Controllers
         public async Task<IActionResult> Login([FromBody] User login)
         {
             IActionResult response = Unauthorized();
-            SportDatabase.Model.User userCheck = new SportDatabase.Model.User()
-            {
-                Login = login.Login,
-                Password = login.Password
-            };
-            userCheck = await unitOfWork.IRepoUser.CheckUser(userCheck);
+            User userCheck = await unitOfWork.IRepoUser.CheckUser(login);
            
             if (userCheck != null)
             {
@@ -69,7 +66,7 @@ namespace SportApi.Controllers
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Wystąpił błąd serwera");
                 }
             }
             else

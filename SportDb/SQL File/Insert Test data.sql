@@ -1,22 +1,27 @@
 use SportNews
 go
 
-INSERT INTO Roles(NameRole,CanModify) VALUES ('SuperAdmin',0)
-INSERT INTO Roles(NameRole,CanModify) VALUES ('Admin',0)
-INSERT INTO Roles(NameRole,CanModify) VALUES ('Dziennikarz',0)
-INSERT INTO Roles(NameRole,CanModify) VALUES ('Dziennikarz ograniczone uprawnienia',1)
+SET IDENTITY_INSERT Roles ON
+GO
+INSERT INTO Roles(RoleId,NameRole,CanModify) VALUES (1,'Admin',0)
+INSERT INTO Roles(RoleId,NameRole,CanModify) VALUES (2,'SuperAdmin',0)
+INSERT INTO Roles(RoleId,NameRole,CanModify) VALUES (3,'Dziennikarz',0)
+INSERT INTO Roles(RoleId,NameRole,CanModify) VALUES (4,'Dziennikarz ograniczone uprawnienia',1)
+SET IDENTITY_INSERT Roles OFF
+GO
 
 INSERT INTO Users(FirstName,LastName,Login,Password,RoleId,UserModified,LastModified) VALUES ('Test','Testowy','Test',HASHBYTES('SHA-512/256','test'),1,null, GETDATE())
 INSERT INTO Users(FirstName,LastName,Login,Password,RoleId,UserModified,LastModified) VALUES ('Test2','Testowy2','Test2',HASHBYTES('SHA-512/256','test'),2,null, GETDATE())
 INSERT INTO Users(FirstName,LastName,Login,Password,RoleId,UserModified,LastModified) VALUES ('Test3','Testowy3','Test3',HASHBYTES('SHA-512/256','test'),3,null, GETDATE())
 
-INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Test',1,1,GETDATE())
-INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Pi³ka',2,1,GETDATE())
-INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Hokej',3,1,GETDATE())
-INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Formu³a 1',4,1,GETDATE())
+INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Pi³ka no¿na',1,1,GETDATE())
+INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Siatkówka',2,1,GETDATE())
+INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Tennis',3,1,GETDATE())
+INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Koszykóka',4,1,GETDATE())
+INSERT INTO Categories(Name,SortField,UserModified,LastModified) VALUES ('Motorsport',5,1,GETDATE())
 
-INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
- VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,NULL,
+INSERT INTO Articles(AuthorId,Title,Picture,DescritpionPicture,SourcePicture,ShortArticle,FullArticle,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
+ VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
 "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac nibh felis. Sed at vestibulum diam. Ut eleifend tellus eu enim consequat, eu mattis neque feugiat. Donec augue lacus, ultrices vitae interdum id, sagittis vel sapien. Cras sit amet elementum lectus. Phasellus purus elit, consequat eget nunc non, cursus vulputate mi. Integer lacinia nisi pulvinar libero facilisis dictum. Donec id viverra tortor. Quisque iaculis orci a metus mollis, nec sodales leo pellentesque. Ut malesuada pharetra purus eget laoreet. Duis id neque sed urna suscipit ultricies ac ut massa. Maecenas pellentesque ullamcorper bibendum.
@@ -26,8 +31,8 @@ Pellentesque sagittis eleifend purus, rhoncus varius nibh faucibus id. Donec vit
 Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tristique ac pellentesque ac, hendrerit vitae ligula. Suspendisse nisl arcu, pretium ut vulputate eget, dignissim quis metus. Cras vestibulum maximus dolor ut sollicitudin. Cras rutrum condimentum gravida. Ut vehicula pulvinar nulla vel molestie. Donec purus ex, hendrerit id dui vitae, consectetur accumsan sapien.',
 'lorem ipsum test 5',GETDATE(),null,1,GETDATE())
 
-INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified) 
-VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,NULL,
+INSERT INTO Articles(AuthorId,Title,Picture,DescritpionPicture,SourcePicture,ShortArticle,FullArticle,Keywords,PublicationTime,CategoryId,UserModified,LastModified) 
+VALUES (2,'Lorem Ipsum',NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
 "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
 
@@ -39,8 +44,8 @@ Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tri
 
 'lorem ipsum test 5',GETDATE(),null,3,GETDATE())
 
-INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
- VALUES (3,'Lorem Ipsum2',NULL,NULL,NULL,NULL,
+INSERT INTO Articles(AuthorId,Title,Picture,DescritpionPicture,SourcePicture,ShortArticle,FullArticle,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
+ VALUES (3,'Lorem Ipsum2',NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"
 "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."',
 
@@ -52,8 +57,8 @@ Fusce vestibulum sem quam, ut mattis leo imperdiet sed. Donec tortor lectus, tri
 
 'lorem ipsum test 5',GETDATE(),null,3,GETDATE())
 
-INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
- VALUES (3,'Jak to siê zaczê³o? – historia pierwszego wyœcigu F1',NULL,NULL,NULL,NULL,
+INSERT INTO Articles(AuthorId,Title,Picture,DescritpionPicture,SourcePicture,ShortArticle,FullArticle,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
+ VALUES (3,'Jak to siê zaczê³o? – historia pierwszego wyœcigu F1',NULL,NULL,NULL,
 '70 lat minê³o, jak jeden dzieñ – parafrazuj¹c tytu³owy utwór serialu „Czterdziestolatek”. Minê³o dok³adnie 13 maja, bo w³aœnie tego dnia 1950 roku, kierowcy po raz pierwszy œcigali siê w ramach Mistrzostw Œwiata Formu³y 1. W ubieg³¹ niedzielê odby³o siê inauguracyjne Grand Prix 70-lecia, a jak w³aœciwie dosz³o do tego pierwszego GP w dziejach F1?',
 
 'Historia wyœcigów Grand Prix siêga roku 1906, kiedy to Automobilklub Francuski zorganizowa³ wyœcig w pobli¿u Le Mans i okolicznych miejscowoœci. Warunki rozgrywania tych zawodów odbiega³y jednak znacznie od obecnych. Jedno okr¹¿enie toru, który wykorzystywa³ g³ównie pobliskie drogi, liczy³o ponad 103 kilometry! Mierz¹c dzisiejsz¹ miar¹, przypomina³o to bardziej rajd terenowy, ni¿ rywalizacjê wyœcigow¹.
@@ -101,8 +106,8 @@ Niedzielne Grand Prix 70-lecia by³o 1023. wyœcigiem w historii Formu³y 1 oraz 55
 
 'lorem ipsum test 5',GETDATE(),null,3,GETDATE())
 
-INSERT INTO Articles(AuthorId,Title,SmallPicture,Picture,DescritpionPicture,SourcePicture,ShortArticle,Article,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
- VALUES (2,'Lorem Ipsum Small',NULL,NULL,NULL,NULL,
+INSERT INTO Articles(AuthorId,Title,Picture,DescritpionPicture,SourcePicture,ShortArticle,FullArticle,Keywords,PublicationTime,CategoryId,UserModified,LastModified)
+ VALUES (2,'Lorem Ipsum Small',NULL,NULL,NULL,
 '"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... \n"',
 '"Tristique nulla vel molestie. Donec purus ex, hendrerit id dui vitae, consectetur accumsan sapien.',
 'lorem ipsum test 5',GETDATE(),null,3,GETDATE())

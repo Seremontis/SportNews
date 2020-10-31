@@ -3,7 +3,7 @@ go
 
 CREATE OR ALTER VIEW WListArticles
 AS
-SELECT ArticleId,Title,ShortArticle,PublicationTime,Keywords,C.Name,A.CategoryId
+SELECT ArticleId,Title,Picture,ShortArticle,PublicationTime,Keywords,C.Name,A.CategoryId
 FROM Articles A
 LEFT JOIN Categories C ON A.CategoryId=C.CategoryId
 go

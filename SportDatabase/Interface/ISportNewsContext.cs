@@ -3,7 +3,7 @@ using SportDatabase.Interface;
 using SportDatabase.Model;
 using System;
 
-namespace SportDatabase
+namespace SportDatabase.Interface
 {
     public interface ISportNewsContext:IBaseContext, IDisposable
     {

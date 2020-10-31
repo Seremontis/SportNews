@@ -2,11 +2,12 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using SportDatabase.Interface;
 using SportDatabase.Model;
 
 namespace SportDatabase.Context
 {
-    public partial class SportNewsContext : DbContext
+    public partial class SportNewsContext :  DbContext, ISportNewsContext
     {
         public SportNewsContext()
         {

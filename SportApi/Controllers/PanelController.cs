@@ -19,6 +19,7 @@ using SportDatabase.Repository;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Primitives;
 using ValidateAntiForgeryTokenAttribute = SportApi.Attribute.ValidateAntiForgeryTokenAttribute;
+using User = SportDatabase.Model.User;
 
 namespace SportApi.Controllers
 {
@@ -31,11 +32,11 @@ namespace SportApi.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private Func<Task> sendOperation;
-        private GenericOperation genericOperation;
+        private IGenericOperation genericOperation;
 
-        public PanelController(SportNewsContext sportNewsContext)
+        public PanelController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = new UnitOfWork(sportNewsContext);
+            this.unitOfWork = unitOfWork;
             this.genericOperation = new GenericOperation((UnitOfWork)unitOfWork);
         }
 
@@ -94,6 +95,23 @@ namespace SportApi.Controllers
             }
         }
 
+        [Route("GetUser/{id}")]
+        [HttpGet]
+        [Authorize(Roles = Policies.AllAdmin)]
+        public async Task<User> GetUser(int id)
+        {
+            try
+            {
+                StringValues stream;
+                HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
+                return await unitOfWork.IRepoUser.GetEdit(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         [Route("GetWUser/{pageid}")]
         [HttpGet]
@@ -115,7 +133,7 @@ namespace SportApi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllAdmin)]
-        public async Task<HttpResponseMessage> AddUser([FromBody] SportDatabase.Model.User user)
+        public async Task<HttpResponseMessage> AddUser([FromBody] User user)
         {
             sendOperation = async () => { await unitOfWork.IRepoUser.Add(user); };
             StringValues stream;
@@ -275,6 +293,15 @@ namespace SportApi.Controllers
             return await genericOperation.Execute(sendOperation, EnumOperation.Update, this.ControllerContext.RouteData,GetUserId(stream));
         }
 
+
+        [Route("GetRole")]
+        [HttpGet]
+        [Authorize(Roles = Policies.AllAdmin)]
+        public async Task<HttpResponseMessage> GetRole()
+        {
+            sendOperation = async () => { await unitOfWork.IRepoRole.Get();  };
+            return await genericOperation.Execute(sendOperation, EnumOperation.Get, this.ControllerContext.RouteData, 0);
+        }
 
         #region metody pomocniczne
         private int GetUserId(StringValues stream)

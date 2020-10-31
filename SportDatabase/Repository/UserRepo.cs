@@ -32,6 +32,11 @@ namespace SportDatabase.Repository
             return await _SportNewsContext.WUsers.FindAsync((object)id);
         }
 
+        public async Task<User> GetEdit(int id)
+        {
+            return await _SportNewsContext.Users.FindAsync((object)id);
+        }
+
         public async Task<List<WUser>> GetWList(int page)
         {
             SetupPageSize(page);

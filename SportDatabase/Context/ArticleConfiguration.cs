@@ -14,8 +14,6 @@ namespace SportDatabase.Context
             entity.Property(e => e.Keywords).IsFixedLength();
 
             entity.Property(e => e.Picture).IsFixedLength();
-
-            entity.Property(e => e.SmallPicture).IsFixedLength();
         }
     }
 }

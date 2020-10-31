@@ -38,7 +38,7 @@ namespace SportDatabase.Repository
             return await _SportNewsContext.WListArticles.OrderByDescending(x=>x.PublicationTime).Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
 
-        public async Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int categoryId, int page)
+        public async Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int? categoryId, int page)
         {
             SetupPageSize(page);
             return await _SportNewsContext.WListArticles

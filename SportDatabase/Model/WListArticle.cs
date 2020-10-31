@@ -13,8 +13,9 @@ namespace SportDatabase.Model
         [Required]
         [Column(TypeName = "text")]
         public string Title { get; set; }
-        [MaxLength(1)]
-        public byte[] SmallPicture { get; set; }
+        [MaxLength]
+        [Column(TypeName = "text")]
+        public string Picture { get; set; }
         [Column(TypeName = "text")]
         public string ShortArticle { get; set; }
         [Column(TypeName = "date")]

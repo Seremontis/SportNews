@@ -27,10 +27,13 @@ export class EditTableComponent implements OnInit {
   CategoryList: WCategory[];
   UserList: IWUser[];
   ArticleList: WListArticle[];
+  page: number;
 
 
   constructor(private route: ActivatedRoute, public service: ApiService, private modalService: NgbModal) {
+    this.page = 1;
     this.route.params.subscribe(params => {
+      this.page = 1;
       this.id = Number(params.id);
       this.runTable();
     });
@@ -51,10 +54,58 @@ export class EditTableComponent implements OnInit {
         break;
     }
   }
+  nextPageArticle() {
+    this.page += 1
+    this.GetListArticle(this.page)
+    if(this.UserList.length==0){
+      this.page -= 1
+      this.GetListArticle(this.page)
+      alert('Brak kolejnych rekordów')
+    }         
+  }
+
+  prevPageArticle() {
+    if (this.page <= 1) {
+      this.page -= 1
+      this.GetListArticle(this.page)
+    }
+  }
+
+  nextPageUser() {   
+    this.page += 1
+    this.GetListUser(this.page)
+    if(this.UserList.length>0){
+      this.page -= 1;
+      this.GetListUser(this.page)
+      alert('Brak kolejnych rekordów')
+    }
+  }
+  prevPageUser() {
+    if (this.page <= 1) {
+      this.page -= 1
+      this.GetListUser(this.page)
+    }
+  }
+
+  checkSizeUser(){
+    if(this.UserList!=null){
+      if(this.UserList.length==15)
+        return true;
+    }
+    return false
+  }
+
+  checkSizeArticle(){
+    if(this.ArticleList!=null){
+      if(this.ArticleList.length==15)
+        return true;
+    }
+    return false
+  }
 
   openFormModal(data) {
     const modalRef = this.modalService.open(ModalCategoryEditComponent);
-    modalRef.componentInstance.id = 10; // should be the id
+    modalRef.componentInstance.id = 10; 
     modalRef.componentInstance.category = data;
     modalRef.componentInstance.CategoryList = this.CategoryList;
     modalRef.result.then((result: Category) => {
@@ -69,28 +120,28 @@ export class EditTableComponent implements OnInit {
   GetCategory() {
     this.isLoading = true;
     this.service.GetCategory().subscribe(
-      (response) => {                          
+      (response) => {
         console.log('response received');
         this.isLoading = this.isError = false;
         this.CategoryList = response;
       },
       (error) => {
         this.isLoading = false;
-        this.isError = true;                           
+        this.isError = true;
         console.log('Request failed with error')
-        if(error.status == 401){
+        if (error.status == 401) {
           alert('Brak uprawnień')
-          window.location.href='/login'
+          window.location.href = '/login'
         }
       },
       () => {
-        console.info('Request completed')     
+        console.info('Request completed')
       });
   }
 
-  FillTrueAndFalse(numb){
-    if(numb){
-      if(numb>0)
+  FillTrueAndFalse(numb) {
+    if (numb) {
+      if (numb > 0)
         return "Tak";
     }
     return "Nie";
@@ -135,15 +186,15 @@ export class EditTableComponent implements OnInit {
 
   UpdateCategory(category: Category) {
     this.service.UpdateCategory(category).subscribe(
-      (response) => {                          
+      (response) => {
         console.log('response received');
         this.GetCategory();
       },
-      (error) => {                          
+      (error) => {
         console.error('Request failed with error')
       },
       () => {
-        console.info('Request completed')     
+        console.info('Request completed')
       });
   }
 
@@ -151,41 +202,41 @@ export class EditTableComponent implements OnInit {
   GetListUser(page: number) {
     this.service.GetUsers(page).subscribe(
       (response) => {
-        this.UserList = response;                   
+        this.UserList = response;
         console.log('response received');
       },
-      (error) => {                          
+      (error) => {
         console.error('Request failed with error')
       },
       () => {
-        console.info('Request completed')     
+        console.info('Request completed')
       });
   }
   GetListArticle(page: number) {
     this.service.GetListArticle(page).subscribe(
       (response) => {
-        this.ArticleList = response;                   
+        this.ArticleList = response;
         console.log('response received');
       },
-      (error) => {                          
+      (error) => {
         console.error('Request failed with error')
       },
       () => {
-        console.info('Request completed')     
+        console.info('Request completed')
       });
   }
 
   DeleteArticle(id: number) {
     this.service.DeleteArticle(id).subscribe(
       (response) => {
-        this.GetListArticle(1)                  
+        this.GetListArticle(1)
         console.log('response received');
       },
-      (error) => {                          
+      (error) => {
         console.error('Request failed with error')
       },
       () => {
-        console.info('Request completed')     
+        console.info('Request completed')
       });
   }
 

@@ -33,6 +33,24 @@ export class ArticleFormComponent implements OnInit {
         this.addOrUpdateFlag = false;
       }
     });
+    if (!this.articleid) {
+      this.article = {
+        articleId: null,
+        authorId: null,
+        title: null,
+        picture: null,
+        descritpionPicture: null,
+        sourcePicture: null,
+        shortArticle: null,
+        fullArticle: null,
+        keywords: null,
+        publicationTime: null,
+        categoryId: null,
+        userModified: null,
+        lastModified: null,
+      };
+    }
+
   }
 
 
@@ -41,12 +59,18 @@ export class ArticleFormComponent implements OnInit {
 
   handleUpload(event) {
     const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      if(reader.result)
-        this.article.picture = reader.result.toString();
-    };
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if (reader.result)
+          this.article.picture = reader.result.toString();
+      };
+    }
+  }
+
+  resetImage() {
+    this.article.picture = '';
   }
 
   openFormModal(data) {

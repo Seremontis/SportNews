@@ -42,14 +42,7 @@ namespace SportDatabase.Repository
             T checkModel = await _SportNewsContext.Set<T>().FindAsync((object)id);
             if (checkModel != null)
                 _SportNewsContext.Set<T>().Remove(checkModel);
-            else
-            {
-                //throw new HttpResponseMessage(System.Net.HttpStatusCode.NotFound)
-                //{
-                //    Content = new StringContent(string.Format("Brak wyników dla id= {0}", id)),
-                //    ReasonPhrase = "Brak elementu do usunięcia"
-                //};
-            }
+ 
         }
 
         public async Task<List<T>> Get()
@@ -60,12 +53,18 @@ namespace SportDatabase.Repository
         public void Update(T model)
         {
             _SportNewsContext.Entry(model).State = EntityState.Modified;
-            //_SportNewsContext.Set<T>().Attach(model);
             _SportNewsContext.Set<T>().Update(model);
         }
 
-        internal void SetupPageSize(int page)
+        internal void SetupPageSize(int page,int? size=null)
         {
+            if (size != null)
+            {
+                _Page = page;
+                _DefaultPageSize=(int)size;
+            }
+
+
             if (page == 1)
             {
                 _Page = 0;

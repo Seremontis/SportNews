@@ -1,54 +1,61 @@
-<form #articleModel = "ngForm" (ngSubmit) = "RunArticle(articleModel)">
+<form #articleModel="ngForm" (ngSubmit)="RunArticle(articleModel)">
   <div class="form-group row ">
     <div class="col-md-12 text-right">
       <button type="submit" class="btn btn-success btn-lg">Zatwiedź</button>
-      <a (click) = "openFormModal(articleModel)" class="btn btn-primary btn-lg">Podgląd</a>
+      <a (click)="openFormModal(articleModel)" class="btn btn-primary btn-lg">Podgląd</a>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label">Tytuł artykułu</label>
     <div class="col-md-10">
-      <input type="text" [(ngModel)] = "article.title" #lastNameVar="ngModel"
-      name="title" class="form-control" />
+      <input type="text" [(ngModel)]="article.title" #lastNameVar="ngModel" name="title" class="form-control" />
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label">Kategoria</label>
     <div class="col-md-10">
-      <select id="inputState" [(ngModel)] = "article.categoryId" name="categoryId" class="form-control col-md-3" >
+      <select id="inputState" [(ngModel)]="article.categoryId" name="categoryId" class="form-control col-md-3">
         <option selected>...</option>
-        <option *ngFor = "let element of categoryList" [(value)] = "element.categoryId" >{{element.name}}</option>
+        <option *ngFor="let element of categoryList" [(value)]="element.categoryId">{{element.name}}</option>
       </select>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label">Słowa kluczowe</label>
     <div class="col-md-10">
-      <input type="text" [(ngModel)] = "article.keywords" name="keywords" class="form-control" />
+      <input type="text" [(ngModel)]="article.keywords" name="keywords" class="form-control" />
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label">Krótki artykułu</label>
     <div class="col-md-10">
-      <textarea type="text" [(ngModel)] = "article.shortArticle" name="shortArticle" class="form-control bgTextaAre" rows="5"></textarea>
+      <textarea type="text" [(ngModel)]="article.shortArticle" name="shortArticle" class="form-control bgTextaAre"
+        rows="5"></textarea>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label">Zdjęcie</label>
     <div class="col-md-10">
-      <input type="file" accept="image/*" (ngModel) = "article.picture" name="picture" id="picture" class="form-control-file bgTextaAre" (change)="handleUpload($event)" />
+      <div style="float: left;">
+        <input type="file" accept="image/*" [ngModel]="article.picture" name="picture" id="picture"
+          class="float-left bgTextaAre" (change)="handleUpload($event)" />
+      </div>
+      <div class="float-left ml-5 h-100 w-auto d-table">
+        <a class="btn btn-danger d-table-cell align-middle" (click)="resetImage()">X</a>
+      </div>
     </div>
+
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label">Alternatywny opis zdjęcia</label>
     <div class="col-md-10">
-      <input type="text" [(ngModel)] = "article.descritpionPicture" name="descritpionPicture" class="form-control" />
+      <input type="text" [(ngModel)]="article.descritpionPicture" name="descritpionPicture" class="form-control" />
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label">Źródło zdjęcia</label>
     <div class="col-md-10">
-      <input type="text" [(ngModel)] = "article.sourcePicture" name="sourcePicture" class="form-control" />
+      <input type="text" [(ngModel)]="article.sourcePicture" name="sourcePicture" class="form-control" />
     </div>
   </div>
   <hr />
@@ -57,13 +64,13 @@
     <div class="col-md-10"></div>
   </div>
   <div class="form-group bgAreaColor">
-   <angular-editor [(ngModel)] = "article.fullArticle" name="fullArticle" [config]="config"></angular-editor>
+    <angular-editor [(ngModel)]="article.fullArticle" name="fullArticle" [config]="config"></angular-editor>
   </div>
-  <hr/>
+  <hr />
   <div class="form-group row">
     <div class="col-md-12 text-center">
       <button type="submit" class="btn btn-success btn-lg">Zatwiedź</button>
-      <a (click) = "openFormModal(articleModel)" class="btn btn-primary btn-lg">Podgląd</a>
+      <a (click)="openFormModal(articleModel)" class="btn btn-primary btn-lg">Podgląd</a>
     </div>
   </div>
 </form>

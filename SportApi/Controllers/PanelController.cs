@@ -70,7 +70,7 @@ namespace SportApi.Controllers
         {
             try
             {
-                return await unitOfWork.IRepoArticle.GetListArticles(pageId);
+                return await unitOfWork.IRepoArticle.GetListArticles(pageId,15);
             }
             catch (Exception ex)
             {
@@ -120,7 +120,7 @@ namespace SportApi.Controllers
         {
             try
             {
-                return await unitOfWork.IRepoUser.GetWList(pageid);
+                return await unitOfWork.IRepoUser.GetWList(pageid,15);
             }
             catch (Exception)
             {
@@ -143,9 +143,7 @@ namespace SportApi.Controllers
         }
 
         [Route("AddArticle")]
-        [ValidateModel]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllWithoutAdmin)]
         public async Task<HttpResponseMessage> AddArticle([FromBody] Article article)
         {

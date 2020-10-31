@@ -2,8 +2,7 @@ export interface  IArticle {
     articleId: number;
     authorId: number;
     title: string;
-    smallPicture: string;  //base64
-    picture: string;
+    picture: string;  //base64
     descritpionPicture: string;
     sourcePicture: string;
     shortArticle: string;

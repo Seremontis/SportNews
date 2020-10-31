@@ -6,7 +6,7 @@ using SportDatabase.Interface;
 using SportDatabase.Model;
 using System;
 using System.Collections.Generic;
-
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,9 +37,9 @@ namespace SportDatabase.Repository
             return await _SportNewsContext.Users.FindAsync((object)id);
         }
 
-        public async Task<List<WUser>> GetWList(int page)
+        public async Task<List<WUser>> GetWList(int page,int size)
         {
-            SetupPageSize(page);
+            SetupPageSize(page,size);
             return await _SportNewsContext.WUsers.Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
     }

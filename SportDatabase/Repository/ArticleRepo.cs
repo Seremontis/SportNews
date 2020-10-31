@@ -32,9 +32,12 @@ namespace SportDatabase.Repository
             return await _SportNewsContext.WFullArticles.FindAsync((object)id);
         }
 
-        public async Task<IEnumerable<WListArticle>> GetListArticles(int page)
+        public async Task<IEnumerable<WListArticle>> GetListArticles(int page,int? size=null)
         {
-            SetupPageSize(page);
+            if (size == null)
+                SetupPageSize(page);
+            else
+                SetupPageSize(page, size);
             return await _SportNewsContext.WListArticles.OrderByDescending(x=>x.PublicationTime).Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
 

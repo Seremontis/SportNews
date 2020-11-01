@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './ApiService';
 import { ApiVisitorService } from './ApiVisitorService';
-import { WCategory } from './model/WCategory';
+import { WCategory } from '../model/WCategory';
 
 @Injectable(
     {

@@ -2,10 +2,10 @@ import { Injectable} from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { HttpHeaders } from '@angular/common/http';
-import { WFullArticle } from './model/WFullArticle';
-import { WListArticle } from './model/WListArticle';
-import { IModelKeyword } from './model/IModelKeyword';
-import { WCategory } from './model/WCategory';
+import { WFullArticle } from '../model/WFullArticle';
+import { WListArticle } from '../model/WListArticle';
+import { IModelKeyword } from '../model/IModelKeyword';
+import { WCategory } from '../model/WCategory';
 
 @Injectable({
     providedIn: 'root'

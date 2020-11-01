@@ -62,7 +62,7 @@ Create table Articles(
 [ShortArticle] text,
 [FullArticle] text,
 [Keywords] nchar(100),
-[PublicationTime] date not null,
+[PublicationTime] datetime not null,
 [CategoryId] int,
 [UserModified] int not null,
 [LastModified] datetime not null

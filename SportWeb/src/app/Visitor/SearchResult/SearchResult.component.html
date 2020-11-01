@@ -5,7 +5,7 @@
     <figure #figure *ngFor="let element of ArticleList">
         <a [routerLink] = "['/article', element.articleId]">
         <div class="card">
-            <img class="card-img-top" src="{{element.smallPicture}}" alt="Card image cap">
+            <img class="card-img-top" src="{{element.picture}}" alt="Card image cap">
             <header class="card-body bgColor">
                 <h5 class="card-title">{{element.title}}</h5>
             </header>

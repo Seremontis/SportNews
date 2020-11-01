@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { DarkMode } from 'src/service/DarkMode';
-import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
+import { DarkMode } from 'src/service/operation/DarkMode';
+import { FontSizeManipulation } from 'src/service/operation/FontSizeManipulation';
 declare var $: any;
 
 @Component({
@@ -12,7 +12,6 @@ export class BarVisitorComponent implements OnInit {
 
   @ViewChildren('mainbar') span: QueryList<any>;
   elementToChangeModeWithBorder: string[] = ['.contentPage', '.mainBar', '.contentSchedule', '.NavSide'];
-  //customATageToChangeMdoe:string[]=['a','.mainBar'];
   model = true;
   constructor(private mode: DarkMode, private fontChange: FontSizeManipulation, private font: FontSizeManipulation) {
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiVisitorService } from 'src/service/ApiVisitorService';
+import { ApiVisitorService } from 'src/service/operation/ApiVisitorService';
 import { HostListener } from '@angular/core';
-import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
+import { FontSizeManipulation } from 'src/service/operation/FontSizeManipulation';
 
 @Component({
   selector: 'app-visitor-layout',

@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ApiVisitorService} from 'src/service/ApiVisitorService'
+import { ApiVisitorService} from 'src/service/operation/ApiVisitorService'
 import { WListArticle } from 'src/service/model/WListArticle';
 import { DefaultImage } from 'src/assets/defaultImage';
-import { Loading } from 'src/assets/Loading';
+import { Loading } from 'src/service/operation/Loading';
 import { HostListener } from '@angular/core';
 import { WCategory } from 'src/service/model/WCategory';
-import { DarkMode } from 'src/service/DarkMode';
+import { DarkMode } from 'src/service/operation/DarkMode';
 
 
 declare var $: any;

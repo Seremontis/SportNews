@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as crypto from '../../node_modules/crypto-js';
-import { IUser } from './model/Iuser';
+import * as crypto from '../../../node_modules/crypto-js';
+import { IUser } from '../model/Iuser';
 import { ApiService } from './ApiService';
 
 @Injectable({

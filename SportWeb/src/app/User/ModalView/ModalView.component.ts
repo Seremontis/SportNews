@@ -28,4 +28,11 @@ export class ModalViewComponent implements OnInit {
     if (!this.article.descritpionPicture)
       this.article.descritpionPicture = this.imageDefault.description;
   }
+
+  checkSourcPic(){
+    if(this.article?.sourcePicture)
+      return this.article.sourcePicture
+    else
+      return "opracowanie własne"
+  }
 }

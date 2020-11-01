@@ -44,8 +44,11 @@ namespace SportDatabase.Repository
         public async Task<IEnumerable<WListArticle>> GetListArticlesByCategory(int? categoryId, int page)
         {
             SetupPageSize(page);
+            List<int> list=new List<int>();
+            if(categoryId!=null)
+                list = _SportNewsContext.Categories.Where(x => x.AboveCategory == categoryId).Select(x => x.CategoryId).ToList();
             return await _SportNewsContext.WListArticles
-                .Where(x => x.CategoryId == categoryId)
+                .Where(x => x.CategoryId == categoryId || list.Contains((int)x.CategoryId))
                 .Skip(_Page).Take(_DefaultPageSize).ToListAsync();
         }
 
@@ -58,7 +61,7 @@ namespace SportDatabase.Repository
             foreach (var item in keys)
             {
                  wLists.AddRange(_SportNewsContext.WListArticles.AsNoTracking()
-                     .Where(x => x.Keywords.Contains(item)));
+                     .Where(x => x.Keywords.Contains(item.ToLower())));
             };
 
             return wLists.Skip(_Page).Take(_DefaultPageSize);

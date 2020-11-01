@@ -1,7 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Loading } from 'src/assets/Loading';
-import { AccessData } from 'src/service/AccessData';
-import { DarkMode } from 'src/service/DarkMode';
+import { Loading } from 'src/service/operation/Loading';
+import { AccessData } from 'src/service/operation/AccessData';
+import { DarkMode } from 'src/service/operation/DarkMode';
 import { WCategory } from 'src/service/model/WCategory';
 
 @Component({

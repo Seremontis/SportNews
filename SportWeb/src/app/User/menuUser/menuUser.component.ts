@@ -12,7 +12,7 @@ export class MenuUserComponent implements OnInit {
     { "text": "Nowy artykuł", "url": "./articleForm", "type": 3,"queryParams":"" },
     { "text": "Artykuły", "url": "./editTable", "type": 3 ,"queryParams":"2"},
     { "text": "Użytkownicy", "url": "./editTable", "type": 1 ,"queryParams":"1"},
-    { "text": "Kategoria", "url": "./editTable", "type": 1 ,"queryParams": "3"},
+    { "text": "Kategorie", "url": "./editTable", "type": 1 ,"queryParams": "3"},
     { "text": "Media", "url": "/user", "type": 0 ,"queryParams":""},
   ];
   constructor() {

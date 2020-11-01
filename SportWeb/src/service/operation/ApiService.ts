@@ -1,15 +1,15 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Category } from './model/Category';
-import { WCategory } from './model/WCategory';
+import { Category } from '../model/Category';
+import { WCategory } from '../model/WCategory';
 import { HttpHeaders } from '@angular/common/http';
-import { IArticle } from './model/Article';
-import { IWUser } from './model/WUser';
-import { WListArticle } from './model/WListArticle';
-import { IUser } from './model/Iuser';
-import {IModelAuth} from './model/ImodelAuth';
-import {IRole} from './model/IRole';
+import { IArticle } from '../model/Article';
+import { IWUser } from '../model/WUser';
+import { WListArticle } from '../model/WListArticle';
+import { IUser } from '../model/Iuser';
+import {IModelAuth} from '../model/ImodelAuth';
+import {IRole} from '../model/IRole';
 
 @Injectable({
     providedIn: 'root'
@@ -86,8 +86,11 @@ export class ApiService {
         return this.http.delete(this.rootURL + 'DeleteArticle/'+id,this.GetHeader());
     }
 
-    UpdateArticle(category:Category):Observable<Category>{
-        return this.http.put<Category>(this.rootURL + 'UpdateArticle', JSON.stringify(category),this.GetHeader())
+    DeleteUser(id:number): Observable<any>{
+        return this.http.delete(this.rootURL + 'DeleteUser/'+id,this.GetHeader());
+    }
+    UpdateArticle(model:IArticle):Observable<IArticle>{
+        return this.http.put<IArticle>(this.rootURL + 'UpdateArticle', JSON.stringify(model),this.GetHeader())
     }
 
     GetUsers(page:number): Observable<IWUser[]>{

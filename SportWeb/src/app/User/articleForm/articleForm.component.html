@@ -15,7 +15,7 @@
     <label class="col-md-2 col-form-label">Kategoria</label>
     <div class="col-md-10">
       <select id="inputState" [(ngModel)]="article.categoryId" name="categoryId" class="form-control col-md-3">
-        <option selected>...</option>
+        <option [value]="0" selected>...</option>
         <option *ngFor="let element of categoryList" [(value)]="element.categoryId">{{element.name}}</option>
       </select>
     </div>

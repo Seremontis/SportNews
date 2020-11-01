@@ -24,7 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {ModalCategoryEditComponent} from 'src/app/User/ModalCategoryEdit/ModalCategoryEdit.component';
 import { ArticleComponent } from './Visitor/article/article.component';
-import {TruncatePipe} from '../service/TruncatePipe'
+import {TruncatePipe} from '../service/operation/TruncatePipe'
 import { SearchResultComponent } from './Visitor/SearchResult/SearchResult.component';
 import { MapSiteComponent } from './Visitor/MapSite/MapSite.component';
 import {ModalViewComponent} from './User/ModalView/ModalView.component'

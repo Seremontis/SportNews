@@ -43,7 +43,7 @@
   <div class="form-group row">
     <label class="col-md-2 col-form-label">Uprawnienia</label>
     <div class="col-md-10">
-      <select id="inputState" [(ngModel)] = "user.roleId" name="roleId" class="form-control col-md-3" >
+      <select id="inputState" [(ngModel)] = "user.roleId" name="roleId" class="form-control col-md-3" (value)="user.roleId" >
         <option selected>...</option>
         <option *ngFor = "let element of roles" [(value)] = "element.roleId" >{{element.nameRole}}</option>
       </select>

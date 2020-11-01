@@ -1,11 +1,11 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultImage } from 'src/assets/defaultImage';
-import { Loading } from 'src/assets/Loading';
-import { AccessData } from 'src/service/AccessData';
-import { ApiVisitorService } from 'src/service/ApiVisitorService';
-import { DarkMode } from 'src/service/DarkMode';
-import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
+import { Loading } from 'src/service/operation/Loading';
+import { AccessData } from 'src/service/operation/AccessData';
+import { ApiVisitorService } from 'src/service/operation/ApiVisitorService';
+import { DarkMode } from 'src/service/operation/DarkMode';
+import { FontSizeManipulation } from 'src/service/operation/FontSizeManipulation';
 import { IModelKeyword } from 'src/service/model/IModelKeyword';
 import { WListArticle } from 'src/service/model/WListArticle';
 

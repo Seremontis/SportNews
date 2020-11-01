@@ -3,12 +3,12 @@ import { ActivatedRoute, NavigationEnd, Router, RouteReuseStrategy } from '@angu
 import { HostListener } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { WListArticle } from 'src/service/model/WListArticle';
-import { ApiVisitorService } from 'src/service/ApiVisitorService';
+import { ApiVisitorService } from 'src/service/operation/ApiVisitorService';
 import { DefaultImage } from 'src/assets/defaultImage';
-import { AccessData } from 'src/service/AccessData';
-import { Loading } from 'src/assets/Loading';
-import { DarkMode } from 'src/service/DarkMode';
-import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
+import { AccessData } from 'src/service/operation/AccessData';
+import { Loading } from 'src/service/operation/Loading';
+import { DarkMode } from 'src/service/operation/DarkMode';
+import { FontSizeManipulation } from 'src/service/operation/FontSizeManipulation';
 import { Location } from '@angular/common';
 import { WCategory } from 'src/service/model/WCategory';
 

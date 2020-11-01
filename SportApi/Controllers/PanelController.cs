@@ -290,10 +290,9 @@ namespace SportApi.Controllers
         [Route("GetRole")]
         [HttpGet]
         [Authorize(Roles = Policies.AllAdmin)]
-        public async Task<HttpResponseMessage> GetRole()
+        public async Task<IEnumerable<Role>> GetRole()
         {
-            sendOperation = async () => { await unitOfWork.IRepoRole.Get();  };
-            return await genericOperation.Execute(sendOperation, EnumOperation.Get, this.ControllerContext.RouteData, 0);
+            return await unitOfWork.IRepoRole.Get();
         }
 
         #region metody pomocniczne

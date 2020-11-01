@@ -83,17 +83,9 @@ const routes: Routes = [
         component:EditTableComponent
       },
       {
-        path:'editTable/userForm',
+        path:'editTable/editForm/:id',
         component:UserEditFormComponent
       },
-      {
-        path:'editTable/userForm/:id',
-        component:UserEditFormComponent
-      },
-      {
-        path:'test',
-        component:UserEditFormComponent
-      }
     ]
   }
 ];

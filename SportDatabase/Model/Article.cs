@@ -26,7 +26,6 @@ namespace SportDatabase.Model
         public string FullArticle { get; set; }
         [StringLength(100)]
         public string Keywords { get; set; }
-        [Column(TypeName = "date")]
         public DateTime PublicationTime { get; set; }
         public int? CategoryId { get; set; }
         public int UserModified { get; set; }

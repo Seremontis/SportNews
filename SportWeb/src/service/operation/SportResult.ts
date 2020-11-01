@@ -1,10 +1,10 @@
-import { IModelResult } from './model/IModelResult'
+import { IModelResult } from '../model/IModelResult'
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { from } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { RootObject as FootballApiModel } from 'src/service/model/ResultPageApiFootball'
-import { RootObject as BasketballApiModel } from 'src/service/model/AllSportApiModel'
-import { RootObject as TennisApi } from 'src/service/model/RapidTennisModelApi'
+import { RootObject as FootballApiModel } from '../model/ResultPageApiFootball'
+import { RootObject as BasketballApiModel } from '../model/AllSportApiModel'
+import { RootObject as TennisApi } from '../model/RapidTennisModelApi'
 
 @Injectable({
     providedIn: 'root'

@@ -4,13 +4,17 @@
   <ul *ngIf="LoadMainCategoryList()">
     <li #li class="active">
       <a class="linkUnd" [routerLink]="['/']">Strona główna</a>
+    </li>
     <li #li class="active" *ngFor="let element of MainCategoryList">
-      <a class="linkUnd" [routerLink]="['./categories', element.categoryId]">{{element.name}}</a>
+      <a class="linkUnd" [routerLink]="['/categories', element.categoryId]">{{element.name}}</a>
       <ul>
         <li #li class="active" *ngFor="let subelement of GetSubMenu(element.categoryId)">
-          <a class="linkUnd" [routerLink]="['./categories', subelement.categoryId]">{{subelement.name}}</a>
+          <a class="linkUnd" [routerLink]="['/categories', subelement.categoryId]">{{subelement.name}}</a>
         </li>
       </ul>
+    </li>
+    <li #li class="active">
+      <a class="linkUnd" [routerLink]="['/categories',0]">Bez kategorii</a>
     </li>
   </ul>
 </main>

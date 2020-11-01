@@ -18,9 +18,10 @@ go
 
 CREATE OR ALTER VIEW WUser
 AS
-SELECT UserId,FirstName,LastName,Login,PasswordExpired,R.RoleId,NameRole
+SELECT U.UserId,U.FirstName,U.LastName,U.Login,U.PasswordExpired,R.RoleId,R.NameRole,Us.FirstName+' '+Us.LastName as'UserModified'
 FROM Users U
 LEFT JOIN Roles R ON U.RoleId=R.RoleId
+LEFT JOIN Users Us ON U.UserModified=Us.UserId
 GO
 
 

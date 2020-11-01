@@ -1,10 +1,10 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiVisitorService } from 'src/service/ApiVisitorService';
+import { ApiVisitorService } from 'src/service/operation/ApiVisitorService';
 import { WFullArticle } from 'src/service/model/WFullArticle';
 import { DatePipe } from '@angular/common';
 import { DefaultImage } from 'src/assets/defaultImage';
-import { FontSizeManipulation } from 'src/service/FontSizeManipulation';
+import { FontSizeManipulation } from 'src/service/operation/FontSizeManipulation';
 
 
 @Component({

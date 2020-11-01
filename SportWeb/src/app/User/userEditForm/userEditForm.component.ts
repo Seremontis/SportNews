@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/service/ApiService';
+import { ApiService } from 'src/service/operation/ApiService';
 import { IUser } from 'src/service/model/Iuser';
 import { ActivatedRoute } from '@angular/router';
 import {IRole} from  'src/service/model/IRole';
@@ -12,14 +12,24 @@ import {IRole} from  'src/service/model/IRole';
 export class UserEditFormComponent implements OnInit {
 
   
-  user: IUser;
+  user: IUser={
+    firstName:null,
+    lastName:null,
+    userId: null,
+    roleId:null,
+    login:null,
+    password:null,
+    passwordExpired:null,
+    userModified:null,
+    lastModified:null
+  };
   selectedOption: number;
   userId: number = 0;
   roles:IRole[]=[];
   addOrUpdateFlag: boolean = true;
-  fileToUpload: File = null;
 
   constructor(public service: ApiService, private route: ActivatedRoute) {
+    this.GetRoles();
     this.route.params.subscribe(params => {
       this.userId = Number(params.id);
       if (!Number.isNaN(this.userId)) {
@@ -70,27 +80,30 @@ export class UserEditFormComponent implements OnInit {
   }
   CreateUser(data) {
     this.service.AddArticle(data).subscribe(
-      (response) => {                           //next() callback
+      (response) => {                           
         console.log('response received');
       },
-      (error) => {                        //error() callback
+      (error) => {                       
         console.error('Request failed with error');
-      },
-      () => {
-        console.info('Request completed')      //This is actually not needed 
       });
   }
   UpdateUser(data) {
     this.service.UpdateArticle(data).subscribe(
-      (response) => {                           //next() callback
+      (response) => {                          
         console.log('response received');
       },
-      (error) => {                        //error() callback
+      (error) => {                        
         console.error('Request failed with error');
-      },
-      () => {
-        console.info('Request completed')      //This is actually not needed 
       });
   }
 
+  GetRoles(){
+    this.service.GetRole().subscribe(
+      (response) => {                          
+        this.roles=response;
+      },
+      (error) => {                      
+        console.error('Request failed with error');
+      });
+  }
 }

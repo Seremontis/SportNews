@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HostListener,ElementRef,ViewChild, ViewChildren, QueryList } from '@angular/core';
-import { Loading } from 'src/assets/Loading';
-import { ApiService} from 'src/service/ApiService'
+import { HostListener,ViewChildren, QueryList } from '@angular/core';
+import { Loading } from 'src/service/operation/Loading';
 import { WCategory } from 'src/service/model/WCategory';
-import { AccessData } from 'src/service/AccessData';
-import { BarVisitorComponent } from '../barVisitor/barVisitor.component';
-import { DarkMode } from 'src/service/DarkMode';
+import { AccessData } from 'src/service/operation/AccessData';
+import { DarkMode } from 'src/service/operation/DarkMode';
 import { Router } from '@angular/router';
-import { ApiVisitorService } from 'src/service/ApiVisitorService';
+import { ApiVisitorService } from 'src/service/operation/ApiVisitorService';
 
 @Component({
   selector: 'app-menu',
@@ -96,5 +94,10 @@ export class MenuComponent implements OnInit {
     else
       alert('Puste pole wyszukiwarki');
    
+  }
+
+  GetCategoryMenu(){
+    if(this.CategoryList)
+      return this.CategoryList.filter(x=> x.aboveCategory==null)
   }
 }

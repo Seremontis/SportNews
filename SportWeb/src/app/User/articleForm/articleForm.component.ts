@@ -1,7 +1,7 @@
 import { mapToMapExpression } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { ApiService } from 'src/service/ApiService';
+import { ApiService } from 'src/service/operation/ApiService';
 import { IArticle } from 'src/service/model/Article';
 import { WCategory } from 'src/service/model/WCategory';
 import { ActivatedRoute } from '@angular/router';
@@ -78,7 +78,6 @@ export class ArticleFormComponent implements OnInit {
     const modalRef = this.modalService.open(ModalViewComponent, { size: 'modalCustom', });
     data.value.picture = this.article.picture;
     modalRef.componentInstance.article = this.checkModel(data.value);
-    //modalRef.componentInstance.categoryName=this.categoryList.filter(x=>x.categoryId==this.article.categoryId);
     modalRef.result.then((result: IArticle) => {
       console.log(result);
 
@@ -90,7 +89,7 @@ export class ArticleFormComponent implements OnInit {
 
   checkModel(value) {
     this.article.title = value.title;
-    this.article.categoryId = value.categoryId;
+    this.article.categoryId = value.categoryId==0?null:value.categoryId;
     this.article.keywords = value.keywords;
     this.article.shortArticle = value.shortArticle;
     this.article.fullArticle = value.fullArticle;
@@ -117,16 +116,15 @@ export class ArticleFormComponent implements OnInit {
 
   LoadCategory(userId) {
     this.service.GetCategory(userId).subscribe(
-      (response) => {                           //next() callback
+      (response) => {                         
         console.log('response received');
         this.categoryList = response;
       },
-      (error) => {                        //error() callback
+      (error) => {              
         console.error('Request failed with error');
         this.LoadOrErrorOption(false);
       },
       () => {
-        console.info('Request completed')      //This is actually not needed 
         this.LoadOrErrorOption(true);
       });
   }
@@ -141,35 +139,36 @@ export class ArticleFormComponent implements OnInit {
 
   CreateArticle(data) {
     this.service.AddArticle(data).subscribe(
-      (response) => {                           //next() callback
+      (response) => {                          
         console.log('response received');
+        alert('Zapisano')
+        window.location.href='/user/editTable/2'
       },
-      (error) => {                        //error() callback
+      (error) => {                       
         console.error('Request failed with error');
-      },
-      () => {
-        console.info('Request completed')      //This is actually not needed 
+        alert('Wystapił błąd')
       });
   }
   UpdateArticle(data) {
-    this.service.UpdateArticle(data).subscribe(
-      (response) => {                           //next() callback
+    this.checkModel(data);
+    this.service.UpdateArticle(this.article).subscribe(
+      (response) => {                           
         console.log('response received');
+        alert('Zapisano')
+        window.location.href='/user/editTable/2'
       },
-      (error) => {                        //error() callback
+      (error) => {                       
         console.error('Request failed with error');
-      },
-      () => {
-        console.info('Request completed')      //This is actually not needed 
+        alert('Wystapił błąd')
       });
   }
 
   LoadArticle(id: number) {
     this.service.GetArticle(id).subscribe(
-      (response) => {                           //next() callback
+      (response) => {                          
         this.article = response;
       },
-      (error) => {                        //error() callback
+      (error) => {                     
         console.error('Request failed with error');
       })
   }

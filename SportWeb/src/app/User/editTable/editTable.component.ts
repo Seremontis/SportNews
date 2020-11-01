@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router, RouteReuseStrategy } from '@angu
 import { HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ApiService } from 'src/service/ApiService'
+import { ApiService } from 'src/service/operation/ApiService'
 import { WCategory } from 'src/service/model/WCategory';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalCategoryEditComponent } from 'src/app/User/ModalCategoryEdit/ModalCategoryEdit.component';
@@ -230,6 +230,20 @@ export class EditTableComponent implements OnInit {
     this.service.DeleteArticle(id).subscribe(
       (response) => {
         this.GetListArticle(1)
+        console.log('response received');
+      },
+      (error) => {
+        console.error('Request failed with error')
+      },
+      () => {
+        console.info('Request completed')
+      });
+  }
+
+  DeleteUser(id: number) {
+    this.service.DeleteUser(id).subscribe(
+      (response) => {
+        this.GetListUser(1)
         console.log('response received');
       },
       (error) => {

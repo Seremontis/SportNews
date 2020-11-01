@@ -21,5 +21,6 @@ namespace SportDatabase.Model
         public int? RoleId { get; set; }
         [StringLength(100)]
         public string NameRole { get; set; }
+        public string UserModified { get; set; }
     }
 }

@@ -12,7 +12,11 @@
   <section class="shortArticle">{{article?.shortArticle}} </section>
   <figure>
     <img src = "{{article?.picture}}" alt = "{{article?.descritpionPicture}}"/>
-    <figcaption>Źródło obrazka</figcaption>
+    <figcaption>Źródło: {{checkSourcPic()}}</figcaption>
   </figure>
   <section class="fullArticle" [innerHTML] = "article?.fullArticle"></section>
+  <div *ngIf="article?.sourceArticle">
+    <hr />
+    <span>Źródło: {{article?.sourceArticle}}</span>
+  </div>
 </article>

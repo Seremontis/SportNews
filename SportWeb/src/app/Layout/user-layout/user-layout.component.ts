@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { Router } from "@angular/router";
 import { Location } from "@angular/common";
-import {Session} from 'src/service/Session'
+import {Session} from 'src/service/operation/Session'
 
 @Component({
   selector: 'app-user-layout',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SportResult } from 'src/service/SportResult';
+import { SportResult } from 'src/service/operation/SportResult';
 import { IModelResult } from 'src/service/model/IModelResult'
 import { DatePipe } from '@angular/common';
 

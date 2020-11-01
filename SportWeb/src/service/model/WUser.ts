@@ -6,4 +6,5 @@ export interface  IWUser {
     passwordExpired: Date;
     roleId:number;
     nameRole:string;
+    userModified:string;
 }

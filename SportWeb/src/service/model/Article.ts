@@ -5,6 +5,7 @@ export interface  IArticle {
     picture: string;  //base64
     descritpionPicture: string;
     sourcePicture: string;
+    sourceArticle: string;
     shortArticle: string;
     fullArticle: string;
     keywords: string;

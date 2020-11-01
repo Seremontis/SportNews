@@ -2,7 +2,7 @@ export class WListArticle {
         articleId:number;
         title:string;
         descriptionImage:string;
-        smallPicture: string; 
+        picture: string; 
         shortArticle: string; 
         publicationTime:Date; 
         name:string; 

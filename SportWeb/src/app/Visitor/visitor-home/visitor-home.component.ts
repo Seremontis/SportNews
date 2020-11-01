@@ -68,8 +68,8 @@ export class VisitorHomeComponent implements OnInit {
 
   CheckImages(){
     this.ArticleList.forEach(article=>{
-      if(!article.smallPicture)
-        article.smallPicture=this.imageDef.image;
+      if(!article.picture)
+        article.picture=this.imageDef.image;
       if(!article.descriptionImage)
         article.descriptionImage=this.imageDef.description;
     })
@@ -105,7 +105,7 @@ export class VisitorHomeComponent implements OnInit {
     let listArticle = <Element>document.querySelector('.olderArticle');
     for (let i = this.startElement; i < this.ArticleList.length; i++) {
       let newElement = <Element>listArticle.querySelector('.olderArticle>figure').cloneNode(true);
-      newElement.querySelector('img').src = this.ArticleList[i].smallPicture;
+      newElement.querySelector('img').src = this.ArticleList[i].picture;
       newElement.querySelector('h5').textContent = this.ArticleList[i].title;
       listArticle.appendChild(newElement);
       this.startElement += 1;

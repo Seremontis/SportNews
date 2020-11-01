@@ -13,7 +13,6 @@ export class ModalCategoryEditComponent implements OnInit {
   @Input() category: Category;
   @Input() CategoryList: WCategory[];
     ngOnInit() {
-         console.log(this.category);
     }
 
   constructor(

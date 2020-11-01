@@ -14,5 +14,5 @@
     <img src = "{{article?.picture}}" alt = "{{article?.descritpionPicture}}"/>
     <figcaption>Źródło obrazka</figcaption>
   </figure>
-  <section class="fullArticle">{{article?.fullArticle}}</section>
+  <section class="fullArticle" [innerHTML] = "article?.fullArticle"></section>
 </article>

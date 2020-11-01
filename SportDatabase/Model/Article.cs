@@ -15,12 +15,11 @@ namespace SportDatabase.Model
         [Column(TypeName = "text")]
         [MaxLength]
         public string Title { get; set; }
-        [StringLength(300)]
         public string Picture { get; set; }
         [StringLength(300)]
         public string DescritpionPicture { get; set; }
-        [StringLength(100)]
         public string SourcePicture { get; set; }
+        public string SourceArticle { get; set; }
         [Column(TypeName = "text")]
         public string ShortArticle { get; set; }
         [Column("FullArticle", TypeName = "text")]

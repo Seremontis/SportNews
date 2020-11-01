@@ -13,12 +13,13 @@ namespace SportDatabase.Model
         [Required]
         [Column(TypeName = "text")]
         public string Title { get; set; }
-        [StringLength(300)]
         public string Picture { get; set; }
         [Column(TypeName = "text")]
         public string ShortArticle { get; set; }
+        public string SourcePicture { get; set; }
+        public string SourceArticle { get; set; }
         [Column(TypeName = "text")]
-        public string Article { get; set; }
+        public string FullArticle { get; set; }
         [Column(TypeName = "date")]
         public DateTime PublicationTime { get; set; }
         [Column(TypeName = "datetime")]

@@ -1,7 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiVisitorService } from 'src/service/ApiVisitorService';
-import { WFullArticle } from 'src/service/model/WFullArticle';
+import { IWFullArticle } from 'src/service/model/WFullArticle';
 import { DatePipe } from '@angular/common';
 import { DefaultImage } from 'src/assets/defaultImage';
 import { VirtualTimeScheduler } from 'rxjs';
@@ -17,7 +17,7 @@ export class ArticleComponent implements OnInit {
 
   @ViewChildren('figure') elements: QueryList<any>;
   articleId: number;
-  FullArticle: WFullArticle;
+  FullArticle: IWFullArticle;
   private readonly imageDefault: DefaultImage = new DefaultImage();
 
   constructor(private route: ActivatedRoute, private service: ApiVisitorService, private datePipe: DatePipe,private font:FontSizeManipulation) {
@@ -74,5 +74,12 @@ export class ArticleComponent implements OnInit {
   }
   GetEditorNameOrDate() {
     return this.FullArticle?.firstName + ' ' + this.FullArticle?.lastName + ', ' + (this.datePipe.transform(this.FullArticle?.publicationTime, "dd-MM-yyyy"));
+  }
+  
+  checkSourcPic(){
+    if(this.FullArticle?.sourcePicture)
+      return this.FullArticle.sourcePicture
+    else
+      return "opracowanie własne"
   }
 }

@@ -1,4 +1,3 @@
---dodaæ podzia³ dziennikarzy
 use master
 go
 
@@ -59,6 +58,7 @@ Create table Articles(
 [Picture] varchar(max), 
 [DescritpionPicture] nvarchar(300),
 [SourcePicture] nvarchar(100),
+[SourceArticle] nvarchar(100),
 [ShortArticle] text,
 [FullArticle] text,
 [Keywords] nchar(100),

@@ -41,6 +41,7 @@ export class ArticleFormComponent implements OnInit {
         picture: null,
         descritpionPicture: null,
         sourcePicture: null,
+        sourceArticle:null,
         shortArticle: null,
         fullArticle: null,
         keywords: null,
@@ -92,11 +93,13 @@ export class ArticleFormComponent implements OnInit {
     this.article.categoryId = value.categoryId;
     this.article.keywords = value.keywords;
     this.article.shortArticle = value.shortArticle;
-    this.article.picture = value.picture;
     this.article.fullArticle = value.fullArticle;
+    this.article.sourcePicture=value.sourcePicture;
+    this.article.sourceArticle=value.sourceArticle;
 
     return this.article;
   }
+
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,

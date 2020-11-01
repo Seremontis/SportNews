@@ -14,7 +14,7 @@
           </div>
           <div class="form-group">
             <label for="categoryId">Podkategoria</label>
-            <select id="inputState" [(ngModel)] = "category.categoryId" name="categoryId" class="form-control" >
+            <select id="inputState" [(ngModel)] = "category.aboveCategory" name="categoryId" class="form-control">
               <option selected>Podkategoria</option>
               <option *ngFor = "let element of CategoryList" [(value)] = "element.categoryId" >{{element.name}}</option>
             </select>

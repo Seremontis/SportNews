@@ -10,7 +10,7 @@ go
 
 CREATE OR ALTER VIEW WFullArticle
 AS
-SELECT ArticleId,Title,Picture,ShortArticle,FullArticle,PublicationTime,A.LastModified,C.Name,A.CategoryId,U.FirstName,U.LastName
+SELECT ArticleId,Title,Picture,SourcePicture,SourceArticle,ShortArticle,FullArticle,PublicationTime,A.LastModified,C.Name,A.CategoryId,U.FirstName,U.LastName
 FROM Articles A
 LEFT JOIN Categories C ON A.CategoryId=C.CategoryId
 LEFT JOIN Users U on A.AuthorId=U.UserId

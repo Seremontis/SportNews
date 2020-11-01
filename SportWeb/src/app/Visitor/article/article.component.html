@@ -6,8 +6,12 @@
   </header>
   <section class="shortArticle">{{FullArticle?.shortArticle}} </section>
   <figure>
-    <img src = "{{FullArticle?.picture}}" alt = "{{FullArticle?.pictureDescirption}}"/>
-    <figcaption>Źródło obrazka</figcaption>
+    <img src="{{FullArticle?.picture}}" alt="{{FullArticle?.pictureDescirption}}" />
+    <figcaption>Źródło: {{this.checkSourcPic()}}</figcaption>
   </figure>
-  <section class="fullArticle">{{FullArticle?.article}}</section>
+  <section class="fullArticle" [innerHTML]="FullArticle?.fullArticle"></section>
+  <div *ngIf="FullArticle?.sourceArticle">
+    <hr />
+    <span>Źródło: {{FullArticle?.sourceArticle}}</span>
+  </div>
 </article>

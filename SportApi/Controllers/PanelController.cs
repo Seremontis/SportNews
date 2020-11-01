@@ -149,15 +149,14 @@ namespace SportApi.Controllers
         {
             StringValues stream;
             HttpContext.Request.Headers.TryGetValue("Authorization", out stream);
-            article.UserModified = GetUserId(stream);
-            article.LastModified = DateTime.Now;
+            article.AuthorId = article.UserModified=GetUserId(stream);
+            article.LastModified= article.PublicationTime = DateTime.Now;
             sendOperation = async () => { await unitOfWork.IRepoArticle.Add(article); };
             return await genericOperation.Execute(sendOperation, EnumOperation.Add, this.ControllerContext.RouteData, article.UserModified);
         }
 
 
         [Route("UpdateArticle")]
-        [ValidateModel]
         [HttpPut]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllWithoutAdmin)]
@@ -185,7 +184,6 @@ namespace SportApi.Controllers
 
         [Route("DeleteUser/{id}")]
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllAdmin)]
         public async Task<HttpResponseMessage> DeleteUser(int id)
         {
@@ -196,7 +194,6 @@ namespace SportApi.Controllers
         }
 
         [Route("UpdateUser")]
-        [ValidateModel]
         [HttpPut]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllAdmin)]
@@ -210,9 +207,7 @@ namespace SportApi.Controllers
         }
 
         [Route("AddCategory")]
-        [ValidateModel]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.All)]
         public async Task<HttpResponseMessage> AddCategory([FromBody] Category category)
         {

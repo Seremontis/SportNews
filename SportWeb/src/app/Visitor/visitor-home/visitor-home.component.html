@@ -3,7 +3,7 @@
     <div class="lastArticle">
         <figure #figure *ngFor="let element of ArticleList | slice:0:2">
             <a [routerLink] ="['../article', element.articleId]" >
-            <img src = "{{element.smallPicture}}" alt = "{{element.descriptionImage}}"/>
+            <img src = "{{element.picture}}" alt = "{{element.descriptionImage}}" class="h-100"/>
             <header><h1>{{element.title}}</h1></header>       
             <div class="opacity"></div>
             </a>
@@ -13,7 +13,7 @@
         <figure #figure *ngFor="let element of ArticleList | slice:2:6">
             <a [routerLink] ="['../article', element.articleId]" >
             <div class="card">
-                <img class="card-img-top" src = "{{element.smallPicture}}" alt = "{{element.descriptionImage}}">
+                <img class="card-img-top" src = "{{element.picture}}" alt = "{{element.descriptionImage}}" />
                 <header class="card-body bgColor">
                     <h5 class="card-title">{{element.title}}</h5>
                 </header>

@@ -1,4 +1,3 @@
-import { mapToMapExpression } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ApiService } from 'src/service/operation/ApiService';
@@ -53,7 +52,6 @@ export class ArticleFormComponent implements OnInit {
     }
 
   }
-
 
   ngOnInit() {
   }

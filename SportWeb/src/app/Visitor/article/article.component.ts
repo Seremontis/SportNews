@@ -17,9 +17,9 @@ export class ArticleComponent implements OnInit {
   @ViewChildren('figure') elements: QueryList<any>;
   articleId: number;
   FullArticle: WFullArticle;
-  private readonly imageDefault: DefaultImage = new DefaultImage();
 
-  constructor(private route: ActivatedRoute, private service: ApiVisitorService, private datePipe: DatePipe,private font:FontSizeManipulation) {
+  constructor(private route: ActivatedRoute, private service: ApiVisitorService,
+     private datePipe: DatePipe,private font:FontSizeManipulation,private readonly imageDefault: DefaultImage) {
     this.route.params.subscribe(params => {
       this.articleId = Number(params.id);
       if (!Number.isNaN(this.articleId)) {
@@ -32,25 +32,7 @@ export class ArticleComponent implements OnInit {
   }
 
   ngAfterViewInit(){
-    if (localStorage.getItem('darkMode')) {
-      this.elements.changes.subscribe(figure => {
-        figure.forEach(elm => {
-          document.querySelector('article').classList.add('darkbackground');
-          document.querySelector('figcaption').classList.add('DarkIconColor');
-        })})
-    }
-    if (localStorage.getItem('FontMode')) {
-      if (localStorage.getItem('FontMode') == '1') {
-        this.elements.changes.subscribe(figure => {
-          figure.forEach(elm => this.font.largeFontchangeAferLoad())
-        })
-      }
-      else if (localStorage.getItem('FontMode') == '2') {
-        this.elements.changes.subscribe(figure => {
-          figure.forEach(elm => this.font.verylargeFontchangeAferLoad())
-        })
-      }
-    }
+    this.checkMode()
   }
 
   LoadArticle(id: number) {
@@ -80,5 +62,26 @@ export class ArticleComponent implements OnInit {
       return this.FullArticle.sourcePicture
     else
       return "opracowanie własne"
+  }
+  checkMode(){
+    if (localStorage.getItem('darkMode')) {
+      this.elements.changes.subscribe(figure => {
+        figure.forEach(elm => {
+          document.querySelector('article').classList.add('darkbackground');
+          document.querySelector('figcaption').classList.add('DarkIconColor');
+        })})
+    }
+    if (localStorage.getItem('FontMode')) {
+      if (localStorage.getItem('FontMode') == '1') {
+        this.elements.changes.subscribe(figure => {
+          figure.forEach(elm => this.font.largeFontchangeAferLoad())
+        })
+      }
+      else if (localStorage.getItem('FontMode') == '2') {
+        this.elements.changes.subscribe(figure => {
+          figure.forEach(elm => this.font.verylargeFontchangeAferLoad())
+        })
+      }
+    }
   }
 }

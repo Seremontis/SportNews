@@ -45,7 +45,7 @@ export class ApiVisitorService {
         return this.http.post<WListArticle[]>(this.rootURL + 'GetSearcher', JSON.stringify(keywords), this.httpOptions);
     }
 
-    GetCategory(categoryId=null): Observable<WCategory[]>{
+    GetCategory(): Observable<WCategory[]>{
             return this.http.get<WCategory[]>(this.rootURL + 'GetCategories');
     }
 }

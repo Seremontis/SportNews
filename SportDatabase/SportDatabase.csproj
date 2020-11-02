@@ -368,11 +368,11 @@
     <Compile Include="Context\WFullArticleConfiguration.cs" />
     <Compile Include="Context\WListArticleConfiguration.cs" />
     <Compile Include="Context\WUserConfiguration.cs" />
-    <Compile Include="EnumOperation.cs" />
+    <Compile Include="Helpers\EnumOperation.cs" />
     <Compile Include="Interface\IArticleRepo.cs" />
     <Compile Include="Interface\IBaseContext.cs" />
     <Compile Include="Interface\ISportNewsContext.cs" />
-    <Compile Include="IntToStringConverter.cs" />
+    <Compile Include="Helpers\IntToStringConverter.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Interface\IRepository.cs" />
@@ -387,8 +387,8 @@
     <Compile Include="Model\WListArticle.cs" />
     <Compile Include="Model\WUser.cs" />
     <Compile Include="Repository\CategoryRepo.cs" />
-    <Compile Include="Repository\ICategoryRepo.cs" />
-    <Compile Include="Repository\IUserRepo.cs" />
+    <Compile Include="Interface\ICategoryRepo.cs" />
+    <Compile Include="Interface\IUserRepo.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\ArticleRepo.cs" />
     <Compile Include="Repository\UserRepo.cs" />

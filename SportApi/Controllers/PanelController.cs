@@ -143,7 +143,9 @@ namespace SportApi.Controllers
         }
 
         [Route("AddArticle")]
+        [ValidateModel]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = Policies.AllWithoutAdmin)]
         public async Task<HttpResponseMessage> AddArticle([FromBody] Article article)
         {

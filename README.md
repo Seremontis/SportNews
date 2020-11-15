@@ -33,6 +33,7 @@ Application written to present the amenities and simplicity of the website
 
 ## Example picture
 <br>
+
 Article:
 ![Image of the article](/exampleScreen/article.png)
 source article: www.polsatsport.pl

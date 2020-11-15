@@ -26,7 +26,7 @@ Application written to present the amenities and simplicity of the website
 
 ### <ul>The application also uses external Api returning:
 <li>https://www.thesportsdb.com/api.php - football</li>
-<li>https://allsportsapi.com/ -basketball (authorization token required)<li>
+<li>https://allsportsapi.com/ -basketball (authorization token required)</li>
 <li>https://english.api.rakuten.net/sportcontentapi/api/tennis-live-data -tennis (authorization token required)</li>
 </ul>
 *For proper operation, it is necessary to place authorization tokens available after registering on the indicated websites

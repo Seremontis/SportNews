@@ -15,6 +15,5 @@ namespace SportDatabase.Repository
 
         Task<IEnumerable<WCategory>> Get(int idCategory);
         Task<IEnumerable<WCategory>> GetView();
-        //Task AddCategory(Category category);
     }
 }

@@ -303,11 +303,16 @@ namespace SportApi.Controllers
             try
             {
                 string str = stream[0].Replace("Bearer ", string.Empty);
-                var handler = new JwtSecurityTokenHandler();
-                var jsonToken = handler.ReadToken(str);
-                var tokenS = handler.ReadToken(str) as JwtSecurityToken;
-                var jti = tokenS.Claims.First(claim => claim.Type == "loginId").Value;
-                return int.Parse(jti);
+                if (!string.IsNullOrEmpty(str))
+                {
+                    var handler = new JwtSecurityTokenHandler();              
+                    var jsonToken = handler.ReadToken(str);
+                    var tokenS = handler.ReadToken(str) as JwtSecurityToken;
+                    var jti = tokenS.Claims.First(claim => claim.Type == "loginId").Value;
+                    return int.Parse(jti);
+                }
+                else
+                    return 0;
             }
             catch (Exception ex)
             {

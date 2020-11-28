@@ -14,5 +14,7 @@ namespace SportDatabase.Interface
         DbSet<Role> Roles { get; set; }
         DbSet<User> Users { get; set; }
         DbSet<LogOperation> LogOperations { get; set; }
+
+        DbSet<T> Set<T>() where T : class;
     }
 }

@@ -12,9 +12,6 @@ using System.Threading.Tasks;
 
 namespace SportDatabase.Repository
 {
-    /// <summary>
-    /// zaimplementować rejestrację błędów
-    /// </summary>
 
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -42,7 +39,7 @@ namespace SportDatabase.Repository
             T checkModel = await _SportNewsContext.Set<T>().FindAsync((object)id);
             if (checkModel != null)
                 _SportNewsContext.Set<T>().Remove(checkModel);
- 
+
         }
 
         public async Task<List<T>> Get()
@@ -56,12 +53,12 @@ namespace SportDatabase.Repository
             _SportNewsContext.Set<T>().Update(model);
         }
 
-        internal void SetupPageSize(int page,int? size=null)
+        internal void SetupPageSize(int page, int? size = null)
         {
             if (size != null)
             {
                 _Page = page;
-                _DefaultPageSize=(int)size;
+                _DefaultPageSize = (int)size;
             }
 
 
